@@ -1,19 +1,45 @@
 ﻿<?php  
-			// !-- =-=-=-=-=-=-=To be delited!!!=-=-=-=-=-=-= --
-			
-setcookie('logged', true, time()+60*60*24);
 
 			// !-- =-=-=-=-=-=-=Login validation=-=-=-=-=-=-= --
 			
-if (!isset($_COOKIE['logged'])){
+if (!isset($_COOKIE['logged-in'])){
 				
-	header('location:index-3.html');
+	header('location:index.php');
 	die();
-
+	
+			// !-- =-=-=-=-=-=-=END of Login validation=-=-=-=-=-=-= --
+	
 }else {
-	include './php/precentage.php';
+	
+			// !-- =-=-=-=-=-=-=Login information retrive=-=-=-=-=-=-= --
+	
+	
+	$user = $_COOKIE['logged-in'];
+	
+	$profilePicture = "./users/".$user."/assets/profilPic/avatar.png";
+	
+	$userData = file('./users/' . $user . '/usersData.txt');
+	
+	$userName = explode("-", $userData[0]);
+	$userName = implode(" ", $userName);
+	
+	
+	
+	$userIncome =  explode("-", $userData[1]);
+	$userЕxpenses = explode("-", $userData[2]);
+	$userSavings = explode("-", $userData[3]);
+	
+	$statisticalInformation = 21;	
+	
+		// !-- =-=-=-=-=-=-=Login information retrive  END=-=-=-=-=-=-= --
+		
 }
+
+
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,8 +50,7 @@ if (!isset($_COOKIE['logged'])){
       <![endif]-->
 
       <meta name="description" content="">
-      <meta name="author" content="ScriptsBundle">
-      <title>Go Finance Business &amp; Finance  Modern Multipurpose Services Template</title>
+      
       <!-- =-=-=-=-=-=-= Favicons Icon =-=-=-=-=-=-= -->
       <link rel="icon" href="images/icon.png" type="image/x-icon" />
       <!-- =-=-=-=-=-=-= Mobile Specific =-=-=-=-=-=-= -->
@@ -99,8 +124,8 @@ if (!isset($_COOKIE['logged'])){
                <div class="information-content">
                   <!--Info Box-->
                   <div class="info-box  hidden-sm">
-                     <div class="icon"><img src="https://blog.intercomassets.com/wp-content/uploads/2016/09/20010801/matt-96x96.png" alt="prifile" /></div>
-                     <div class="text">Jhone Doe</div>                    
+                     <div class="icon"><img src="<?php echo $profilePicture?>" alt="Prifile Picture" /></div>
+                     <div class="text"><?php echo $userName?></div>                    
                   </div>
                  
                </div>
@@ -185,10 +210,10 @@ if (!isset($_COOKIE['logged'])){
             <div class="row">
                <!-- countTo -->
                <div class="col-xs-6 col-sm-3 col-md-3">
-                  <div class="statistic-percent" data-perc="<?php echo $sum;?>">
+                  <div class="statistic-percent" data-perc="<?php echo $userIncome[1];?>">
                      <div class="facts-icons"> <span class="flaticon-pie-chart-1"></span> </div>
                      <div class="fact">
-                        <span class="percentfactor"><?php echo $sum;?></span>
+                        <span class="percentfactor">0</span>
                         <p>Montly Income</p>
                      </div>
                      <!-- end fact -->
@@ -198,7 +223,7 @@ if (!isset($_COOKIE['logged'])){
                <!-- end col-xs-6 col-sm-3 col-md-3 -->
                <!-- countTo -->
                <div class="col-xs-6 col-sm-3 col-md-3">
-                  <div class="statistic-percent" data-perc="60">
+                  <div class="statistic-percent" data-perc="<?php echo $userSavings[1];?>">
                      <div class="facts-icons"> <span class="flaticon-graph-3"></span> </div>
                      <div class="fact">
                         <span class="percentfactor">0</span>
@@ -211,7 +236,7 @@ if (!isset($_COOKIE['logged'])){
                <!-- end col-xs-6 col-sm-3 col-md-3 -->
                <!-- countTo -->
                <div class="col-xs-6 col-sm-3 col-md-3">
-                  <div class="statistic-percent" data-perc="274">
+                  <div class="statistic-percent" data-perc="<?php echo $userЕxpenses[1];?>">
                      <div class="facts-icons"> <span class="flaticon-diagram"></span> </div>
                      <div class="fact">
                         <span class="percentfactor">0</span>
@@ -224,7 +249,7 @@ if (!isset($_COOKIE['logged'])){
                <!-- end col-xs-6 col-sm-3 col-md-3 -->
                <!-- countTo -->
                <div class="col-xs-6 col-sm-3 col-md-3">
-                  <div class="statistic-percent" data-perc="434">
+                  <div class="statistic-percent" data-perc="<?php echo $userIncome[1] - $userЕxpenses[1];?>">
                      <div class="facts-icons"> <span class="flaticon-receipt"></span> </div>
                      <div class="fact">
                         <span class="percentfactor">0</span>
@@ -328,34 +353,34 @@ if (!isset($_COOKIE['logged'])){
                   <div class="our-skill">
                      <div class="progress-bar-linear">
                         <p class="progress-bar-text">Financial Service
-                           <span><?php echo $buget1 . "%";?></span>
+                           <span><?php echo $statisticalInformation . "%";?></span>
                         </p>
                         <div class="progress-bar">
-                           <span data-percent="<?php echo $buget1;?>"></span>
+                           <span data-percent="<?php echo $statisticalInformation;?>"></span>
                         </div>
                      </div>
                      <div class="progress-bar-linear">
                         <p class="progress-bar-text">Best Consultancy
-                           <span>98%</span>
+                           <span><?php echo $statisticalInformation . "%"?></span>
                         </p>
                         <div class="progress-bar">
-                           <span data-percent="95"></span>
+                           <span data-percent="<?php echo $statisticalInformation;?>"></span>
                         </div>
                      </div>
                      <div class="progress-bar-linear">
                         <p class="progress-bar-text">Business Analysis
-                           <span>90%</span>
+                           <span><?php echo $statisticalInformation . "%"?></span>
                         </p>
                         <div class="progress-bar">
-                           <span data-percent="90"></span>
+                           <span data-percent="<?php echo $statisticalInformation;?>"></span>
                         </div>
                      </div>
                      <div class="progress-bar-linear">
                         <p class="progress-bar-text">Market Analysis
-                           <span>70%</span>
+                           <span><?php echo $statisticalInformation. "%"?></span>
                         </p>
                         <div class="progress-bar">
-                           <span data-percent="90"></span>
+                           <span data-percent="<?php echo $statisticalInformation;?>"></span>
                         </div>
                      </div>
                   </div>
@@ -385,7 +410,7 @@ if (!isset($_COOKIE['logged'])){
                                  <li><span class="icon fa fa-envelope-o"></span> contant@glixentech.com</li>
                                  <li><span class="icon fa fa-fax"></span>  (042) 1234 7777</li>
                               </ul>
-                              <div class="social-links-two clearfix"> <a href="#" class="facebook img-circle"><span class="fa fa-facebook-f"></span></a> <a href="#" class="twitter img-circle"><span class="fa fa-twitter"></span></a> <a href="#" class="google-plus img-circle"><span class="fa fa-google-plus"></span></a> <a href="#" class="linkedin img-circle"><span class="fa fa-pinterest-p"></span></a> <a href="#" class="linkedin img-circle"><span class="fa fa-linkedin"></span></a> </div>
+                              <div class="social-links-two clearfix"> <a href="#" class="facebook img-circle"><span class="fa fa-facebook-f"></span></a> <a href="#" class="twitter img-circle"><span class="fa fa-twitter"></span></a><a href="#" class="linkedin img-circle"><span class="fa fa-linkedin"></span></a> </div>
                            </div>
                         </div>
                         <!--Footer Column-->
