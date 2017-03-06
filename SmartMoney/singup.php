@@ -58,7 +58,7 @@ if (isset($_POST['sing-up-button'])){
 				$newACC = $mailSha1."-".$paddSha1."-";
 				file_put_contents('logIn-data/loginData.txt', $newACC . PHP_EOL, FILE_APPEND);
 				fclose($handle);
-				header('Location: index.php', true, 303);
+				header('Location: about.php', true, 303);
 				die();
 			}
 			// End creat account
