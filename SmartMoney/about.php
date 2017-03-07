@@ -1,10 +1,9 @@
 ﻿<?php  
-
 			// !-- =-=-=-=-=-=-=Login validation=-=-=-=-=-=-= --
 			
 if (!isset($_COOKIE['logged-in'])){
 				
-	header('location:index.php');
+	header('Location: ./index.php');
 	die();
 	
 			// !-- =-=-=-=-=-=-=END of Login validation=-=-=-=-=-=-= --
@@ -32,11 +31,7 @@ if (!isset($_COOKIE['logged-in'])){
 	$statisticalInformation = 21;	
 	
 		// !-- =-=-=-=-=-=-=Login information retrive  END=-=-=-=-=-=-= --
-		
 }
-
-
-
 ?>
 
 
@@ -105,7 +100,7 @@ if (!isset($_COOKIE['logged-in'])){
             </ul>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12">
-             <a href="#" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Careers</a>
+            <a href="./php/logOut.php" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Log Out</a>
             <a href="#" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Recent Events</a>
             <a href="#" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Latest News</a>
             <a href="#" class="info-bar-meta-link hidden-sm"><i class="fa fa-caret-right fa-fw"></i>Blog</a>
@@ -150,24 +145,10 @@ if (!isset($_COOKIE['logged-in'])){
                   <div class="collapse navbar-collapse" id="main-navigation">
                      <ul class="nav navbar-nav">
                         <li class="dropdown">
-                           <a class="dropdown-toggle " data-hover="dropdown" data-toggle="dropdown" data-animations="fadeInUp">Home <span class="fa fa-angle-down"></span></a>
-                           <ul class="dropdown-menu">
-                              <li><a href="index.html">Home </a> </li>
-                              <li><a href="index-2.html">Home Page 2</a> </li>
-                              <li><a href="index-3.html">Home Page 3 </a> </li>
-                              <li><a href="index-5.html">Home Variation 4</a> </li>
-                              <li><a href="index-4.html">Home Variation 5</a> </li>
-                              <li><a href="one-page.html">One Page </a> </li>
-                           </ul>
+                           <a  href="index.php" >Home </a>
                         </li>
                         <li class="dropdown">
-                           <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-animations="fadeInUp">About Us <span class="fa fa-angle-down"></span></a>
-                           <ul class="dropdown-menu">
-                              <li><a href="about.html">About </a> </li>
-                              <li><a href="about-1.html">About 2</a> </li>
-                              <li><a href="about-2.html">About 3</a> </li>
-                              <li><a href="about-3.html">About 4</a> </li>
-                           </ul>
+                        	<a href="about.php">About </a> 
                         </li>
                         <li class="dropdown ">
                            <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-animations="fadeInUp">Our Service <span class="fa fa-angle-down"></span></a>
@@ -190,7 +171,7 @@ if (!isset($_COOKIE['logged-in'])){
                               <li><a href="gallery.html ">Gallery</a></li>
                            </ul>
                         </li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="contact.php">Contact Us</a></li>
                      </ul>
                      <a  href="online-booking.html"  class="btn btn-primary pull-right"><span class="hidden-sm">Get An </span>Appointment</a> 
                   </div>

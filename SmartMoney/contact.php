@@ -1,49 +1,70 @@
-﻿
+<?php
+// !-- =-=-=-=-=-=-=Login validation=-=-=-=-=-=-= --
 
+if (!isset($_COOKIE['logged-in'])){
+	header('Location: ./index.php');
+	die();
+	// !-- =-=-=-=-=-=-=END of Login validation=-=-=-=-=-=-= --
+
+}else {
+	// !-- =-=-=-=-=-=-=Login information retrive=-=-=-=-=-=-= --
+	$user = $_COOKIE['logged-in'];
+
+	$profilePicture = "./users/".$user."/assets/profilPic/avatar.png";
+
+	$userData = file('./users/' . $user . '/usersData.txt');
+
+	$userName = explode("-", $userData[0]);
+	$userName = implode(" ", $userName);
+
+	// !-- =-=-=-=-=-=-=Login information retrive  END=-=-=-=-=-=-= --
+
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-      <!--[if IE]>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <![endif]-->
+<head>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<![endif]-->
 
-      <meta name="description" content="">
-      <meta name="author" content="ScriptsBundle">
-      <title>Smart Money </title>
-      <!-- =-=-=-=-=-=-= Favicons Icon =-=-=-=-=-=-= -->
-      <link rel="icon" href="images/icon.png" type="image/x-icon" />
-      <!-- =-=-=-=-=-=-= Mobile Specific =-=-=-=-=-=-= -->
-      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-      <!-- =-=-=-=-=-=-= Bootstrap CSS Style =-=-=-=-=-=-= -->
-      <link rel="stylesheet" href="css/bootstrap.css">
-      <!-- =-=-=-=-=-=-= Template CSS Style =-=-=-=-=-=-= -->
-      <link rel="stylesheet" href="css/style.css">
-      <!-- =-=-=-=-=-=-= Font Awesome =-=-=-=-=-=-= -->
-      <link rel="stylesheet" href="css/font-awesome.css" type="text/css">
-      <!-- =-=-=-=-=-=-= Et Line Fonts =-=-=-=-=-=-= -->
-      <link rel="stylesheet" href="css/et-line-fonts.css" type="text/css">
-      <!-- =-=-=-=-=-=-= Magnific PopUP CSS =-=-=-=-=-=-= -->
-      <link href="js/magnific-popup/magnific-popup.css" rel="stylesheet">
-      <!-- =-=-=-=-=-=-= Owl carousel =-=-=-=-=-=-= -->
-      <link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
-      <link rel="stylesheet" type="text/css" href="css/owl.style.css">
-      <!-- =-=-=-=-=-=-= Google Fonts =-=-=-=-=-=-= -->
-      <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600,600italic,700,700italic,900italic,900,300,300italic%7CMerriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css">
-      <!-- =-=-=-=-=-=-= Flat Icon =-=-=-=-=-=-= -->
-      <link href="css/flaticon.css" rel="stylesheet">
-      <!-- Theme Color -->
-      <link rel="stylesheet" id="color" href="css/colors/defualt.css">
-      <!-- Animation Css -->
-      <link href="css/animate.min.css" rel="stylesheet">
-      <!-- Menu Hover -->
-      <link href="css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-            <!-- =-=-=-=-=-=-= Select Options =-=-=-=-=-=-= -->
-      <link href="css/select2.min.css" rel="stylesheet" />
-      <!-- JavaScripts -->
-      <script src="js/modernizr.js"></script>
-      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<meta name="description" content="">
+<meta name="author" content="ScriptsBundle">
+<title>Smart Money </title>
+<!-- =-=-=-=-=-=-= Favicons Icon =-=-=-=-=-=-= -->
+<link rel="icon" href="images/icon.png" type="image/x-icon" />
+<!-- =-=-=-=-=-=-= Mobile Specific =-=-=-=-=-=-= -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!-- =-=-=-=-=-=-= Bootstrap CSS Style =-=-=-=-=-=-= -->
+<link rel="stylesheet" href="css/bootstrap.css">
+<!-- =-=-=-=-=-=-= Template CSS Style =-=-=-=-=-=-= -->
+<link rel="stylesheet" href="css/style.css">
+<!-- =-=-=-=-=-=-= Font Awesome =-=-=-=-=-=-= -->
+<link rel="stylesheet" href="css/font-awesome.css" type="text/css">
+<!-- =-=-=-=-=-=-= Et Line Fonts =-=-=-=-=-=-= -->
+<link rel="stylesheet" href="css/et-line-fonts.css" type="text/css">
+<!-- =-=-=-=-=-=-= Magnific PopUP CSS =-=-=-=-=-=-= -->
+<link href="js/magnific-popup/magnific-popup.css" rel="stylesheet">
+<!-- =-=-=-=-=-=-= Owl carousel =-=-=-=-=-=-= -->
+<link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="css/owl.style.css">
+<!-- =-=-=-=-=-=-= Google Fonts =-=-=-=-=-=-= -->
+<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600,600italic,700,700italic,900italic,900,300,300italic%7CMerriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css">
+<!-- =-=-=-=-=-=-= Flat Icon =-=-=-=-=-=-= -->
+<link href="css/flaticon.css" rel="stylesheet">
+<!-- Theme Color -->
+<link rel="stylesheet" id="color" href="css/colors/defualt.css">
+<!-- Animation Css -->
+<link href="css/animate.min.css" rel="stylesheet">
+<!-- Menu Hover -->
+<link href="css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+<!-- =-=-=-=-=-=-= Select Options =-=-=-=-=-=-= -->
+<link href="css/select2.min.css" rel="stylesheet" />
+<!-- JavaScripts -->
+<script src="js/modernizr.js"></script>
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
       <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -52,22 +73,22 @@
    <body>
     <!-- =-=-=-=-=-=-= PRELOADER =-=-=-=-=-=-= -->
        <!-- <div class="preloader"><span class="preloader-gif"></span></div> -->
-      
+
       <!-- =-=-=-=-=-=-= HEADER =-=-=-=-=-=-= -->
       <div id="header-info-bar">
          <div class="container">
          	<div class="col-md-6 col-sm-6 col-xs-12">
-            <ul class="header-social pull-left">              
+            <ul class="header-social pull-left">
                <li><a href="https://twitter.com/S_M_Managment" class="social-twitter"  target="blank">
                <i class="fa fa-twitter"></i></a></li>
                <li><a href="https://www.facebook.com/SMManagmetn/" class="social-facebook"  target="blank">
                <i class="fa fa-facebook" ></i></a></li>
                <li><a href="https://www.youtube.com/channel/UCebM3sL3ASfzAQ0YYD7m6Og" class="social-youtube"  target="blank">
-               <i class="fa fa-youtube"></i></a></li>             
+               <i class="fa fa-youtube"></i></a></li>
             </ul>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12">
-             <a href="#" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Careers</a>
+             <a href="./php/logOut.php" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Log Out</a>
             <a href="#" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Recent Events</a>
             <a href="#" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Latest News</a>
             <a href="#" class="info-bar-meta-link hidden-sm"><i class="fa fa-caret-right fa-fw"></i>Blog</a>
@@ -75,12 +96,21 @@
          </div>
       </div>
       <header class="header-area">
-         <!-- Logo Bar -->
+          <!-- Logo Bar -->
          <div class="logo-bar">
             <div class="container clearfix">
                <!-- Logo -->
                <div class="logo">
-                  <a href="index.html"><img src="images/logo.png" alt=""></a>
+                  <a href="index.html"><img src="images/logo.png" alt="logo of the company"></a>
+               </div>
+               <!--Info Outer-->
+               	
+				<div class="information-content">
+                  <!--Client Info Box-->
+                  <div class="info-box  hidden-sm">
+                     <div class="icon"><img src="<?=$profilePicture ?>" alt="prifile" /></div>
+                     <div class="text"><?= $userName ?></div>                    
+                  </div>
                </div>
             </div>
          </div>
@@ -106,14 +136,10 @@
                            <a  href="index.php" >Home </a>
                         </li>
                         <li class="dropdown">
-                           <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-animations="fadeInUp">About Us <span class="fa fa-angle-down"></span></a>
-                           <ul class="dropdown-menu">
-                              <li><a href="about.html">About </a> </li>
-                              <li><a href="about-1.html">About 2</a> </li>
-                              <li><a href="about-2.html">About 3</a> </li>
-                              <li><a href="about-3.html">About 4</a> </li>
-                           </ul>
+
+                        	<a href="about.php">About </a>
                         </li>
+            
                         <li class="dropdown ">
                            <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-animations="fadeInUp">Our Service <span class="fa fa-angle-down"></span></a>
                            <ul class="dropdown-menu">
@@ -124,7 +150,7 @@
                               <li><a href="services-details.html">Services Detail</a> </li>
                            </ul>
                         </li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="contact.php">Contact Us</a></li>
                      </ul>
                   </div>
                   <!-- /.navbar-collapse -->
@@ -149,7 +175,7 @@
             </div>
          </div>
       </section>
-      <!-- =-=-=-=-=-=-= PAGE BREADCRUMB END =-=-=-=-=-=-= --> 
+      <!-- =-=-=-=-=-=-= PAGE BREADCRUMB END =-=-=-=-=-=-= -->
 
       <!-- =-=-=-=-=-=-= Contact Us =-=-=-=-=-=-= -->
       <section id="contact-us" class="section-padding-70">
@@ -177,7 +203,7 @@
                            <input type="email" placeholder="Email" id="email" name="email" class="form-control" required>
                         </div>
                      </div>
-                   </div>  
+                   </div>
                      <!-- End col-sm-6 -->
                       <div class="row">
                      <div class="col-sm-12">
@@ -189,7 +215,7 @@
                      </div>
                      </div>
                      <!-- End col-sm-12 -->
-                     
+           
                        <!-- End col-sm-6 -->
                         <div class="row">
                      <div class="col-sm-12">
@@ -226,7 +252,7 @@
                   </form>
                </div>
                <div class="col-md-4 col-xs-12 col-sm-12 margin-top-30">
-			   
+
                 <div class="location-box"> <a class="media-left pull-left" href="#"> <i class=" icon-envelope"></i></a>
                   <div class="media-body"> <strong>OUR CONTACT E-MAIL</strong>
                     <p>smart.money.managment@gmail.com</p>
@@ -237,17 +263,17 @@
                     <p> +359 - 888-333-124 | +359 - 888-333-125  </p>
                   </div>
                 </div>
-                
+
                </div>
-               
+        
                <div class="clearfix"></div>
             </div>
-            <!-- Row End --> 
+            <!-- Row End -->
          </div>
-         <!-- end container --> 
+         <!-- end container -->
       </section>
       <!-- =-=-=-=-=-=-= Contact Us End =-=-=-=-=-=-= -->
-      
+
       <!-- =-=-=-=-=-=-= FOOTER =-=-=-=-=-=-= -->
       <footer class="footer-area">
          <!--Footer Upper-->
@@ -264,13 +290,13 @@
                                  <li><span class="icon fa fa-phone"></span> +359 - 888-333-124</li>
                                  <li><span class="icon fa fa-envelope-o"></span> smart.money.managment@gmai.com</li>
                               </ul>
-                              <div class="social-links-two clearfix"> 
+                              <div class="social-links-two clearfix">
                               <a href="https://www.facebook.com/SMManagmetn/" class="facebook img-circle" target="blank">
-                              <span class="fa fa-facebook-f" ></span></a> 
+                              <span class="fa fa-facebook-f" ></span></a>
                               <a href="https://twitter.com/S_M_Managment" class="twitter img-circle" target="blank"><span class="fa fa-twitter">
-                              </span></a> 
+                              </span></a>
                               <a href="https://www.youtube.com/channel/UCebM3sL3ASfzAQ0YYD7m6Og" class="google-plus img-circle" target="blank">
-                              <span class="fa fa-google-plus"></span></a> 
+                              <span class="fa fa-google-plus"></span></a>
                               </div>
                            </div>
                         </div>
@@ -289,7 +315,7 @@
                         </div>
                      </div>
                   </div>
-                  <!--Two 4th column End--> 
+                  <!--Two 4th column End-->
                   <!--Two 4th column-->
                   <div class="col-md-6 col-sm-12 col-xs-12">
                      <div class="row clearfix">
@@ -331,7 +357,7 @@
                         </div>
                      </div>
                   </div>
-                  <!--Two 4th column End--> 
+                  <!--Two 4th column End-->
                </div>
             </div>
          </div>
@@ -343,37 +369,37 @@
             </div>
          </div>
       </footer>
- 
-      <!-- =-=-=-=-=-=-= JQUERY =-=-=-=-=-=-= --> 
-      <script src="js/jquery.min.js"></script> 
-      <!-- Bootstrap Core Css  --> 
+
+      <!-- =-=-=-=-=-=-= JQUERY =-=-=-=-=-=-= -->
+      <script src="js/jquery.min.js"></script>
+      <!-- Bootstrap Core Css  -->
       <script src="js/bootstrap.min.js"></script>
       <!-- Dropdown Hover  -->
-      <script src="js/bootstrap-dropdownhover.min.js"></script><!-- Jquery Easing --> 
-      <script type="text/javascript" src="js/easing.js"></script> 
-      <!-- Jquery Counter --> 
-      <script src="js/jquery.countTo.js"></script> 
-      <!-- Jquery Waypoints --> 
-      <script src="js/jquery.waypoints.js"></script> 
-      <!-- Jquery Appear Plugin --> 
-      <script src="js/jquery.appear.min.js"></script> 
-      <!-- Jquery Shuffle Portfolio --> 
-      <script src="js/jquery.shuffle.min.js"></script> 
-      <!-- Carousel Slider  --> 
-      <script src="js/carousel.min.js"></script> 
-      <!-- Jquery Migrate --> 
-      <script src="js/jquery-migrate.min.js"></script> 
-      <!--Style Switcher --> 
-      <script src="js/color-switcher.js"></script> 
-      <!-- Gallery Magnify  --> 
+      <script src="js/bootstrap-dropdownhover.min.js"></script><!-- Jquery Easing -->
+      <script type="text/javascript" src="js/easing.js"></script>
+      <!-- Jquery Counter -->
+      <script src="js/jquery.countTo.js"></script>
+      <!-- Jquery Waypoints -->
+      <script src="js/jquery.waypoints.js"></script>
+      <!-- Jquery Appear Plugin -->
+      <script src="js/jquery.appear.min.js"></script>
+      <!-- Jquery Shuffle Portfolio -->
+      <script src="js/jquery.shuffle.min.js"></script>
+      <!-- Carousel Slider  -->
+      <script src="js/carousel.min.js"></script>
+      <!-- Jquery Migrate -->
+      <script src="js/jquery-migrate.min.js"></script>
+      <!--Style Switcher -->
+      <script src="js/color-switcher.js"></script>
+      <!-- Gallery Magnify  -->
       <script src="js/magnific-popup/jquery.magnific-popup.min.js"></script>
       <!-- Sticky Bar  -->
       <script src="js/theia-sticky-sidebar.js"></script>
       <!-- Jquery Select Options  -->
-      <script src="js/select2.min.js"></script> 
-      <!-- Template Core JS --> 
+      <script src="js/select2.min.js"></script>
+      <!-- Template Core JS -->
       <script src="js/custom.js"></script>
-      <!-- =-=-=-=-=-=-= Quote Modal =-=-=-=-=-=-= --> 
+      <!-- =-=-=-=-=-=-= Quote Modal =-=-=-=-=-=-= -->
       <div class="modal fade " id="request-quote" role="dialog"  aria-hidden="true">
          <div class="modal-dialog">
             <div class="modal-content">
@@ -424,4 +450,3 @@
       <!-- =-=-=-=-=-=-= Quote Modal End =-=-=-=-=-=-= -->
    </body>
 </html>
-

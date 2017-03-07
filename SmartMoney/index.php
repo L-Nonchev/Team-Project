@@ -1,5 +1,26 @@
+<?php
+// !-- =-=-=-=-=-=-=Login validation=-=-=-=-=-=-= --
+	
+if (!isset($_COOKIE['logged-in'])){
+	$logged = false;
+	// !-- =-=-=-=-=-=-=END of Login validation=-=-=-=-=-=-= --
 
+}else {
+	$logged = true;
+	// !-- =-=-=-=-=-=-=Login information retrive=-=-=-=-=-=-= --
+	$user = $_COOKIE['logged-in'];
 
+	$profilePicture = "./users/".$user."/assets/profilPic/avatar.png";
+
+	$userData = file('./users/' . $user . '/usersData.txt');
+
+	$userName = explode("-", $userData[0]);
+	$userName = implode(" ", $userName);
+
+	// !-- =-=-=-=-=-=-=Login information retrive  END=-=-=-=-=-=-= --
+
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -71,12 +92,14 @@
                <i class="fa fa-youtube"></i></a></li>             
             </ul>
             </div>
+            <?php if ($logged){?>
             <div class="col-md-6 col-sm-6 col-xs-12">
-             <a href="#" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Careers</a>
+             <a href="./php/logOut.php" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Log Out</a>
             <a href="#" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Recent Events</a>
             <a href="#" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Latest News</a>
-            <a href="#" class="info-bar-meta-link hidden-sm"><i class="fa fa-caret-right fa-fw"></i>Blog</a>
+            <a href="#" class="info-bar-meta-link hidden-sm"><i class="fa fa-caret-right fa-fw"></i>Relog</a>
             </div>
+            <?php }?>
          </div>
       </div>
       <header class="header-area">
@@ -87,20 +110,34 @@
                <div class="logo">
                   <a href="index.html"><img src="images/logo.png" alt="logo of the company"></a>
                </div>
+               <?php if ($logged){?>
                <!--Info Outer-->
-               <div class="information-content">                 
-                  <!--Info Box-->
+               	
+				<div class="information-content">
+                  <!--Client Info Box-->
+                  <div class="info-box  hidden-sm">
+                     <div class="icon"><img src="<?= $profilePicture ?>" alt="prifile" /></div>
+                     <div class="text"> <?= $userName ?></div>                    
+                  </div>
+               </div>
+				<?php }else {?>	
+				<div class="information-content">    
+                  <!--Log in button-->
 					<div class="info-box" data-target="#request-quote" data-toggle="modal" class="quote-button hidden-xs">
 						<form action="index.php" method="get">
 							<input id="log-button" type="button" name="LogIn"	value="Login" />
 						</form>
 					</div>
-					<div class="info-box"  data-target="#request-quote" data-toggle="modal" class="quote-button hidden-xs">
+				<!--Sing Up button-->
+					<div class="info-box" >
 						<form action="index.php" method="get">
-							<input id="log-button" type="button" name="SignUp"	value="SignUp" />
+						<button id="log-button" type="button" name="SignUp"	value="SignUp" >
+						<a href="singup.php">Sing up!</a></button>
 						</form>
 					</div>
 				</div>
+				
+				<?php }?>
             </div>
          </div>
          <!-- Header Top End -->
@@ -125,13 +162,7 @@
                            <a  href="index.php" >Home </a>
                         </li>
                         <li class="dropdown">
-                           <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-animations="fadeInUp">About Us <span class="fa fa-angle-down"></span></a>
-                           <ul class="dropdown-menu">
-                              <li><a href="about.html">About </a> </li>
-                              <li><a href="about-1.html">About 2</a> </li>
-                              <li><a href="about-2.html">About 3</a> </li>
-                              <li><a href="about-3.html">About 4</a> </li>
-                           </ul>
+                        	<a href="about.php">About </a> 
                         </li>
                         <li class="dropdown ">
                            <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-animations="fadeInUp">Our Service <span class="fa fa-angle-down"></span></a>
@@ -143,7 +174,7 @@
                               <li><a href="services-details.html">Services Detail</a> </li>
                            </ul>
                         </li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="contact.php">Contact Us</a></li>
                      </ul>
                   </div>
                   <!-- /.navbar-collapse -->
@@ -679,58 +710,6 @@
       <script type="text/javascript" src="js/revolution-slider/js/extensions/revolution.extension.slideanims.min.js"></script>
       <script type="text/javascript" src="js/revolution-slider/js/extensions/revolution.extension.video.min.js"></script>
      
-     <!-- =-=-=-=-=-=-= Sing Up Modal =-=-=-=-=-=-= --> 
-      <div class="modal fade " id="request-quote" role="dialog"  aria-hidden="true">
-         <div class="modal-dialog">
-            <div class="modal-content">
-               <div class="modal-body">
-                  <div class="quotation-box-1">
-                     <h2>Sing Up</h2>
-                     <div class="desc-tex2">
-                        <p>Please feel all fields!</p>
-                     </div>
-                     <form action="singup.php" method="post">
-                        <div class="row clearfix">
-                           <!--First Name-->
-                           <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                              <input class="form-control" type="text" placeholder="First Name" value="" name="first-name">
-                           </div>
-                           <!--Last Name-->
-                           <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                              <input class="form-control" type="text" placeholder="Last Name" value="" name="last-name">
-                           </div>
-                           <!--Email Address-->
-                           <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                           
-                              <input class="form-control" type="email" placeholder="Email Address" value="" name="email">
-                           </div>
-                           <!-- password -->
-                           <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                              <input class="form-control" type="password" placeholder="Pasword" value="" name="pasword">
-                           </div>
-                           <!-- repeat password-->
-                           <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                              <input class="form-control" type="password" placeholder="Repeat pasword" value="" name="repeat-pasword">
-                           </div>
-                           <!-- button -->
-                            <div class="row">
-                     <div class="col-sm-12">
-                        <button type="submit" id="yes" class="btn btn-primary" name="sing-up-button">Sing up!</button>
-                        <img id="loader" alt="" src="images/loader.gif" class="loader">
-                     </div>
-                     </div>
-                           
-                        </div>
-                     </form>
-                  </div>
-               </div>
-            </div>
-            <!-- /.modal-content -->
-         </div>
-         <!-- /.modal-dialog -->
-      </div>
-      <!-- =-=-=-=-=-=-= Sing Up Modal End =-=-=-=-=-=-= -->
-      
       	<!-- =-=-=-=-=-=-= Log In Model =-=-=-=-=-=-= --> 
       <div class="modal fade " id="request-quote" role="dialog"  aria-hidden="true">
          <div class="modal-dialog">
@@ -739,23 +718,25 @@
                   <div class="quotation-box-1">
                      <h2> Log In</h2>
                      <div class="desc-text">
-                        <p>Please feel all fields!</p>
+                        <p>Please fill in all fields!</p>
                      </div>
-                     <form action="singup.php" method="post">
+                     <form action="./php/logIn.php" method="post">
                         <div class="row clearfix">
                            
                            <!-- Email Address-->
                            <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                          	  <label>E-mail<span class="required">*</span></label>
                               <input class="form-control" type="email" placeholder="Email Address" value="" name="email">
                            </div>
                            <!-- password-->
                            <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                          	  <label>Password<span class="required">*</span></label>
                               <input class="form-control" type="password" placeholder="Password" value="" name="password">
                            </div>
                            <!-- button-->
                             <div class="row">
                      <div class="col-sm-12">
-                        <button type="submit" id="yes" class="btn btn-primary" name="sing-up-button">Sing up!</button>
+                        <button type="submit" id="yes" class="btn btn-primary" name="log-in-button">Log In!</button>
                         <img id="loader" alt="" src="images/loader.gif" class="loader">
                      </div>
                      </div>
@@ -773,4 +754,3 @@
 
    </body>
 </html>
-
