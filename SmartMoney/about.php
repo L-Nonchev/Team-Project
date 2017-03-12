@@ -1,12 +1,12 @@
 ﻿<?php  
-			// !-- =-=-=-=-=-=-=Login validation=-=-=-=-=-=-= --
+			// !-- =-=-=-=-=-=-=Loggedin validation=-=-=-=-=-=-= --
 			
 if (!isset($_COOKIE['logged-in'])){
 				
 	header('Location: ./index.php');
 	die();
 	
-			// !-- =-=-=-=-=-=-=END of Login validation=-=-=-=-=-=-= --
+			// !-- =-=-=-=-=-=-=END of Loggedin validation=-=-=-=-=-=-= --
 	
 }else {
 	

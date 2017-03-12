@@ -718,20 +718,20 @@ if (!isset($_COOKIE['logged-in'])){
                   <div class="quotation-box-1">
                      <h2> Log In</h2>
                      <div class="desc-text">
-                        <p>Please fill in all fields!</p>
+                        <p>Enter yor E-mail and Password</p>
                      </div>
-                     <form action="./php/logIn.php" method="post">
+                     <form action="./php/logIn.php" method="post" id="login-form">
                         <div class="row clearfix">
                            
                            <!-- Email Address-->
                            <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                          	  <label>E-mail<span class="required">*</span></label>
-                              <input class="form-control" type="email" placeholder="Email Address" value="" name="email">
+                          	  <label id="email-label">E-mail<span class="required">*</span></label>
+                              <input class="form-control" type="email" placeholder="Email Address" value="" id="email" required="required">
                            </div>
                            <!-- password-->
                            <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                          	  <label>Password<span class="required">*</span></label>
-                              <input class="form-control" type="password" placeholder="Password" value="" name="password">
+                          	  <label id="pass-label">Password<span class="required">*</span></label>
+                              <input class="form-control" type="password" placeholder="Password" value="" id="password" required="required">
                            </div>
                            <!-- button-->
                             <div class="row">
@@ -751,6 +751,6 @@ if (!isset($_COOKIE['logged-in'])){
          <!-- /.modal-dialog -->
       </div>
       <!-- =-=-=-=-=-=-= Log In Model End  =-=-=-=-=-=-= -->
-
+	<script type="text/javascript" src="js/login-validation.js"></script>
    </body>
 </html>
