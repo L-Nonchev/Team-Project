@@ -24,11 +24,11 @@ if (isset($_POST['log-in-button'])){
 		$userPassword = substr($info, -40);
 		$usersData[$userEmail] = $userPassword;
 	}
-	
+
 					//-=-=-=-=-=-=---==-=-=-=END of Database formating=-=-=-==-=-==-=-==--\\
 	foreach ($usersData as $userEmail => $userPassword){
 		if ($email === $userEmail && $password === $userPassword){
-			
+
 			//-=-=-=-=-=-=---==-=-=-= Cookies =-=-=-==-=-==-=-==--\\
 			// creat cookie for client acces
 			$cookie_name = "logged-in";
@@ -50,7 +50,8 @@ if (isset($_POST['log-in-button'])){
 	}
 
 }else {
-	echo "nene";
+	header('Location: ../invalidLogin.php', true, 303);
+	die();
 }
 
 ?>

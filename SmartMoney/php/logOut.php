@@ -1,5 +1,5 @@
 <?php
-//-=-=-=-=-=-=---==-=-=-= Log Out Cookies =-=-=-==-=-==-=-==--\\
+//-=-=-=-=-=-=---==-=-=-= Log Out - Cookies Delete=-=-=-==-=-==-=-==--\\
 // creat cookie for client acces
 $cookie_name = "logged-in";
 $cookie_value  = $email;

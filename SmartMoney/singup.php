@@ -1,5 +1,4 @@
 <?php 
-
 if (isset($_POST['sing-up-button'])){
 	$firstName = htmlentities($_POST['first-name']);
 	$lastName = htmlentities($_POST['last-name']);
@@ -24,7 +23,7 @@ if (isset($_POST['sing-up-button'])){
 			$line = fgets($handle);
 			$allData = $allData . $line;
 		}
-		//check to existing username
+		//check to existing e-mail
 		if (substr_count($allData, $mailSha1) > 0){
 			$email= "";
 			$error = "ERROR! <br /> Email alredy exist!";
@@ -70,7 +69,6 @@ if (isset($_POST['sing-up-button'])){
 		fclose($handle);
 		
 	} else {
-		$error = "ERROR! <br /> Please fill all fields!";
 	}
 }else {
 	$firstName = '';
@@ -237,14 +235,14 @@ if (isset($_POST['sing-up-button'])){
                         <!-- First Name -->
                         <div class="form-group">
                            <label> First Name<span class="required">*</span></label>
-							<input class="form-control" type="text" placeholder="First Name" value="<?= $firstName ?>" name="first-name">
+							<input class="form-control" type="text" placeholder="First Name" value="<?= $firstName ?>" name="first-name" required="required">
                         </div>
                      </div>
                      <div class="col-sm-6">
                         <!-- Last Name -->
                         <div class="form-group">
-                           <label for="email">Email<span class="required">*</span></label>
-                           <input class="form-control" type="text" placeholder="Last Name" value="<?= $lastName ?>" name="last-name">
+                           <label for="email">Last Name<span class="required">*</span></label>
+                           <input class="form-control" type="text" placeholder="Last Name" value="<?= $lastName ?>" name="last-name" required="required">
                         </div>
                      </div>
                    </div> 
@@ -254,7 +252,8 @@ if (isset($_POST['sing-up-button'])){
                        		 <!-- Email -->
                        		 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                         		 <label>E-mail<span class="required">*</span></label>
-                           		<input class="form-control" type="email" placeholder="Email Address" value="<?= $email ?>" name="email">
+                           		<input class="form-control" type="email" placeholder="Email Address" value="<?= $email ?>" name="email" 
+                           		id = "e-mail"required="required">
                            </div>
                      	</div>
                      </div>
@@ -262,23 +261,28 @@ if (isset($_POST['sing-up-button'])){
                        <div class="row">
                      <div class="col-sm-6">
                         <!-- Password -->
-                        <div class="form-group">
+                        <div class="form-group" >
                            <label>Password<span class="required">*</span></label>
-							<input class="form-control" type="password" placeholder="Pasword" value="<?= $password1 ?>" name="pasword">
+							<input class="form-control" type="password" placeholder="Pasword" value="<?= $password1 ?>" name="pasword" 
+							id="inputPassword1" required="required">
                         </div>
                      </div>
                      <div class="col-sm-6">
                         <!-- Re-Enter Password -->
-                        <div class="form-group">
+                        <div class="form-group" >
                            <label>Re-Enter Password<span class="required">*</span></label>
-                           <input class="form-control" type="password" placeholder="Repeat pasword" value="<?= $password2 ?>" name="repeat-pasword">
+                           <input class="form-control" type="password" placeholder="Repeat pasword" value="<?= $password2 ?>" name="repeat-pasword" 
+                           id="inputPassword2" required="required">
                         </div>
+                        
                      </div>
                    </div>  
-                   
+                   <div id="divPassword2"></div>
                      <div class="row">
+                     <div id="divPassword2"></div>
                     	 <div class="col-sm-12">
                         	<button type="submit" id="yes" class="btn btn-primary" name="sing-up-button">Sing up!</button>
+                        	
                        	 <img id="loader" alt="" src="images/loader.gif" class="loader">
                     	 </div>
                      </div>
@@ -402,7 +406,10 @@ if (isset($_POST['sing-up-button'])){
             </div>
          </div>
       </footer>
- 
+      
+ 	  <!-- =-=-=-=-=-=-= Sing UP validation =-=-=-=-=-=-= --> 
+ 	  <script src="./js/singup-validation.js" type="text/javascript"></script>
+ 	  
       <!-- =-=-=-=-=-=-= JQUERY =-=-=-=-=-=-= --> 
       <script src="js/jquery.min.js"></script> 
       <!-- Bootstrap Core Css  --> 
