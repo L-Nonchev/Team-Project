@@ -1,4 +1,4 @@
-var singUpButton = document.getElementById('yes');
+var singUpButton = document.getElementById('sing-up-button');
 
 //-=-=-=-=-=-=--=---=-= Chech for e-mail exist=-=-=-=-=-=-=--=-=-==-=-=\\
 var email = document.getElementById('e-mail');
@@ -7,6 +7,7 @@ email.onblur = function() {
 	currier.onreadystatechange = function(){
 		if (this.readyState === 4 && this.status === 200) {
 			var incomeData = JSON.parse(this.responseText);
+
 			if(incomeData['haveMail'] === true){
 				alert("Email "+ incomeData['mail'] + " alredy exist!");
 			}

@@ -1,21 +1,16 @@
 <?php
 // !-- =-=-=-=-=-=-=Login validation=-=-=-=-=-=-= --
-
-if (!isset($_COOKIE['logged-in'])){
+session_start();
+if (!isset($_SESSION['user_id'])){
 	header('Location: ./index.php');
 	die();
 	// !-- =-=-=-=-=-=-=END of Login validation=-=-=-=-=-=-= --
 
 }else {
 	// !-- =-=-=-=-=-=-=Login information retrive=-=-=-=-=-=-= --
-	$user = $_COOKIE['logged-in'];
 
-	$profilePicture = "./users/".$user."/assets/profilPic/avatar.png";
 
-	$userData = file('./users/' . $user . '/usersData.txt');
-
-	$userName = explode("-", $userData[0]);
-	$userName = implode(" ", $userName);
+	$userName = $_SESSION['user_name'];
 
 	// !-- =-=-=-=-=-=-=Login information retrive  END=-=-=-=-=-=-= --
 

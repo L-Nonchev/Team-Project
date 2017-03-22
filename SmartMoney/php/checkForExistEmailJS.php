@@ -9,28 +9,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 	// hash email 
 	$mailSha1 = sha1($email['mail']);
 	
-	$allData = "";
-	$handle = fopen('../logIn-data/loginData.txt', 'r');
-	while (!feof($handle)){
-		$line = fgets($handle);
-		$allData = $allData . $line;
-	}
+	// define data for login DB
+	define('DB_HOST', 'localhost');
+	define('DB_NAME', 'smartmoney');
+	define('DB_USER', 'root');
+	define('DB_PASS', '');
 	
-	//check to existing e-mail
-	if (substr_count($allData, $mailSha1) > 0){
-		$results = array(
-			"haveMail" => true,
-			"mail" => $email['mail']
-		);
-	} else {
-		$results = array(
-			"haveMail" => false,
-			"mail" => $email['mail'],
-		);
+	try{
+			// Create connection
+			$db = new PDO("mysql:host=". DB_HOST . "; dbname=". DB_NAME, DB_USER, DB_PASS);
+		
+			// Set the PDO error mode to exception
+			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		
+			//select data for exist e-mail
+			$selectEmail = "SELECT email
+			FROM users
+			WHERE email = '$mailSha1'; ";
+			$result = $db->query($selectEmail)->fetch(PDO::FETCH_COLUMN);
+			if($result === $mailSha1){
+				$results = array(
+						"haveMail" => true,
+						"mail" => $email['mail']
+				);
+			}else {
+				$results = array(
+						"haveMail" => false,
+						"mail" => $email['mail']
+				);
+			}
+			
+			// return JSON response
+			echo json_encode($results);
+			
+	} catch(PDOException $error){
+		die("ERROR: " . $error->getMessage());
 	}
-	// return JSON response
-	echo json_encode($results);
-
+	// Close connection
+	unset($db);
 }
 
 ?>

@@ -1,74 +1,109 @@
 <?php 
-if (isset($_POST['sing-up-button'])){
-	$firstName = htmlentities($_POST['first-name']);
-	$lastName = htmlentities($_POST['last-name']);
-	$email = htmlentities($_POST['email']);
-	$password1 = htmlentities($_POST['pasword']);
-	$password2 = htmlentities($_POST['repeat-pasword']);
-	
-	if (strlen($firstName) > 0 && strlen($lastName) > 0 && strlen($email) > 0 && strlen($password1) > 0 && strlen($password2) > 0){
+//<!-- =-=-=-=-=-=-=  NEWS =-=-=-=-=-=-= -->\\
+include 'php/news.php';
+
+//<!-- =-=-=-=-=-=-=  Sing Up =-=-=-=-=-=-= -->\\
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+	if (isset($_POST['sing-up-button'])){
+		if (isset($_POST['first-name']) && isset($_POST['last-name']) && isset($_POST['email']) 
+				&& isset($_POST['pasword']) && isset($_POST['repeat-pasword'])  ){
+			// user data
+			$firstName = htmlentities($_POST['first-name']);
+			$lastName = htmlentities($_POST['last-name']);
+			$email = htmlentities($_POST['email']);
+			$password1 = htmlentities($_POST['pasword']);
+			$password2 = htmlentities($_POST['repeat-pasword']);
 			
-			//-=-=-=-=-=-=---==-=-=-= Hash data=-=-=-==-=-==-=-==--\\
-			//hash email 
-			$mailSha1 = sha1($email);
-			// hash passwords
-			$passMd5 = md5($password1);
-			$paddSha1 = sha1($passMd5);
+			// define data for login DB
+			define('DB_HOST', 'localhost');
+			define('DB_NAME', 'smartmoney');
+			define('DB_USER', 'root');
+			define('DB_PASS', '');
+			
+			if (strlen($firstName) > 0 && strlen($lastName) > 0 && strlen($email) > 0 && strlen($password1) > 7 && strlen($password2) > 7){
+					
+				//-=-=-=-=-=-=---==-=-=-= Hash data=-=-=-==-=-==-=-==--\\
+				//hash email 
+				$mailSha1 = sha1($email);
+				// hash passwords
+				$passMd5 = md5($password1);
+				$passSha1 = sha1($passMd5);
+				
+				//-=-=-=-=-=-=---==-=-=-= Check incomig data =-=-=-==-=-==-=-==--\\
+				try{
+					// Create connection
+					$db = new PDO("mysql:host=". DB_HOST . "; dbname=". DB_NAME, DB_USER, DB_PASS);
+						
+					// Set the PDO error mode to exception
+					$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+						
+					//select data for exist e-mail
+					$selectEmail = "SELECT email 
+								  FROM users
+								  WHERE email = '$mailSha1'; ";
+					$result = $db->query($selectEmail);
+					if($result->rowCount() > 0){
+						$email= "";
+						$error = "ERROR! <br /> Email alredy exist!";
+						
+					} else {
+						// check for corec pass
+						if ($password1 !== $password2){
+							$password1 = '';
+							$password2 = '';
+							$error = "ERROR! <br /> The password you entered does NOT match! TRY AGAIN.";
+						} else {
+							
+							//-=-=-=-=-=-=---==-=-=-= Creat folder for client =-=-=-==-=-==-=-==--\\
+							mkdir('./users/'. $mailSha1 );
+							mkdir('./users/'.$mailSha1.'/assets');
+							mkdir('./users/'.$mailSha1.'/assets/profilPic');
+	
+							//-=-=-=-=-=-=---==-=-=-= Creat acount =-=-=-==-=-==-=-==--\\
+	
+								//insert data
+								$inserUSER = "INSERT INTO users VALUES (
+												null, '$firstName' ' ' '$lastName', '$mailSha1' , '$passSha1');";
 		
-		//-=-=-=-=-=-=---==-=-=-= Check incomig data =-=-=-==-=-==-=-==--\\
-		// check to exist incoming input data
-		$allData = "";
-		$handle = fopen('logIn-data/loginData.txt', 'r');
-		while (!feof($handle)){
-			$line = fgets($handle);
-			$allData = $allData . $line;
+								$db->exec($inserUSER);
+	
+							//-=-=-=-=-=-=---==-=-=-=  SESSION =-=-=-==-=-==-=-==--\\
+							session_start();
+								
+							$selectUser_Id  = "SELECT user_id
+									  	   FROM users
+									 	   WHERE email = '$mailSha1';";
+							$userID = $db->query($selectUser_Id)->fetch(PDO::FETCH_COLUMN);
+							
+							$selectUserName=  "SELECT name 
+									   	  FROM users
+										  WHERE email = '$mailSha1';";
+							$userName = $db->query($selectUserName)->fetch(PDO::FETCH_COLUMN);
+							
+							$_SESSION['user_id'] = $userID;
+							$_SESSION['user_name'] = $userName;
+								
+								// Close connection
+								unset($db);
+							//-=-=-=-=-=-=---==-=-=-= Redirect =-=-=-==-=-==-=-==--\\
+							header('Location: index.php', true, 303);
+							die();
+						}	
+					}
+				} catch(PDOException $error){
+					die("ERROR: " . $error->getMessage());
+				}	
+				// Close connection
+				unset($db);
+			} 
 		}
-		//check to existing e-mail
-		if (substr_count($allData, $mailSha1) > 0){
-			$email= "";
-			$error = "ERROR! <br /> Email alredy exist!";
-		} else {
-			// check for corec pass
-			if ($password1 !== $password2){
-				$password1 = '';
-				$password2 = '';
-				$error = "ERROR! <br /> The password you entered does NOT match! TRY AGAIN.";
-			} else {
-				
-				//-=-=-=-=-=-=---==-=-=-= Creat folder for client =-=-=-==-=-==-=-==--\\
-				mkdir('./users/'. $mailSha1 );
-				mkdir('./users/'.$mailSha1.'/assets');
-				mkdir('./users/'.$mailSha1.'/assets/profilPic');
-				$data = $firstName . "-" . $lastName . "-" . PHP_EOL . 
-						"income-0-" . PHP_EOL .
-						"spend-0-" . PHP_EOL .
-						"saved-0-". PHP_EOL;		
-				file_put_contents('./users/'.$mailSha1.'/usersData.txt', $data);
-				
-				
-				//-=-=-=-=-=-=---==-=-=-= Cookies =-=-=-==-=-==-=-==--\\
-				// creat cookie for client acces
-				$cookie_name = "logged-in";
-				$cookie_value  = $mailSha1;
-				$cookie_exp = time() + 3600; // login time 1hour
-				// create cookie
-				setcookie($cookie_name, $cookie_value , $cookie_exp , "/");
-				
-				//-=-=-=-=-=-=---==-=-=-= Creat acount =-=-=-==-=-==-=-==--\\
-				// create a data for new User and Password
-				$newACC = $mailSha1.$paddSha1;
-				file_put_contents('logIn-data/loginData.txt', $newACC . PHP_EOL, FILE_APPEND);
-				fclose($handle);
-				//-=-=-=-=-=-=---==-=-=-= Redirect =-=-=-==-=-==-=-==--\\
-				header('Location: index.php', true, 303);
-				die();
-				// End creat account
-			}
-				
-		}
-		fclose($handle);
-		
-	} else {
+	}else {
+		$firstName = '';
+		$lastName = '';
+		$email = '';
+		$password1 = '';
+		$password2 = '';
+		$error = "";
 	}
 }else {
 	$firstName = '';
@@ -78,7 +113,6 @@ if (isset($_POST['sing-up-button'])){
 	$password2 = '';
 	$error = "";
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -180,22 +214,6 @@ if (isset($_POST['sing-up-button'])){
                         <li class="dropdown">
                            <a  href="index.php" >Home </a>
                         </li>
-                        <li class="dropdown">
-                        
-                        	<a href="about.php">About </a> 
-                        </li>
-                       
-                        <li class="dropdown ">
-                           <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-animations="fadeInUp">Our Service <span class="fa fa-angle-down"></span></a>
-                           <ul class="dropdown-menu">
-                              <li><a href="services.html">Services</a> </li>
-                              <li><a href="services-2.html">Services 2</a> </li>
-                              <li><a href="services-3.html">Services 3</a> </li>
-                              <li><a href="services-4.html">Services 4 (Sticky Bar)</a> </li>
-                              <li><a href="services-details.html">Services Detail</a> </li>
-                           </ul>
-                        </li>
-                        <li><a href="contact.php">Contact Us</a></li>
                      </ul>
                   </div>
                   <!-- /.navbar-collapse -->
@@ -281,7 +299,7 @@ if (isset($_POST['sing-up-button'])){
                      <div class="row">
                      <div id="divPassword2"></div>
                     	 <div class="col-sm-12">
-                        	<button type="submit" id="yes" class="btn btn-primary" name="sing-up-button">Sing up!</button>
+                        	<button type="submit" id="sing-up-button" class="btn btn-primary" name="sing-up-button">Sing up!</button>
                         	
                        	 <img id="loader" alt="" src="images/loader.gif" class="loader">
                     	 </div>
@@ -339,44 +357,55 @@ if (isset($_POST['sing-up-button'])){
                         </div>
                         <!--Footer Column-->
                         <div class="col-lg-5 col-sm-6 col-xs-12 column">
-                           <h2>Our Service</h2>
-                           <div class="footer-widget links-widget">
-                              <ul>
-                                 <li><a href="#">Financial Planning</a></li>
-                                 <li><a href="#">Saving Solutions</a></li>
-                                 <li><a href="#">Private Banking</a></li>
-                                 <li><a href="#">Busniess Loan</a></li>
-                                 <li><a href="#">Tax Planning</a></li>
-                              </ul>
+                          <div class="footer-widget news-widget">
+                              <h2>Latest News</h2>
+                              <!--News Post-->
+                              <div class="news-post">
+                                 <div class="icon"></div>
+                                 <div class="news-content">
+                                    <figure class="image-thumb"><img src="<?= $imgLN[0]?>" alt=""></figure>
+                                    <a target="blank" href="<?= $urlLN[0] ?>"><?= $titleLN[0] ?></a>
+                                 </div>
+                                 <div class="time"><?= $dateLN[0] ?></div>
+                              </div>
+                              <!--News Post-->
+                              <div class="news-post">
+                                 <div class="icon"></div>
+                                 <div class="news-content">
+                                    <figure class="image-thumb"><img src="<?= $imgLN[1]?>" alt=""></figure>
+                                    <a target="blank" <?= $urlLN[1] ?>><?= $titleLN[1] ?></a>
+                                 </div>
+                                 <div class="time"><?= $dateLN[1] ?></div>
+                              </div>
                            </div>
                         </div>
                      </div>
                   </div>
-                  <!--Two 4th column End--> 
+                  <!--Two 4th column End-->
                   <!--Two 4th column-->
                   <div class="col-md-6 col-sm-12 col-xs-12">
                      <div class="row clearfix">
                         <!--Footer Column-->
                         <div class="col-lg-7 col-sm-6 col-xs-12 column">
                            <div class="footer-widget news-widget">
-                              <h2>Latest News</h2>
+                              <h2> <?=  "&nbsp" ?> </h2>
                               <!--News Post-->
                               <div class="news-post">
                                  <div class="icon"></div>
                                  <div class="news-content">
-                                    <figure class="image-thumb"><img src="images/blog/popular-2.jpg" alt=""></figure>
-                                    <a href="#">top benefits of hiring our professional logistics service</a>
+                                    <figure class="image-thumb"><img src="<?= $imgLN[2]?>" alt=""></figure>
+                                    <a target="blank" href="<?= $urlLN[2] ?>"><?= $titleLN[2] ?></a>
                                  </div>
-                                 <div class="time">June 21, 2016</div>
+                                 <div class="time"><?= $dateLN[2] ?></div>
                               </div>
                               <!--News Post-->
                               <div class="news-post">
                                  <div class="icon"></div>
                                  <div class="news-content">
-                                    <figure class="image-thumb"><img src="images/blog/popular-1.jpg" alt=""></figure>
-                                    <a href="#">top benefits of hiring our professional logistics service</a>
+                                    <figure class="image-thumb"><img src="<?= $imgLN[3]?>" alt=""></figure>
+                                    <a target="blank" <?= $urlLN[3]?>><?= $titleLN[3] ?> </a>
                                  </div>
-                                 <div class="time">June 21, 2016</div>
+                                 <div class="time"><?= $dateLN[3] ?></div>
                               </div>
                            </div>
                         </div>
@@ -385,10 +414,7 @@ if (isset($_POST['sing-up-button'])){
                            <div class="footer-widget links-widget">
                               <h2>Site Links</h2>
                               <ul>
-                                 <li><a href="index-3.html">Home</a></li>
-                                 <li><a href="about.html">About Us</a></li>
-                                 <li><a href="services.html">Our Services</a></li>
-                                 <li><a href="contact.html">Contact Us</a></li>
+                                 <li><a href="index.php">Home</a></li>
                               </ul>
                            </div>
                         </div>

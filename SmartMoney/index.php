@@ -1,25 +1,22 @@
 <?php
 // !-- =-=-=-=-=-=-=Login validation=-=-=-=-=-=-= --
-	
-if (!isset($_COOKIE['logged-in'])){
+	session_start();
+if (!isset($_SESSION['user_id'])){
 	$logged = false;
+
 	// !-- =-=-=-=-=-=-=END of Login validation=-=-=-=-=-=-= --
 
 }else {
 	$logged = true;
 	// !-- =-=-=-=-=-=-=Login information retrive=-=-=-=-=-=-= --
-	$user = $_COOKIE['logged-in'];
-
-	$profilePicture = "./users/".$user."/assets/profilPic/avatar.png";
-
-	$userData = file('./users/' . $user . '/usersData.txt');
-
-	$userName = explode("-", $userData[0]);
-	$userName = implode(" ", $userName);
+	$user = $_SESSION['user_id'];
+	$userName = $_SESSION['user_name'];
 
 	// !-- =-=-=-=-=-=-=Login information retrive  END=-=-=-=-=-=-= --
 
 }
+//<!-- =-=-=-=-=-=-=  NEWS =-=-=-=-=-=-= -->
+include 'php/news.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -142,6 +139,7 @@ if (!isset($_COOKIE['logged-in'])){
          </div>
          <!-- Header Top End -->
         <!-- Menu Section -->
+        <?php if ($logged) { ?>
          <div class="navigation-2">
             <!-- navigation-start -->
             <nav class="navbar navbar-default ">
@@ -183,6 +181,7 @@ if (!isset($_COOKIE['logged-in'])){
             </nav>
          </div>
          <!-- /.navigation-end -->
+         <?php } ?>
          <!-- Menu  End -->
       </header>
       <!-- =-=-=-=-=-=-= HEADER END =-=-=-=-=-=-= -->
@@ -426,8 +425,8 @@ if (!isset($_COOKIE['logged-in'])){
          <div class="container">
             <!-- title-section -->
             <div class="main-heading text-center">
-               <h2>OUR BLOG</h2>
-               <p>Cras varius purus in tempus porttitor ut dapibus efficitur sagittis cras vitae lacus metus nunc vulputate facilisis nisi eu lobortis erat consequat ut. Aliquam et justo ante. Nam a cursus velit</p>
+               <h2>TOP NEWS Business Insider</h2>
+               <p></p>
             </div>
             <!-- End title-section -->
             <!-- Row -->
@@ -437,19 +436,18 @@ if (!isset($_COOKIE['logged-in'])){
                   <div class="col-md-4 col-sm-6 col-xs-12">
                      <div class="news-box">
                         <div class="news-thumb">
-                           <a href="blog-detail.html"><img alt="" class="img-responsive" src="images/blog/1.jpg"></a>
-                           <div class="date"> <strong>21</strong>
-                              <span>Jun</span> 
+                           <a target="blank" href="<?= $url[0] ?>"><img alt="" class="img-responsive" src="<?= $img[0] ?>"></a>
+                           <div class="date"> <strong><?= $date[0] ?></strong>
+                              <span>Mar</span> 
                            </div>
                         </div>
                         <div class="news-detail">
-                           <h2><a title="" href="blog-detail.html">Help you planning for your retirement</a></h2>
-                           <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo enean dolor sit amet, consectetuer.</p>
+                           <h2><a title="" href="<?= $url[0] ?>"><?= $title[0] ?></a></h2>
+                           <p><?= $description[0] ?></p>
                            <div class="entry-footer">
                               <div class="post-meta">
-                                 <div class="post-admin"> <i class="icon-profile-male"></i>Posted by<a href="#">Admin</a> </div>
-                                 <div class="post-comment"> <i class="icon-chat"></i> <a href="#">217</a> </div>
-                                 <div class="post-like"> <i class="icon-heart"></i> <a href="#">130</a> </div>
+                                 <div class="post-admin"> <i class="icon-profile-male"></i>Author <a href="#"><?= $author[0] ?></a> </div>
+                                 
                               </div>
                            </div>
                         </div>
@@ -460,19 +458,17 @@ if (!isset($_COOKIE['logged-in'])){
                   <div class="col-md-4 col-sm-6 col-xs-12">
                      <div class="news-box">
                         <div class="news-thumb">
-                           <a href="blog-detail.html"><img alt="" class="img-responsive" src="images/blog/2.jpg"></a>
-                           <div class="date"> <strong>21</strong>
-                              <span>Jun</span> 
+                           <a target="blank" href="<?= $url[1] ?>"><img alt="" class="img-responsive" src="<?= $img[1] ?>"></a>
+                           <div class="date"> <strong><?= $date[1] ?></strong>
+                              <span>Mar</span> 
                            </div>
                         </div>
                         <div class="news-detail">
-                           <h2><a title="" href="blog-detail.html">Solution financial for good startup</a></h2>
-                           <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo enean dolor sit amet, consectetuer.</p>
+                           <h2><a title="" href="<?= $url[1] ?>"><?= $title[1] ?></a></h2>
+                           <p><?= $description[1] ?></p>
                            <div class="entry-footer">
                               <div class="post-meta">
-                                 <div class="post-admin"> <i class="icon-profile-male"></i>Posted by<a href="#">Admin</a> </div>
-                                 <div class="post-comment"> <i class="icon-chat"></i> <a href="#">217</a> </div>
-                                 <div class="post-like"> <i class="icon-heart"></i> <a href="#">130</a> </div>
+                                 <div class="post-admin"> <i class="icon-profile-male"></i>Author <a href="#"><?= $author[1] ?></a> </div>
                               </div>
                            </div>
                         </div>
@@ -483,19 +479,92 @@ if (!isset($_COOKIE['logged-in'])){
                   <div class="col-md-4 col-sm-6 col-xs-12">
                      <div class="news-box">
                         <div class="news-thumb">
-                           <a href="blog-detail.html"><img class="img-responsive" alt="" src="images/blog/3.jpg"></a>
-                           <div class="date"> <strong>21</strong>
-                              <span>Jun</span> 
+                           <a target="blank" href="<?= $url[2] ?>"><img class="img-responsive" alt="" src="<?= $img[2] ?>"></a>
+                           <div class="date"> <strong><?= $date[2] ?></strong>
+                              <span>Mar</span> 
                            </div>
                         </div>
                         <div class="news-detail">
-                           <h2><a title="" href="blog-detail.html">Plans for growing your businesses</a></h2>
-                           <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo enean dolor sit amet, consectetuer.</p>
+                           <h2><a title="" href="<?= $url[2] ?>"><?= $title[2] ?></a></h2>
+                           <p><?= $description[2] ?></p>
                            <div class="entry-footer">
                               <div class="post-meta">
-                                 <div class="post-admin"> <i class="icon-profile-male"></i>Posted by<a href="#">Admin</a> </div>
-                                 <div class="post-comment"> <i class="icon-chat"></i> <a href="#">217</a> </div>
-                                 <div class="post-like"> <i class="icon-heart"></i> <a href="#">130</a> </div>
+                                 <div class="post-admin"> <i class="icon-profile-male"></i>Author <a href="#"><?= $author[2] ?></a> </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- blog-grid end -->
+                  <div class="clearfix"></div>
+               </div>
+            </div>
+            <!-- Row End -->
+            <div class="main-heading text-center">
+               <h2>TOP NEWS Bloomberg</h2>
+               <p></p>
+            </div>
+            <!-- Row -->
+            <div class="row">
+               <div class="col-sm-12 col-xs-12 col-md-12">
+                  <!-- blog-grid -->
+                  <div class="col-md-4 col-sm-6 col-xs-12">
+                     <div class="news-box">
+                        <div class="news-thumb">
+                           <a target="blank" href="<?= $url[3] ?>"><img alt="" class="img-responsive" src="<?= $img[3] ?>"></a>
+                           <div class="date"> <strong><?= $date[3] ?></strong>
+                              <span>Mar</span> 
+                           </div>
+                        </div>
+                        <div class="news-detail">
+                           <h2><a title="" href="<?= $url[3] ?>"><?= $title[3] ?></a></h2>
+                           <p><?= $description[3]?></p>
+                           <div class="entry-footer">
+                              <div class="post-meta">
+                                 <div class="post-admin"> <i class="icon-profile-male"></i>Author <a href="#"><?= $author[3] ?></a> </div>
+                                 
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- blog-grid end -->
+                  <!-- blog-grid -->
+                  <div class="col-md-4 col-sm-6 col-xs-12">
+                     <div class="news-box">
+                        <div class="news-thumb">
+                           <a target="blank" href="<?= $url[4] ?>"><img alt="" class="img-responsive" src="<?= $img[4] ?>"></a>
+                           <div class="date"> <strong><?= $date[4] ?></strong>
+                              <span>Mar</span> 
+                           </div>
+                        </div>
+                        <div class="news-detail">
+                           <h2><a title="" href="<?= $url[4] ?>"><?= $title[4] ?></a></h2>
+                           <p><?= $description[4] ?></p>
+                           <div class="entry-footer">
+                              <div class="post-meta">
+                                 <div class="post-admin"> <i class="icon-profile-male"></i>Author <a href="#"><?= $author[4] ?></a> </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- blog-grid end -->
+                  <!-- blog-grid -->
+                  <div class="col-md-4 col-sm-6 col-xs-12">
+                     <div class="news-box">
+                        <div class="news-thumb">
+                           <a target="blank" href="<?= $url[5] ?>"><img class="img-responsive" alt="" src="<?= $img[5] ?>"></a>
+                           <div class="date"> <strong><?= $date[5] ?></strong>
+                              <span>Mar</span> 
+                           </div>
+                        </div>
+                        <div class="news-detail">
+                           <h2><a title="" href="<?= $url[5] ?>"><?= $title[5] ?></a></h2>
+                           <p><?= $description[5] ?></p>
+                           <div class="entry-footer">
+                              <div class="post-meta">
+                                 <div class="post-admin"> <i class="icon-profile-male"></i>Author <a href="#"><?= $author[5] ?></a> </div>
                               </div>
                            </div>
                         </div>
@@ -575,15 +644,26 @@ if (!isset($_COOKIE['logged-in'])){
 							</div>
                         <!--Footer Column-->
                         <div class="col-lg-5 col-sm-6 col-xs-12 column">
-                           <h2>Our Service</h2>
-                           <div class="footer-widget links-widget">
-                              <ul>
-                                 <li><a href="#">Financial Planning</a></li>
-                                 <li><a href="#">Saving Solutions</a></li>
-                                 <li><a href="#">Private Banking</a></li>
-                                 <li><a href="#">Busniess Loan</a></li>
-                                 <li><a href="#">Tax Planning</a></li>
-                              </ul>
+                          <div class="footer-widget news-widget">
+                              <h2>Latest News</h2>
+                              <!--News Post-->
+                              <div class="news-post">
+                                 <div class="icon"></div>
+                                 <div class="news-content">
+                                    <figure class="image-thumb"><img src="<?= $imgLN[0]?>" alt=""></figure>
+                                    <a target="blank" href="<?= $urlLN[0] ?>"><?= $titleLN[0] ?></a>
+                                 </div>
+                                 <div class="time"><?= $dateLN[0] ?></div>
+                              </div>
+                              <!--News Post-->
+                              <div class="news-post">
+                                 <div class="icon"></div>
+                                 <div class="news-content">
+                                    <figure class="image-thumb"><img src="<?= $imgLN[1]?>" alt=""></figure>
+                                    <a target="blank" <?= $urlLN[1] ?>><?= $titleLN[1] ?></a>
+                                 </div>
+                                 <div class="time"><?= $dateLN[1] ?></div>
+                              </div>
                            </div>
                         </div>
                      </div>
@@ -595,37 +675,34 @@ if (!isset($_COOKIE['logged-in'])){
                         <!--Footer Column-->
                         <div class="col-lg-7 col-sm-6 col-xs-12 column">
                            <div class="footer-widget news-widget">
-                              <h2>Latest News</h2>
+                              <h2> <?=  "&nbsp" ?> </h2>
                               <!--News Post-->
                               <div class="news-post">
                                  <div class="icon"></div>
                                  <div class="news-content">
-                                    <figure class="image-thumb"><img src="images/blog/popular-2.jpg" alt=""></figure>
-                                    <a href="#">top benefits of hiring our professional logistics service</a>
+                                    <figure class="image-thumb"><img src="<?= $imgLN[2]?>" alt=""></figure>
+                                    <a target="blank" href="<?= $urlLN[2] ?>"><?= $titleLN[2] ?></a>
                                  </div>
-                                 <div class="time">June 21, 2016</div>
+                                 <div class="time"><?= $dateLN[2] ?></div>
                               </div>
                               <!--News Post-->
                               <div class="news-post">
                                  <div class="icon"></div>
                                  <div class="news-content">
-                                    <figure class="image-thumb"><img src="images/blog/popular-1.jpg" alt=""></figure>
-                                    <a href="#">top benefits of hiring our professional logistics service</a>
+                                    <figure class="image-thumb"><img src="<?= $imgLN[3]?>" alt=""></figure>
+                                    <a target="blank" <?= $urlLN[3]?>><?= $titleLN[3] ?> </a>
                                  </div>
-                                 <div class="time">June 21, 2016</div>
+                                 <div class="time"><?= $dateLN[3] ?></div>
                               </div>
                            </div>
                         </div>
+                        <!--Footer Column-->
                         <!--Footer Column-->
                         <div class="col-lg-5 col-sm-6 col-xs-12 column">
                            <div class="footer-widget links-widget">
                               <h2>Site Links</h2>
                               <ul>
-                                 <li><a href="about.html">About Us</a></li>
-                                 <li><a href="team.html">Our Team</a></li>
-                                 <li><a href="services.html">Our Services</a></li>
-                                 <li><a href="index-7.html">Blog</a></li>
-                                 <li><a href="contact.html">Contact Us</a></li>
+                                 <li><a href="index.php">Home</a></li>
                               </ul>
                            </div>
                         </div>
@@ -639,7 +716,7 @@ if (!isset($_COOKIE['logged-in'])){
          <div class="footer-copyright">
             <div class="auto-container clearfix">
                <!--Copyright-->
-               <div class="copyright text-center">Copyright 2017 &copy;</div>
+                <div class="copyright text-center">Copyright 2017 &copy; Smart Money Managment</div>
             </div>
          </div>
       </footer>
@@ -723,23 +800,25 @@ if (!isset($_COOKIE['logged-in'])){
                      <form action="./php/logIn.php" method="post" id="login-form">
                         <div class="row clearfix">
                            
-                           <!-- Email Address-->
-                           <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                          	  <label id="email-label">E-mail<span class="required">*</span></label>
-                              <input class="form-control" type="email" placeholder="Email Address" value="" id="email" required="required">
-                           </div>
-                           <!-- password-->
-                           <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                          	  <label id="pass-label">Password<span class="required">*</span></label>
-                              <input class="form-control" type="password" placeholder="Password" value="" id="password" required="required">
-                           </div>
-                           <!-- button-->
-                            <div class="row">
-                     <div class="col-sm-12">
-                        <button type="submit" id="yes" class="btn btn-primary" name="log-in-button">Log In!</button>
-                        <img id="loader" alt="" src="images/loader.gif" class="loader">
-                     </div>
-                     </div>
+	                           <!-- Email Address-->
+	                           <div class="form-group col-md-12 col-sm-12 col-xs-12">
+	                          	  <label id="email-label">E-mail<span class="required">*</span></label>
+	                              <input class="form-control" type="email" placeholder="Email Address" value="" id="email" 
+	                              name="email"	required="required">
+	                           </div>
+	                           <!-- password-->
+	                           <div class="form-group col-md-6 col-sm-6 col-xs-12">
+	                          	  <label id="pass-label">Password<span class="required">*</span></label>
+	                              <input class="form-control" type="password" placeholder="Password" value="" id="password" 
+	                              name="password" required="required">
+	                           </div>
+	                           <!-- button-->
+	                            <div class="row">
+		                     <div class="col-sm-12">
+		                        <button type="submit" id="yes" class="btn btn-primary" name="log-in-button">Log In!</button>
+		                        <img id="loader" alt="" src="images/loader.gif" class="loader">
+		                     </div>
+		                     </div>
                            
                         </div>
                      </form>

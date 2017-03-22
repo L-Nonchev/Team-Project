@@ -1,4 +1,9 @@
-﻿
+﻿<?php
+
+	//<-- =-=-=-=-=-=-=  NEWS =-=-=-=-=-=-= -->
+include 'php/news.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -104,41 +109,12 @@
             <!-- navigation-start -->
             <nav class="navbar navbar-default ">
                <div class="container">
-                  <!-- Brand and toggle get grouped for better mobile display -->
-                  <div class="navbar-header">
-                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navigation" aria-expanded="false">
-                     <span class="sr-only">Toggle navigation</span>
-                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                     </button>
-                  </div>
                   <!-- Collect the nav links, forms, and other content for toggling -->
                   <div class="collapse navbar-collapse" id="main-navigation">
                      <ul class="nav navbar-nav">
                         <li class="dropdown">
                            <a  href="index.php" >Home </a>
                         </li>
-                        <li class="dropdown">
-                           <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-animations="fadeInUp">About Us <span class="fa fa-angle-down"></span></a>
-                           <ul class="dropdown-menu">
-                              <li><a href="about.html">About </a> </li>
-                              <li><a href="about-1.html">About 2</a> </li>
-                              <li><a href="about-2.html">About 3</a> </li>
-                              <li><a href="about-3.html">About 4</a> </li>
-                           </ul>
-                        </li>
-                        <li class="dropdown ">
-                           <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-animations="fadeInUp">Our Service <span class="fa fa-angle-down"></span></a>
-                           <ul class="dropdown-menu">
-                              <li><a href="services.html">Services</a> </li>
-                              <li><a href="services-2.html">Services 2</a> </li>
-                              <li><a href="services-3.html">Services 3</a> </li>
-                              <li><a href="services-4.html">Services 4 (Sticky Bar)</a> </li>
-                              <li><a href="services-details.html">Services Detail</a> </li>
-                           </ul>
-                        </li>
-                        <li><a href="contact.html">Contact Us</a></li>
                      </ul>
                   </div>
                   <!-- /.navbar-collapse -->
@@ -195,17 +171,28 @@
 									</div>
 								</div>
 							</div>
-                        <!--Footer Column-->
+                           <!--Footer Column-->
                         <div class="col-lg-5 col-sm-6 col-xs-12 column">
-                           <h2>Our Service</h2>
-                           <div class="footer-widget links-widget">
-                              <ul>
-                                 <li><a href="#">Financial Planning</a></li>
-                                 <li><a href="#">Saving Solutions</a></li>
-                                 <li><a href="#">Private Banking</a></li>
-                                 <li><a href="#">Busniess Loan</a></li>
-                                 <li><a href="#">Tax Planning</a></li>
-                              </ul>
+                          <div class="footer-widget news-widget">
+                              <h2>Latest News</h2>
+                              <!--News Post-->
+                              <div class="news-post">
+                                 <div class="icon"></div>
+                                 <div class="news-content">
+                                    <figure class="image-thumb"><img src="<?= $imgLN[0]?>" alt=""></figure>
+                                    <a target="blank" href="<?= $urlLN[0] ?>"><?= $titleLN[0] ?></a>
+                                 </div>
+                                 <div class="time"><?= $dateLN[0] ?></div>
+                              </div>
+                              <!--News Post-->
+                              <div class="news-post">
+                                 <div class="icon"></div>
+                                 <div class="news-content">
+                                    <figure class="image-thumb"><img src="<?= $imgLN[1]?>" alt=""></figure>
+                                    <a target="blank" <?= $urlLN[1] ?>><?= $titleLN[1] ?></a>
+                                 </div>
+                                 <div class="time"><?= $dateLN[1] ?></div>
+                              </div>
                            </div>
                         </div>
                      </div>
@@ -217,38 +204,25 @@
                         <!--Footer Column-->
                         <div class="col-lg-7 col-sm-6 col-xs-12 column">
                            <div class="footer-widget news-widget">
-                              <h2>Latest News</h2>
+                              <h2> <?=  "&nbsp" ?> </h2>
                               <!--News Post-->
                               <div class="news-post">
                                  <div class="icon"></div>
                                  <div class="news-content">
-                                    <figure class="image-thumb"><img src="images/blog/popular-2.jpg" alt=""></figure>
-                                    <a href="#">top benefits of hiring our professional logistics service</a>
+                                    <figure class="image-thumb"><img src="<?= $imgLN[2]?>" alt=""></figure>
+                                    <a target="blank" href="<?= $urlLN[2] ?>"><?= $titleLN[2] ?></a>
                                  </div>
-                                 <div class="time">June 21, 2016</div>
+                                 <div class="time"><?= $dateLN[2] ?></div>
                               </div>
                               <!--News Post-->
                               <div class="news-post">
                                  <div class="icon"></div>
                                  <div class="news-content">
-                                    <figure class="image-thumb"><img src="images/blog/popular-1.jpg" alt=""></figure>
-                                    <a href="#">top benefits of hiring our professional logistics service</a>
+                                    <figure class="image-thumb"><img src="<?= $imgLN[3]?>" alt=""></figure>
+                                    <a target="blank" <?= $urlLN[3]?>><?= $titleLN[3] ?> </a>
                                  </div>
-                                 <div class="time">June 21, 2016</div>
+                                 <div class="time"><?= $dateLN[3] ?></div>
                               </div>
-                           </div>
-                        </div>
-                        <!--Footer Column-->
-                        <div class="col-lg-5 col-sm-6 col-xs-12 column">
-                           <div class="footer-widget links-widget">
-                              <h2>Site Links</h2>
-                              <ul>
-                                 <li><a href="about.html">About Us</a></li>
-                                 <li><a href="team.html">Our Team</a></li>
-                                 <li><a href="services.html">Our Services</a></li>
-                                 <li><a href="index-7.html">Blog</a></li>
-                                 <li><a href="contact.html">Contact Us</a></li>
-                              </ul>
                            </div>
                         </div>
                      </div>
@@ -340,28 +314,30 @@
                   <div class="quotation-box-1">
                      <h2> Log In</h2>
                      <div class="desc-text">
-                        <p>Please fill in all fields!</p>
+                        <p>Enter yor E-mail and Password</p>
                      </div>
-                     <form action="./php/logIn.php" method="post">
+                     <form action="./php/logIn.php" method="post" id="login-form">
                         <div class="row clearfix">
                            
-                           <!-- Email Address-->
-                           <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                          	  <label>E-mail<span class="required">*</span></label>
-                              <input class="form-control" type="email" placeholder="Email Address" value="" name="email">
-                           </div>
-                           <!-- password-->
-                           <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                          	  <label>Password<span class="required">*</span></label>
-                              <input class="form-control" type="password" placeholder="Password" value="" name="password">
-                           </div>
-                           <!-- button-->
-                            <div class="row">
-                     <div class="col-sm-12">
-                        <button type="submit" id="yes" class="btn btn-primary" name="log-in-button">Log In!</button>
-                        <img id="loader" alt="" src="images/loader.gif" class="loader">
-                     </div>
-                     </div>
+	                           <!-- Email Address-->
+	                           <div class="form-group col-md-12 col-sm-12 col-xs-12">
+	                          	  <label id="email-label">E-mail<span class="required">*</span></label>
+	                              <input class="form-control" type="email" placeholder="Email Address" value="" id="email" 
+	                              name="email"	required="required">
+	                           </div>
+	                           <!-- password-->
+	                           <div class="form-group col-md-6 col-sm-6 col-xs-12">
+	                          	  <label id="pass-label">Password<span class="required">*</span></label>
+	                              <input class="form-control" type="password" placeholder="Password" value="" id="password" 
+	                              name="password" required="required">
+	                           </div>
+	                           <!-- button-->
+	                            <div class="row">
+		                     <div class="col-sm-12">
+		                        <button type="submit" id="yes" class="btn btn-primary" name="log-in-button">Log In!</button>
+		                        <img id="loader" alt="" src="images/loader.gif" class="loader">
+		                     </div>
+		                     </div>
                            
                         </div>
                      </form>

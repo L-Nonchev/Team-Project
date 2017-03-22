@@ -1,7 +1,7 @@
 ﻿<?php  
 			// !-- =-=-=-=-=-=-=Loggedin validation=-=-=-=-=-=-= --
-			
-if (!isset($_COOKIE['logged-in'])){
+session_start();
+if (!isset($_SESSION['user_id'])){
 				
 	header('Location: ./index.php');
 	die();
@@ -11,16 +11,8 @@ if (!isset($_COOKIE['logged-in'])){
 }else {
 	
 			// !-- =-=-=-=-=-=-=Login information retrive=-=-=-=-=-=-= --
-	
-	
-	$user = $_COOKIE['logged-in'];
-	
-	$profilePicture = "./users/".$user."/assets/profilPic/avatar.png";
-	
-	$userData = file('./users/' . $user . '/usersData.txt');
-	
-	$userName = explode("-", $userData[0]);
-	$userName = implode(" ", $userName);
+
+	$userName = $_SESSION['user_name'];
 	
 	
 	
@@ -33,8 +25,6 @@ if (!isset($_COOKIE['logged-in'])){
 		// !-- =-=-=-=-=-=-=Login information retrive  END=-=-=-=-=-=-= --
 }
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">

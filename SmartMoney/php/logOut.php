@@ -1,11 +1,9 @@
 <?php
-//-=-=-=-=-=-=---==-=-=-= Log Out - Cookies Delete=-=-=-==-=-==-=-==--\\
-// creat cookie for client acces
-$cookie_name = "logged-in";
-$cookie_value  = $email;
-$cookie_exp = time() - 3600; // destroy cookie
-// create cookie
-setcookie($cookie_name, $cookie_value , $cookie_exp , "/");
+//-=-=-=-=-=-=---==-=-=-= Log Out - SESSION DESTROY=-=-=-==-=-==-=-==--\\
+session_start();
+
+unset($_SESSION['user_id']);
+unset($_SESSION['user_name']);
 
 //-=-=-=-=-=-=---==-=-=-= Redirect =-=-=-==-=-==-=-==--\\
 echo "da";
