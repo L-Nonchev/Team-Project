@@ -4,6 +4,7 @@ function wrongLogin (){
 	header('Location: ../invalidLogin.php', true, 303);
 	die();
 }
+
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
 	if (isset($_POST['log-in-button'])){
 		if (isset($_POST['email']) && isset($_POST['password'])){
@@ -24,7 +25,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 				define('DB_PASS', '');
 				//-=-=-=-=-=-=---==-=-=-=END of Data insert=-=-=-==-=-==-=-==--\\
 					
-				//-=-=-=-=-=-=---==--=-=-=---==-=-=-=LogIn validation=-=-=-==--=-=-=---==-=-==-=-==--\\
+		//-=-=-=-=-=-=---==--=-=-=---==-=-=-=LogIn validation=-=-=-==--=-=-=---==-=-==-=-==--\\
 	
 				//-=-=-=-=-=-=---==-=-=-= Select to Database =-=-=-==-=-==-=-==--\\
 				try{
@@ -34,19 +35,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 					// Set the PDO error mode to exception
 					$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					
-					// Print host information
-					echo "Connect Successfully. Host info: " .
-							$db->getAttribute(constant("PDO::ATTR_CONNECTION_STATUS"));
-	
 					//select data for exist e-mail
-					$selectEmail = "SELECT email
-					FROM users
-					WHERE email = '$mailSha1'; ";
+					$selectEmail = "SELECT user_email
+									FROM users
+									WHERE user_email = '$mailSha1'; ";
 					$resultEmail = $db->query($selectEmail)->fetch(PDO::FETCH_COLUMN);
 					
-					$selectPassword = "SELECT password
-					FROM users
-					WHERE email = '$mailSha1'; ";
+					$selectPassword = "SELECT user_password
+										FROM users
+										WHERE user_email = '$mailSha1'; ";
 					$resultPassword = $db->query($selectPassword)->fetch(PDO::FETCH_COLUMN);
 		
 					if (($resultPassword === $password ) && ($resultEmail === $mailSha1)){
@@ -56,12 +53,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 							
 						$selectUser_Id  = "SELECT user_id
 									  	   FROM users
-									 	   WHERE email = '$mailSha1';";
+									 	   WHERE user_email = '$mailSha1';";
 						$userID = $db->query($selectUser_Id)->fetch(PDO::FETCH_COLUMN);
 						
-						$selectUserName=  "SELECT name
+						$selectUserName=  "SELECT user_name
 									   	  FROM users
-										  WHERE email = '$mailSha1';";
+										  WHERE user_email = '$mailSha1';";
 						$userName = $db->query($selectUserName)->fetch(PDO::FETCH_COLUMN);
 						
 						$_SESSION['user_id'] = $userID;
@@ -102,6 +99,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 		wrongLogin();
 	}
 }else{
-		wrongLogin();
-	}
+	wrongLogin();
+}
 ?>

@@ -24,12 +24,12 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) NOT NULL,
-  `email` varchar(40) NOT NULL,
-  `password` varchar(40) NOT NULL,
+  `user_name` varchar(30) NOT NULL,
+  `user_email` varchar(40) NOT NULL,
+  `user_password` varchar(40) NOT NULL,
   PRIMARY KEY (`user_id`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  UNIQUE KEY `user_email` (`user_email`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Kiro Kirov','9c0106ca13ebcc328da8ad898b2af18401425e6f','1f82ea75c5cc526729e2d581aeb3aeccfef4407e'),(2,'Geri Gogova','8b36f4941e85eb2b6b7f2ace797c8fb1bf7a7351','1f82ea75c5cc526729e2d581aeb3aeccfef4407e');
+INSERT INTO `users` VALUES (1,'Kiro Kirov','9c0106ca13ebcc328da8ad898b2af18401425e6f','1f82ea75c5cc526729e2d581aeb3aeccfef4407e'),(2,'Ani Gogova','fb03c4551611642ea8c5768aa029d9452075f408','1f82ea75c5cc526729e2d581aeb3aeccfef4407e'),(3,'Geri Gogova','8b36f4941e85eb2b6b7f2ace797c8fb1bf7a7351','9e7f76d1a5f5dffb0104ab67325d65e977e30830');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-22 15:40:59
+-- Dump completed on 2017-03-23  8:08:38

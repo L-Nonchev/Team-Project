@@ -1,6 +1,6 @@
 <?php 
 //<!-- =-=-=-=-=-=-=  NEWS =-=-=-=-=-=-= -->\\
-include 'php/news.php';
+include 'php/lastNews.php';
 
 //<!-- =-=-=-=-=-=-=  Sing Up =-=-=-=-=-=-= -->\\
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -38,9 +38,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 					$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 						
 					//select data for exist e-mail
-					$selectEmail = "SELECT email 
+					$selectEmail = "SELECT user_email 
 								  FROM users
-								  WHERE email = '$mailSha1'; ";
+								  WHERE user_email = '$mailSha1'; ";
 					$result = $db->query($selectEmail);
 					if($result->rowCount() > 0){
 						$email= "";
@@ -72,12 +72,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 								
 							$selectUser_Id  = "SELECT user_id
 									  	   FROM users
-									 	   WHERE email = '$mailSha1';";
+									 	   WHERE user_email = '$mailSha1';";
 							$userID = $db->query($selectUser_Id)->fetch(PDO::FETCH_COLUMN);
 							
-							$selectUserName=  "SELECT name 
+							$selectUserName=  "SELECT user_name 
 									   	  FROM users
-										  WHERE email = '$mailSha1';";
+										  WHERE user_email = '$mailSha1';";
 							$userName = $db->query($selectUserName)->fetch(PDO::FETCH_COLUMN);
 							
 							$_SESSION['user_id'] = $userID;
@@ -140,9 +140,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
       <link rel="stylesheet" href="css/et-line-fonts.css" type="text/css">
       <!-- =-=-=-=-=-=-= Magnific PopUP CSS =-=-=-=-=-=-= -->
       <link href="js/magnific-popup/magnific-popup.css" rel="stylesheet">
-      <!-- =-=-=-=-=-=-= Owl carousel =-=-=-=-=-=-= -->
-      <link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
-      <link rel="stylesheet" type="text/css" href="css/owl.style.css">
       <!-- =-=-=-=-=-=-= Google Fonts =-=-=-=-=-=-= -->
       <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600,600italic,700,700italic,900italic,900,300,300italic%7CMerriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css">
       <!-- =-=-=-=-=-=-= Flat Icon =-=-=-=-=-=-= -->
@@ -165,9 +162,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
       <![endif]-->
    </head>
    <body>
-    <!-- =-=-=-=-=-=-= PRELOADER =-=-=-=-=-=-= -->
-       <!-- <div class="preloader"><span class="preloader-gif"></span></div> -->
-      
+   
       <!-- =-=-=-=-=-=-= HEADER =-=-=-=-=-=-= -->
       <div id="header-info-bar">
          <div class="container">
@@ -189,7 +184,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="container clearfix">
                <!-- Logo -->
                <div class="logo">
-                  <a href="index.html"><img src="images/logo.png" alt=""></a>
+                  <a href="index.php"><img src="images/logo.png" alt=""></a>
                </div>
             </div>
          </div>
@@ -207,7 +202,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                      <span class="icon-bar"></span>
                      <span class="icon-bar"></span>
                      </button>
-                  </div>
+                  </div>	
                   <!-- Collect the nav links, forms, and other content for toggling -->
                   <div class="collapse navbar-collapse" id="main-navigation">
                      <ul class="nav navbar-nav">
@@ -301,19 +296,19 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                     	 <div class="col-sm-12">
                         	<button type="submit" id="sing-up-button" class="btn btn-primary" name="sing-up-button">Sing up!</button>
                         	
-                       	 <img id="loader" alt="" src="images/loader.gif" class="loader">
+<!--                        	 <img id="loader" alt="" src="images/loader.gif" class="loader"> -->
                     	 </div>
                      </div>
                   </form>
                </div>
                <div class="col-md-4 col-xs-12 col-sm-12 margin-top-30">
 			   
-                <div class="location-box"> <a class="media-left pull-left" href="#"> <i class=" icon-envelope"></i></a>
+                <div class="location-box"> <a class="media-left pull-left" > <i class=" icon-envelope"></i></a>
                   <div class="media-body"> <strong>OUR CONTACT E-MAIL</strong>
                     <p>smart.money.managment@gmail.com</p>
                   </div>
                 </div>
-                <div class="location-box"> <a class="media-left pull-left" href="#"> <i class="icon-phone"></i></a>
+                <div class="location-box"> <a class="media-left pull-left" > <i class="icon-phone"></i></a>
                   <div class="media-body"> <strong>Call us 24/7</strong>
                     <p> +359 - 888-333-124 | +359 - 888-333-125  </p>
                   </div>
@@ -340,7 +335,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                      <div class="row clearfix">
                         <div class="col-lg-7 col-sm-6 col-xs-12 column">
                            <div class="footer-widget about-widget">
-                              <div class="logo"><a href="index-3.html"><img alt="" src="images/small_logo.png" class="img-responsive" ></a></div>
+                              <div class="logo"><a href="index.php"><img alt="" src="images/small_logo.png" class="img-responsive" ></a></div>
                               <ul class="contact-info">
                                  <li><span class="icon fa fa-phone"></span> +359 - 888-333-124</li>
                                  <li><span class="icon fa fa-envelope-o"></span> smart.money.managment@gmai.com</li>
@@ -373,7 +368,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                                  <div class="icon"></div>
                                  <div class="news-content">
                                     <figure class="image-thumb"><img src="<?= $imgLN[1]?>" alt=""></figure>
-                                    <a target="blank" <?= $urlLN[1] ?>><?= $titleLN[1] ?></a>
+                                    <a target="blank"  href="<?= $urlLN[1] ?>"><?= $titleLN[1] ?></a>
                                  </div>
                                  <div class="time"><?= $dateLN[1] ?></div>
                               </div>
@@ -403,7 +398,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                                  <div class="icon"></div>
                                  <div class="news-content">
                                     <figure class="image-thumb"><img src="<?= $imgLN[3]?>" alt=""></figure>
-                                    <a target="blank" <?= $urlLN[3]?>><?= $titleLN[3] ?> </a>
+                                    <a target="blank"  href="<?= $urlLN[3]?>"><?= $titleLN[3] ?> </a>
                                  </div>
                                  <div class="time"><?= $dateLN[3] ?></div>
                               </div>
@@ -441,7 +436,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
       <!-- Bootstrap Core Css  --> 
       <script src="js/bootstrap.min.js"></script>
       <!-- Dropdown Hover  -->
-      <script src="js/bootstrap-dropdownhover.min.js"></script><!-- Jquery Easing --> 
+      <script src="js/bootstrap-dropdownhover.min.js"></script>
+      <!-- Jquery Easing --> 
       <script type="text/javascript" src="js/easing.js"></script> 
       <!-- Jquery Counter --> 
       <script src="js/jquery.countTo.js"></script> 

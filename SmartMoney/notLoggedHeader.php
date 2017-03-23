@@ -1,26 +1,7 @@
 <?php
-// !-- =-=-=-=-=-=-=Login validation=-=-=-=-=-=-= --
-
-if (!isset($_COOKIE['logged-in'])){
-	$logged = false;
-	// !-- =-=-=-=-=-=-=END of Login validation=-=-=-=-=-=-= --
-
-}else {
-	$logged = true;
-	// !-- =-=-=-=-=-=-=Login information retrive=-=-=-=-=-=-= --
-	$user = $_COOKIE['logged-in'];
-
-	$profilePicture = "./users/".$user."/assets/profilPic/avatar.png";
-
-	$userData = file('./users/' . $user . '/usersData.txt');
-
-	$userName = explode("-", $userData[0]);
-	$userName = implode(" ", $userName);
-
-	// !-- =-=-=-=-=-=-=Login information retrive  END=-=-=-=-=-=-= --
-}
 //<!-- =-=-=-=-=-=-=  NEWS =-=-=-=-=-=-= -->
-include 'php/news.php';
+include 'php/topNews.php';
+include 'php/lastNews.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -93,14 +74,6 @@ include 'php/news.php';
                <i class="fa fa-youtube"></i></a></li>             
             </ul>
             </div>
-            <?php if ($logged){?>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-             <a href="./php/logOut.php" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Log Out</a>
-            <a href="#" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Recent Events</a>
-            <a href="#" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Latest News</a>
-            <a href="#" class="info-bar-meta-link hidden-sm"><i class="fa fa-caret-right fa-fw"></i>Relog</a>
-            </div>
-            <?php }?>
          </div>
       </div>
       <header class="header-area">
@@ -109,19 +82,8 @@ include 'php/news.php';
             <div class="container clearfix">
                <!-- Logo -->
                <div class="logo">
-                  <a href="index.html"><img src="images/logo.png" alt="logo of the company"></a>
+                  <a href="index.php"><img src="images/logo.png" alt="logo of the company"></a>
                </div>
-               <?php if ($logged){?>
-               <!--Info Outer-->
-               	
-				<div class="information-content">
-                  <!--Client Info Box-->
-                  <div class="info-box  hidden-sm">
-                     <div class="icon"><img src="<?= $profilePicture ?>" alt="prifile" /></div>
-                     <div class="text"> <?= $userName ?></div>                    
-                  </div>
-               </div>
-				<?php }else {?>	
 				<div class="information-content">    
                   <!--Log in button-->
 					<div class="info-box" data-target="#request-quote" data-toggle="modal" class="quote-button hidden-xs">
@@ -137,8 +99,6 @@ include 'php/news.php';
 						</form>
 					</div>
 				</div>
-				
-				<?php }?>
             </div>
          </div>
          <!-- Header Top End -->
@@ -163,20 +123,6 @@ include 'php/news.php';
                         <li class="dropdown">
                            <a  href="index.php" >Home </a>
                         </li>
-                        <li class="dropdown">
-                        	<a href="about.php">About </a> 
-                        </li>
-                        <li class="dropdown ">
-                           <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-animations="fadeInUp">Our Service <span class="fa fa-angle-down"></span></a>
-                           <ul class="dropdown-menu">
-                              <li><a href="services.html">Services</a> </li>
-                              <li><a href="services-2.html">Services 2</a> </li>
-                              <li><a href="services-3.html">Services 3</a> </li>
-                              <li><a href="services-4.html">Services 4 (Sticky Bar)</a> </li>
-                              <li><a href="services-details.html">Services Detail</a> </li>
-                           </ul>
-                        </li>
-                        <li><a href="contact.php">Contact Us</a></li>
                      </ul>
                   </div>
                   <!-- /.navbar-collapse -->

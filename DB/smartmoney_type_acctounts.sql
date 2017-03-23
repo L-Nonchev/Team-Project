@@ -24,10 +24,10 @@ DROP TABLE IF EXISTS `type_acctounts`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `type_acctounts` (
   `type_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) NOT NULL,
-  `sort` varchar(10) NOT NULL,
+  `type_name` varchar(20) NOT NULL,
+  `type` varchar(10) NOT NULL,
   PRIMARY KEY (`type_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,6 +36,7 @@ CREATE TABLE `type_acctounts` (
 
 LOCK TABLES `type_acctounts` WRITE;
 /*!40000 ALTER TABLE `type_acctounts` DISABLE KEYS */;
+INSERT INTO `type_acctounts` VALUES (1,'salary','IN'),(2,'electricity bill','OUT'),(3,'water bills','OUT'),(4,'Money from rent','IN');
 /*!40000 ALTER TABLE `type_acctounts` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -48,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-22 15:40:59
+-- Dump completed on 2017-03-23  8:08:38

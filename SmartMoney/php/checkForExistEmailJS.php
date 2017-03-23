@@ -1,5 +1,5 @@
 <?php
-
+// this script is used from JS "singup-validation.js"
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 	// JSON request
 	$data = array();
@@ -23,9 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		
 			//select data for exist e-mail
-			$selectEmail = "SELECT email
+			$selectEmail = "SELECT user_email
 			FROM users
-			WHERE email = '$mailSha1'; ";
+			WHERE user_email = '$mailSha1'; ";
 			$result = $db->query($selectEmail)->fetch(PDO::FETCH_COLUMN);
 			if($result === $mailSha1){
 				$results = array(

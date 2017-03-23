@@ -23,13 +23,13 @@ DROP TABLE IF EXISTS `accounts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `accounts` (
-  `person_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `sum` int(11) NOT NULL,
   `type_id` int(11) NOT NULL,
   `date` date DEFAULT NULL,
-  KEY `person_id` (`person_id`),
+  KEY `user_id` (`user_id`),
   KEY `type_id` (`type_id`),
-  CONSTRAINT `accounts_ibfk_1` FOREIGN KEY (`person_id`) REFERENCES `users` (`user_id`),
+  CONSTRAINT `accounts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
   CONSTRAINT `accounts_ibfk_2` FOREIGN KEY (`type_id`) REFERENCES `type_acctounts` (`type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -40,6 +40,7 @@ CREATE TABLE `accounts` (
 
 LOCK TABLES `accounts` WRITE;
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
+INSERT INTO `accounts` VALUES (1,1500,1,'2017-03-22'),(1,200,2,'2017-03-22'),(1,-200,2,'2017-03-22');
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-22 15:40:59
+-- Dump completed on 2017-03-23  8:08:38

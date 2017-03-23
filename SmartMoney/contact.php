@@ -13,7 +13,9 @@ if (!isset($_SESSION['user_id'])){
 	$userName = $_SESSION['user_name'];
 
 	// !-- =-=-=-=-=-=-=Login information retrive  END=-=-=-=-=-=-= --
-
+	
+	//<!-- =-=-=-=-=-=-=  NEWS =-=-=-=-=-=-= -->\\
+	include 'php/lastNews.php';
 }
 ?>
 <!DOCTYPE html>
@@ -84,9 +86,7 @@ if (!isset($_SESSION['user_id'])){
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12">
              <a href="./php/logOut.php" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Log Out</a>
-            <a href="#" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Recent Events</a>
-            <a href="#" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Latest News</a>
-            <a href="#" class="info-bar-meta-link hidden-sm"><i class="fa fa-caret-right fa-fw"></i>Blog</a>
+             <a href="#" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Setings</a>
             </div>
          </div>
       </div>
@@ -96,7 +96,7 @@ if (!isset($_SESSION['user_id'])){
             <div class="container clearfix">
                <!-- Logo -->
                <div class="logo">
-                  <a href="index.html"><img src="images/logo.png" alt="logo of the company"></a>
+                  <a href="index.php"><img src="images/logo.png" alt="logo of the company"></a>
                </div>
                <!--Info Outer-->
                	
@@ -130,20 +130,13 @@ if (!isset($_SESSION['user_id'])){
                         <li class="dropdown">
                            <a  href="index.php" >Home </a>
                         </li>
+                        
                         <li class="dropdown">
-
                         	<a href="about.php">About </a>
                         </li>
             
                         <li class="dropdown ">
-                           <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-animations="fadeInUp">Our Service <span class="fa fa-angle-down"></span></a>
-                           <ul class="dropdown-menu">
-                              <li><a href="services.html">Services</a> </li>
-                              <li><a href="services-2.html">Services 2</a> </li>
-                              <li><a href="services-3.html">Services 3</a> </li>
-                              <li><a href="services-4.html">Services 4 (Sticky Bar)</a> </li>
-                              <li><a href="services-details.html">Services Detail</a> </li>
-                           </ul>
+						<a href="blog.php">Blog</a>
                         </li>
                         <li><a href="contact.php">Contact Us</a></li>
                      </ul>
@@ -248,12 +241,12 @@ if (!isset($_SESSION['user_id'])){
                </div>
                <div class="col-md-4 col-xs-12 col-sm-12 margin-top-30">
 
-                <div class="location-box"> <a class="media-left pull-left" href="#"> <i class=" icon-envelope"></i></a>
+                <div class="location-box"> <a class="media-left pull-left" > <i class=" icon-envelope"></i></a>
                   <div class="media-body"> <strong>OUR CONTACT E-MAIL</strong>
                     <p>smart.money.managment@gmail.com</p>
                   </div>
                 </div>
-                <div class="location-box"> <a class="media-left pull-left" href="#"> <i class="icon-phone"></i></a>
+                <div class="location-box"> <a class="media-left pull-left" > <i class="icon-phone"></i></a>
                   <div class="media-body"> <strong>Call us 24/7</strong>
                     <p> +359 - 888-333-124 | +359 - 888-333-125  </p>
                   </div>
@@ -280,7 +273,7 @@ if (!isset($_SESSION['user_id'])){
                      <div class="row clearfix">
                         <div class="col-lg-7 col-sm-6 col-xs-12 column">
                            <div class="footer-widget about-widget">
-                              <div class="logo"><a href="index-3.html"><img alt="" src="images/small_logo.png" class="img-responsive" ></a></div>
+                              <div class="logo"><a href="index.php"><img alt="" src="images/small_logo.png" class="img-responsive" ></a></div>
                               <ul class="contact-info">
                                  <li><span class="icon fa fa-phone"></span> +359 - 888-333-124</li>
                                  <li><span class="icon fa fa-envelope-o"></span> smart.money.managment@gmai.com</li>
@@ -297,15 +290,26 @@ if (!isset($_SESSION['user_id'])){
                         </div>
                         <!--Footer Column-->
                         <div class="col-lg-5 col-sm-6 col-xs-12 column">
-                           <h2>Our Service</h2>
-                           <div class="footer-widget links-widget">
-                              <ul>
-                                 <li><a href="#">Financial Planning</a></li>
-                                 <li><a href="#">Saving Solutions</a></li>
-                                 <li><a href="#">Private Banking</a></li>
-                                 <li><a href="#">Busniess Loan</a></li>
-                                 <li><a href="#">Tax Planning</a></li>
-                              </ul>
+                          <div class="footer-widget news-widget">
+                              <h2>Latest News</h2>
+                              <!--News Post-->
+                              <div class="news-post">
+                                 <div class="icon"></div>
+                                 <div class="news-content">
+                                    <figure class="image-thumb"><img src="<?= $imgLN[0]?>" alt=""></figure>
+                                    <a target="blank" href="<?= $urlLN[0] ?>"><?= $titleLN[0] ?></a>
+                                 </div>
+                                 <div class="time"><?= $dateLN[0] ?></div>
+                              </div>
+                              <!--News Post-->
+                              <div class="news-post">
+                                 <div class="icon"></div>
+                                 <div class="news-content">
+                                    <figure class="image-thumb"><img src="<?= $imgLN[1]?>" alt=""></figure>
+                                    <a target="blank"  href="<?= $urlLN[1] ?>"><?= $titleLN[1] ?></a>
+                                 </div>
+                                 <div class="time"><?= $dateLN[1] ?></div>
+                              </div>
                            </div>
                         </div>
                      </div>
@@ -317,24 +321,24 @@ if (!isset($_SESSION['user_id'])){
                         <!--Footer Column-->
                         <div class="col-lg-7 col-sm-6 col-xs-12 column">
                            <div class="footer-widget news-widget">
-                              <h2>Latest News</h2>
+                              <h2> <?=  "&nbsp" ?> </h2>
                               <!--News Post-->
                               <div class="news-post">
                                  <div class="icon"></div>
                                  <div class="news-content">
-                                    <figure class="image-thumb"><img src="images/blog/popular-2.jpg" alt=""></figure>
-                                    <a href="#">top benefits of hiring our professional logistics service</a>
+                                    <figure class="image-thumb"><img src="<?= $imgLN[2]?>" alt=""></figure>
+                                    <a target="blank" href="<?= $urlLN[2] ?>"><?= $titleLN[2] ?></a>
                                  </div>
-                                 <div class="time">June 21, 2016</div>
+                                 <div class="time"><?= $dateLN[2] ?></div>
                               </div>
                               <!--News Post-->
                               <div class="news-post">
                                  <div class="icon"></div>
                                  <div class="news-content">
-                                    <figure class="image-thumb"><img src="images/blog/popular-1.jpg" alt=""></figure>
-                                    <a href="#">top benefits of hiring our professional logistics service</a>
+                                    <figure class="image-thumb"><img src="<?= $imgLN[3]?>" alt=""></figure>
+                                    <a target="blank"  href="<?= $urlLN[3] ?>"><?= $titleLN[3] ?> </a>
                                  </div>
-                                 <div class="time">June 21, 2016</div>
+                                 <div class="time"><?= $dateLN[3] ?></div>
                               </div>
                            </div>
                         </div>
@@ -343,10 +347,10 @@ if (!isset($_SESSION['user_id'])){
                            <div class="footer-widget links-widget">
                               <h2>Site Links</h2>
                               <ul>
-                                 <li><a href="index-3.html">Home</a></li>
-                                 <li><a href="about.html">About Us</a></li>
-                                 <li><a href="services.html">Our Services</a></li>
-                                 <li><a href="contact.html">Contact Us</a></li>
+                                 <li><a href="index.php">Home</a></li>
+                                 <li><a href="about.php">About Us</a></li>
+                                 <li><a href="blog.php">blog</a></li>
+                                 <li><a href="contact.php">Contact Us</a></li>
                               </ul>
                            </div>
                         </div>
@@ -370,7 +374,8 @@ if (!isset($_SESSION['user_id'])){
       <!-- Bootstrap Core Css  -->
       <script src="js/bootstrap.min.js"></script>
       <!-- Dropdown Hover  -->
-      <script src="js/bootstrap-dropdownhover.min.js"></script><!-- Jquery Easing -->
+      <script src="js/bootstrap-dropdownhover.min.js"></script>
+      <!-- Jquery Easing -->
       <script type="text/javascript" src="js/easing.js"></script>
       <!-- Jquery Counter -->
       <script src="js/jquery.countTo.js"></script>
@@ -394,54 +399,6 @@ if (!isset($_SESSION['user_id'])){
       <script src="js/select2.min.js"></script>
       <!-- Template Core JS -->
       <script src="js/custom.js"></script>
-      <!-- =-=-=-=-=-=-= Quote Modal =-=-=-=-=-=-= -->
-      <div class="modal fade " id="request-quote" role="dialog"  aria-hidden="true">
-         <div class="modal-dialog">
-            <div class="modal-content">
-               <div class="modal-body">
-                  <div class="quotation-box-1">
-                     <h2>Request a Call Back</h2>
-                     <div class="desc-text">
-                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
-                     </div>
-                     <form action="contact.html" method="post">
-                        <div class="row clearfix">
-                           <!--Form Group-->
-                           <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                              <input class="form-control" type="text" placeholder="Your Name" value="" name="your-name">
-                           </div>
-                           <!--Form Group-->
-                           <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                              <input class="form-control" type="text" placeholder="Subject" value="" name="your-subject">
-                           </div>
-                           <!--Form Group-->
-                           <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                              <input class="form-control" type="email" placeholder="Email Address" value="" name="your-email">
-                           </div>
-                           <!--Form Group-->
-                           <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                              <select class="form-control">
-                                 <option>Share Market Trading</option>
-                                 <option>Market Hosting</option>
-                                 <option>Presidency Share</option>
-                                 <option>Other Topic</option>
-                              </select>
-                           </div>
-                           <!--Form Group-->
-                           <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                              <textarea class="form-control" rows="7" cols="20" placeholder="Your Message" name="your-message"></textarea>
-                           </div>
-                           <!--Form Group-->
-                           <div class="form-group col-md-12 col-sm-12 col-xs-12 text-right"> <a class="custom-button light">Submit Request</a> </div>
-                        </div>
-                     </form>
-                  </div>
-               </div>
-            </div>
-            <!-- /.modal-content -->
-         </div>
-         <!-- /.modal-dialog -->
-      </div>
-      <!-- =-=-=-=-=-=-= Quote Modal End =-=-=-=-=-=-= -->
+
    </body>
 </html>

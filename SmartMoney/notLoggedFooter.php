@@ -50,7 +50,7 @@ include 'notLoggedHeader.php';
                                  <div class="icon"></div>
                                  <div class="news-content">
                                     <figure class="image-thumb"><img src="<?= $imgLN[1]?>" alt=""></figure>
-                                    <a target="blank" <?= $urlLN[1] ?>><?= $titleLN[1] ?></a>
+                                    <a target="blank"  href="<?= $urlLN[1] ?>"><?= $titleLN[1] ?></a>
                                  </div>
                                  <div class="time"><?= $dateLN[1] ?></div>
                               </div>
@@ -80,7 +80,7 @@ include 'notLoggedHeader.php';
                                  <div class="icon"></div>
                                  <div class="news-content">
                                     <figure class="image-thumb"><img src="<?= $imgLN[3]?>" alt=""></figure>
-                                    <a target="blank" <?= $urlLN[3]?>><?= $titleLN[3] ?> </a>
+                                    <a target="blank"  href="<?= $urlLN[3]?>"><?= $titleLN[3] ?> </a>
                                  </div>
                                  <div class="time"><?= $dateLN[3] ?></div>
                               </div>
@@ -116,7 +116,8 @@ include 'notLoggedHeader.php';
       <!-- Bootstrap Core Css  -->
       <script src="js/bootstrap.min.js"></script>
       <!-- Dropdown Hover  -->
-      <script src="js/bootstrap-dropdownhover.min.js"></script><!-- Jquery Easing -->
+      <script src="js/bootstrap-dropdownhover.min.js"></script>
+      <!-- Jquery Easing -->
       <script type="text/javascript" src="js/easing.js"></script>
       <!-- Jquery Counter -->
       <script src="js/jquery.countTo.js"></script>
@@ -190,23 +191,25 @@ include 'notLoggedHeader.php';
                      <form action="./php/logIn.php" method="post" id="login-form">
                         <div class="row clearfix">
                            
-                           <!-- Email Address-->
-                           <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                          	  <label id="email-label">E-mail<span class="required">*</span></label>
-                              <input class="form-control" type="email" placeholder="Email Address" value="" id="email" required="required">
-                           </div>
-                           <!-- password-->
-                           <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                          	  <label id="pass-label">Password<span class="required">*</span></label>
-                              <input class="form-control" type="password" placeholder="Password" value="" id="password" required="required">
-                           </div>
-                           <!-- button-->
-                            <div class="row">
-                     <div class="col-sm-12">
-                        <button type="submit" id="yes" class="btn btn-primary" name="log-in-button">Log In!</button>
-                        <img id="loader" alt="" src="images/loader.gif" class="loader">
-                     </div>
-                     </div>
+	                           <!-- Email Address-->
+	                           <div class="form-group col-md-12 col-sm-12 col-xs-12">
+	                          	  <label id="email-label">E-mail<span class="required">*</span></label>
+	                              <input class="form-control" type="email" placeholder="Email Address" value="" id="email" 
+	                              name="email"	required="required">
+	                           </div>
+	                           <!-- password-->
+	                           <div class="form-group col-md-6 col-sm-6 col-xs-12">
+	                          	  <label id="pass-label">Password<span class="required">*</span></label>
+	                              <input class="form-control" type="password" placeholder="Password" value="" id="password" 
+	                              name="password" required="required">
+	                           </div>
+	                           <!-- button-->
+	                            <div class="row">
+		                     <div class="col-sm-12">
+		                        <button type="submit" id="yes" class="btn btn-primary" name="log-in-button">Log In!</button>
+		                        <img id="loader" alt="" src="images/loader.gif" class="loader">
+		                     </div>
+		                     </div>
                            
                         </div>
                      </form>

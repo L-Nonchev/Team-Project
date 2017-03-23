@@ -1,7 +1,13 @@
 ﻿<?php
-
+// !-- =-=-=-=-=-=-=Login validation=-=-=-=-=-=-= --
+session_start();
+if (isset($_SESSION['user_id'])){
+	header('Location: ./index.php');
+	die();
+}
+	// !-- =-=-=-=-=-=-=END of Login validation=-=-=-=-=-=-= --
 	//<-- =-=-=-=-=-=-=  NEWS =-=-=-=-=-=-= -->
-include 'php/news.php';
+include 'php/lastNews.php';
 
 ?>
 <!DOCTYPE html>

@@ -16,7 +16,8 @@ if (!isset($_SESSION['user_id'])){
 
 }
 //<!-- =-=-=-=-=-=-=  NEWS =-=-=-=-=-=-= -->
-include 'php/news.php';
+include 'php/topNews.php';
+include 'php/lastNews.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,15 +87,14 @@ include 'php/news.php';
                <li><a href="https://www.facebook.com/SMManagmetn/" class="social-facebook"  target="blank">
                <i class="fa fa-facebook" ></i></a></li>
                <li><a href="https://www.youtube.com/channel/UCebM3sL3ASfzAQ0YYD7m6Og" class="social-youtube"  target="blank">
-               <i class="fa fa-youtube"></i></a></li>             
+               <i class="fa fa-youtube"></i></a></li>     
+               
             </ul>
-            </div>
+		    </div>
             <?php if ($logged){?>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-             <a href="./php/logOut.php" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Log Out</a>
-            <a href="#" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Recent Events</a>
-            <a href="#" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Latest News</a>
-            <a href="#" class="info-bar-meta-link hidden-sm"><i class="fa fa-caret-right fa-fw"></i>Relog</a>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+             <a href="./php/logOut.php" class="info-bar-meta-link">Log Out</a>
+             <a href="#" class="info-bar-meta-link">Setings</a>
             </div>
             <?php }?>
          </div>
@@ -105,7 +105,7 @@ include 'php/news.php';
             <div class="container clearfix">
                <!-- Logo -->
                <div class="logo">
-                  <a href="index.html"><img src="images/logo.png" alt="logo of the company"></a>
+                  <a href="index.php"><img src="images/logo.png" alt="logo of the company"></a>
                </div>
                <?php if ($logged){?>
                <!--Info Outer-->
@@ -163,14 +163,7 @@ include 'php/news.php';
                         	<a href="about.php">About </a> 
                         </li>
                         <li class="dropdown ">
-                           <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-animations="fadeInUp">Our Service <span class="fa fa-angle-down"></span></a>
-                           <ul class="dropdown-menu">
-                              <li><a href="services.html">Services</a> </li>
-                              <li><a href="services-2.html">Services 2</a> </li>
-                              <li><a href="services-3.html">Services 3</a> </li>
-                              <li><a href="services-4.html">Services 4 (Sticky Bar)</a> </li>
-                              <li><a href="services-details.html">Services Detail</a> </li>
-                           </ul>
+                              <a href="blog.php">Blog</a>
                         </li>
                         <li><a href="contact.php">Contact Us</a></li>
                      </ul>
@@ -442,11 +435,11 @@ include 'php/news.php';
                            </div>
                         </div>
                         <div class="news-detail">
-                           <h2><a title="" href="<?= $url[0] ?>"><?= $title[0] ?></a></h2>
+                           <h2><a target="blank" href="<?= $url[0] ?>"><?= $title[0] ?></a></h2>
                            <p><?= $description[0] ?></p>
                            <div class="entry-footer">
                               <div class="post-meta">
-                                 <div class="post-admin"> <i class="icon-profile-male"></i>Author <a href="#"><?= $author[0] ?></a> </div>
+                                 <div class="post-admin"> <i class="icon-profile-male"></i>Author <a ><?= $author[0] ?></a> </div>
                                  
                               </div>
                            </div>
@@ -464,11 +457,11 @@ include 'php/news.php';
                            </div>
                         </div>
                         <div class="news-detail">
-                           <h2><a title="" href="<?= $url[1] ?>"><?= $title[1] ?></a></h2>
+                           <h2><a target="blank" href="<?= $url[1] ?>"><?= $title[1] ?></a></h2>
                            <p><?= $description[1] ?></p>
                            <div class="entry-footer">
                               <div class="post-meta">
-                                 <div class="post-admin"> <i class="icon-profile-male"></i>Author <a href="#"><?= $author[1] ?></a> </div>
+                                 <div class="post-admin"> <i class="icon-profile-male"></i>Author <a ><?= $author[1] ?></a> </div>
                               </div>
                            </div>
                         </div>
@@ -485,11 +478,11 @@ include 'php/news.php';
                            </div>
                         </div>
                         <div class="news-detail">
-                           <h2><a title="" href="<?= $url[2] ?>"><?= $title[2] ?></a></h2>
+                           <h2><a target="blank" href="<?= $url[2] ?>"><?= $title[2] ?></a></h2>
                            <p><?= $description[2] ?></p>
                            <div class="entry-footer">
                               <div class="post-meta">
-                                 <div class="post-admin"> <i class="icon-profile-male"></i>Author <a href="#"><?= $author[2] ?></a> </div>
+                                 <div class="post-admin"> <i class="icon-profile-male"></i>Author <a ><?= $author[2] ?></a> </div>
                               </div>
                            </div>
                         </div>
@@ -517,11 +510,11 @@ include 'php/news.php';
                            </div>
                         </div>
                         <div class="news-detail">
-                           <h2><a title="" href="<?= $url[3] ?>"><?= $title[3] ?></a></h2>
+                           <h2><a target="blank" href="<?= $url[3] ?>"><?= $title[3] ?></a></h2>
                            <p><?= $description[3]?></p>
                            <div class="entry-footer">
                               <div class="post-meta">
-                                 <div class="post-admin"> <i class="icon-profile-male"></i>Author <a href="#"><?= $author[3] ?></a> </div>
+                                 <div class="post-admin"> <i class="icon-profile-male"></i>Author <a ><?= $author[3] ?></a> </div>
                                  
                               </div>
                            </div>
@@ -539,11 +532,11 @@ include 'php/news.php';
                            </div>
                         </div>
                         <div class="news-detail">
-                           <h2><a title="" href="<?= $url[4] ?>"><?= $title[4] ?></a></h2>
+                           <h2><a target="blank" href="<?= $url[4] ?>"><?= $title[4] ?></a></h2>
                            <p><?= $description[4] ?></p>
                            <div class="entry-footer">
                               <div class="post-meta">
-                                 <div class="post-admin"> <i class="icon-profile-male"></i>Author <a href="#"><?= $author[4] ?></a> </div>
+                                 <div class="post-admin"> <i class="icon-profile-male"></i>Author <a ><?= $author[4] ?></a> </div>
                               </div>
                            </div>
                         </div>
@@ -560,11 +553,11 @@ include 'php/news.php';
                            </div>
                         </div>
                         <div class="news-detail">
-                           <h2><a title="" href="<?= $url[5] ?>"><?= $title[5] ?></a></h2>
+                           <h2><a target="blank" href="<?= $url[5] ?>"><?= $title[5] ?></a></h2>
                            <p><?= $description[5] ?></p>
                            <div class="entry-footer">
                               <div class="post-meta">
-                                 <div class="post-admin"> <i class="icon-profile-male"></i>Author <a href="#"><?= $author[5] ?></a> </div>
+                                 <div class="post-admin"> <i class="icon-profile-male"></i>Author <a ><?= $author[5] ?></a> </div>
                               </div>
                            </div>
                         </div>
@@ -660,7 +653,7 @@ include 'php/news.php';
                                  <div class="icon"></div>
                                  <div class="news-content">
                                     <figure class="image-thumb"><img src="<?= $imgLN[1]?>" alt=""></figure>
-                                    <a target="blank" <?= $urlLN[1] ?>><?= $titleLN[1] ?></a>
+                                    <a target="blank"  href="<?= $urlLN[1] ?>"><?= $titleLN[1] ?></a>
                                  </div>
                                  <div class="time"><?= $dateLN[1] ?></div>
                               </div>
@@ -690,7 +683,7 @@ include 'php/news.php';
                                  <div class="icon"></div>
                                  <div class="news-content">
                                     <figure class="image-thumb"><img src="<?= $imgLN[3]?>" alt=""></figure>
-                                    <a target="blank" <?= $urlLN[3]?>><?= $titleLN[3] ?> </a>
+                                    <a target="blank"  href="<?= $urlLN[3]?>"><?= $titleLN[3] ?> </a>
                                  </div>
                                  <div class="time"><?= $dateLN[3] ?></div>
                               </div>
@@ -703,6 +696,9 @@ include 'php/news.php';
                               <h2>Site Links</h2>
                               <ul>
                                  <li><a href="index.php">Home</a></li>
+                                 <li><a href="about.php">About Us</a></li>
+                                 <li><a href="blog.php">blog</a></li>
+                                 <li><a href="contact.php">Contact Us</a></li>
                               </ul>
                            </div>
                         </div>
@@ -726,7 +722,8 @@ include 'php/news.php';
       <!-- Bootstrap Core Css  -->
       <script src="js/bootstrap.min.js"></script>
       <!-- Dropdown Hover  -->
-      <script src="js/bootstrap-dropdownhover.min.js"></script><!-- Jquery Easing -->
+      <script src="js/bootstrap-dropdownhover.min.js"></script>
+      <!-- Jquery Easing -->
       <script type="text/javascript" src="js/easing.js"></script>
       <!-- Jquery Counter -->
       <script src="js/jquery.countTo.js"></script>
