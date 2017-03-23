@@ -14,6 +14,7 @@ if (!isset($_SESSION['user_id'])){
 
 	$userName = $_SESSION['user_name'];
 	
+	include './db_connection.php';
 	
 	
 	$userIncome =  explode("-", $userData[1]);
