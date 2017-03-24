@@ -11,16 +11,15 @@ if (!isset($_SESSION['user_id'])){
 }else {
 	
 			// !-- =-=-=-=-=-=-=Login information retrive=-=-=-=-=-=-= --
-
-	$userName = $_SESSION['user_name'];
-	
 	include './db_connection.php';
+
+	$userName = db_user_name($_SESSION['user_id']);
 	
-	$info = db_request_info($userName);
+	$user_id = $_SESSION['user_id'];
 	
+	$info = db_request_info($user_id);	
 	
-	
-	$userIncome =  explode("-", $userData[1]);
+	$userIncome =  $info['IN'];
 	$userЕxpenses = explode("-", $userData[2]);
 	$userSavings = explode("-", $userData[3]);
 	

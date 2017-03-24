@@ -190,6 +190,43 @@ function db_expense_name_check($type_name) {
 
 // -=-==-=--=-=-=-=-=-=--=-==--==-= END of DB Spend type check function=-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
 
-var_dump(db_request_info(1));
+// -=-==-=--=-=-=-=-=-=--=-==--==-= DB User Name function=-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
+
+function db_user_name($user_id) {
+	
+	$type_name = htmlentities($user_id);
+	
+	
+	try {
+		$dbcon = new PDO ( "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS );
+		$dbcon->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+		
+		$execute = $dbcon->prepare ( "SELECT user_name FROM users WHERE user_id = ? ");
+		
+		if ($execute->execute(array( $user_id ))) {
+			
+			$result = $execute->fetchColumn();
+			return $result;
+			
+		}else {
+			
+			$result = false;
+			return $result;
+			
+		};
+		
+		
+		
+	} catch ( PDOException $e ) {
+		$errorType = $e->errorInfo . "<br />";
+		$errorMessage = $e->getMessage ();
+		mail ( 'jasensolid@gmail.com', $errorType, $errorMessage );
+		return header ( 'Location: ./404.html' );
+	}
+};
+
+// -=-==-=--=-=-=-=-=-=--=-==--==-=END of DB User Name function=-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
+
+
 
 ?>
