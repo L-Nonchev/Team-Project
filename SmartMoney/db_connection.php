@@ -24,12 +24,31 @@ function db_request_info($user_id) {
 										INNER JOIN transaction_type tt ON( ua.type_id = tt.type_id)
 										WHERE u.user_id = ? " );
 		if ($carryer->execute ( array ($user_id) )) {
-			$dataOutput = array ();
-			while ( $row = $carryer->fetch ( PDO::FETCH_ASSOC ) ) {
-				$dataOutput [] = $row;
-			};
+			$sums_in = array ();
+			$sums_out = array();
+			$in = 0;
+			$out = 0;
+			while ( $row = $carryer->fetch ( PDO::FETCH_ASSOC ) ) {				
+				
+				if ($row['trans_type'] == 'IN') {					
+					$sums_in[$in]['sum'] = $row['transaction_sum'];
+					$sums_in[$in]['name'] = $row['trans_name'];
+					$sums_in[$in]['date'] = $row['transaction_date'];		
+					$in++;
+					
+				}elseif($row['trans_type'] == 'OUT') {					
+					$sums_out[$out]['sum'] = $row['transaction_sum'];
+					$sums_out[$out]['name'] = $row['trans_name'];
+					$sums_out[$out]['date'] = $row['transaction_date'];
+					$out++;
+				}
+			};		
+			$user_info = array(
+					'IN' => $sums_in,
+					'OUT' => $sums_out
+			);
 			
-			return $dataOutput;
+			return $user_info;
 			
 		} else {
 			return false;
@@ -171,5 +190,6 @@ function db_expense_name_check($type_name) {
 
 // -=-==-=--=-=-=-=-=-=--=-==--==-= END of DB Spend type check function=-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
 
+var_dump(db_request_info(1));
 
 ?>

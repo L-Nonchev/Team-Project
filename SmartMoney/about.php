@@ -16,6 +16,9 @@ if (!isset($_SESSION['user_id'])){
 	
 	include './db_connection.php';
 	
+	$info = db_request_info($userName);
+	
+	
 	
 	$userIncome =  explode("-", $userData[1]);
 	$userЕxpenses = explode("-", $userData[2]);
