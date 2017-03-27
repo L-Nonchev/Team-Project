@@ -1,25 +1,33 @@
 <?php
 // -=-==-=--=-=-=-=-=-=--=-==--==-= DB Constants=-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
-define ( 'DB_USER', 'root' );
-define ( 'DB_PASS', '' );
-define ( 'DB_HOST', 'localhost' );
-define ( 'DB_NAME', 'smart_money' );
-
+require './db_constants.php';
 // -=-==-=--=-=-=-=-=-=--=-==--==-= END of DB Constants=-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
 
+// -=-==-=--=-=-=-=-=-=--=-==--==-= DB connection establish=-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
+function db_connection(){
+	$dbcon = new PDO ( "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS );
+	$dbcon->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+	return $dbcon;
+};
+
+// -=-==-=--=-=-=-=-=-=--=-==--==-=END of DB connection establish=-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
+
+function cach_handler($e){
+	$errorType = $e->errorInfo . "<br />";
+	$errorMessage = $e->getMessage ();
+	mail ( 'jasensolid@gmail.com', $errorType, $errorMessage );
+	header ( 'Location: ./404.html' );
+};
+
+
+
 // -=-==-=--=-=-=-=-=-=--=-==--==-= DB User info Request function=-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
-
-
 function db_request_info($user_id) {	
 	try {
-		$dbcon = new PDO ( "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS );
-		$dbcon->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		
-		$carryer = $dbcon->prepare ( "SELECT ua.transaction_sum, tn.trans_name, tt.trans_type, ua.transaction_date 
-										FROM users u INNER JOIN user_account ua ON( u.user_id = ua.user_id)
-										INNER JOIN transaction_name tn ON( ua.name_id = tn.name_id)
-										INNER JOIN transaction_type tt ON( ua.type_id = tt.type_id)
-										WHERE u.user_id = ? " );
+		$dbcon = db_connection();
+		
+		$carryer = $dbcon->prepare ( REQUEST_USER_INFO_SQL );
 		if ($carryer->execute ( array ($user_id) )) {
 			$sums_in = array ();
 			$sums_out = array();
@@ -52,10 +60,8 @@ function db_request_info($user_id) {
 		}
 		;
 	} catch ( PDOException $e ) {
-		$errorType = $e->errorInfo . "<br />";
-		$errorMessage = $e->getMessage ();
-		mail ( 'jasensolid@gmail.com', $errorType, $errorMessage );
-		return header ( 'Location: ./404.html' );
+		
+		 cach_handler($e);
 	}
 };
 
@@ -65,72 +71,56 @@ function db_request_info($user_id) {
 // -=-==-=--=-=-=-=-=-=--=-==--==-= DB User expense Insert function=-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
 function db_insert_expense($user_id, $sum, $type_of_expense, $name_of_expense) {
 	
-	$user_id = htmlentities($user_id);
-	$sum = htmlentities($sum);
-	$type_of_expense= htmlentities($type_of_expense);
-	$name_of_expense= htmlentities($name_of_expense);
-	
+	$user_id = htmlentities ( $user_id );
+	$sum = htmlentities ( $sum );
+	$type_of_expense = htmlentities ( $type_of_expense );
+	$name_of_expense = htmlentities ( $name_of_expense );
 	
 	try {
-		$dbcon = new PDO ( "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS );
-		$dbcon->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+		$dbcon = db_connection ();
 		
-		$execute = $dbcon->prepare ( "INSERT INTO user_account (user_id, transaction_sum, transaction_date, type_id, name_id )
-										VALUES (?, ?, NOW(), ?, ?)");
+		$execute = $dbcon->prepare ( INSERT_USER_EXPENSE_SQL );
+		
+		if ($execute->execute ( array (	$user_id, $sum,	$type_of_expense, $name_of_expense ) )) {
 			
-		if ($execute->execute(array( $user_id, $sum, $type_of_expense, $name_of_expense))) {			
-						
-			return true;				
-			
-		}else {
+			return true;
+		} else {
 			
 			return false;
-			
-		};		
-		
+		}
+		;
 	} catch ( PDOException $e ) {
-		$errorType = $e->errorInfo . "<br />";
-		$errorMessage = $e->getMessage ();
-		mail ( 'jasensolid@gmail.com', $errorType, $errorMessage );
-		return header ( 'Location: ./404.html' );
+		cach_handler ( $e );
 	}
 };
 // -=-==-=--=-=-=-=-=-=--=-==--==-= END of DB User expense Insert function=-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
 
 // -=-==-=--=-=-=-=-=-=--=-==--==-= DB   type insert function=-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
+
 function db_insert_type_of_expense($type_name) {
+	$type_name = htmlentities ( $type_name );
 	
-	$type_name = htmlentities($type_name);
-		
 	try {
-		$dbcon = new PDO ( "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS );
-		$dbcon->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+		$dbcon = db_connection ();
 		
-		$execute = $dbcon->prepare ( "INSERT INTO transaction_name ( trans_name)
- 									VALUES(?) ");
+		$execute = $dbcon->prepare ( INSERT_TYPE_OF_EXPENSE_SQL );
 		
-		if ($execute->execute(array( $type_name ))) {
+		if ($execute->execute ( array (
+				$type_name 
+		) )) {
 			
 			$result = true;
 			echo $result;
-			
-		}else {
+		} else {
 			
 			$result = false;
 			echo $result;
-			
-		};		
-		
+		}
+		;
 	} catch ( PDOException $e ) {
-		$errorType = $e->errorInfo . "<br />";
-		$errorMessage = $e->getMessage ();
-		mail ( 'jasensolid@gmail.com', $errorType, $errorMessage );
-		return header ( 'Location: ./404.html' );
+		cach_handler ( $e );
 	}
 };
-
-
-
 
 // -=-==-=--=-=-=-=-=-=--=-==--==-=END of  DB Spend type insert function=-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
 
@@ -139,42 +129,36 @@ function db_insert_type_of_expense($type_name) {
 // -=-==-=--=-=-=-=-=-=--=-==--==-= DB Spend type check function=-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
 
 function db_expense_name_check($type_name) {
+	$type_name = htmlentities ( $type_name );
 	
-	$type_name = htmlentities($type_name);
-		
 	try {
-		$dbcon = new PDO ( "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS );
-		$dbcon->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+		$dbcon = db_connection ();
 		
-		$check = $dbcon->prepare ( "SELECT EXISTS (SELECT name_id FROM transaction_name WHERE trans_name = ? ) AS 'Result check'" );
+		$check = $dbcon->prepare ( CHECK_IF_TYPE_EXPENSE_EXIST_SQL );
 		
-		if ($check->execute(array($type_name))) {
+		if ($check->execute ( array (
+				$type_name 
+		) )) {
 			
-			if (($result = $check->fetchColumn()) == 1) {
+			if (($result = $check->fetchColumn ()) == 1) {
 				
-				$type_id= $dbcon->prepare ( "SELECT name_id FROM transaction_name WHERE trans_name = ?" );
-				$type_id->execute(array($type_name));
-				$type_id = $type_id->fetchColumn();
+				$type_id = $dbcon->prepare ( SELECT_TRANSACTION_NAME_ID_SQL );
+				$type_id->execute ( array (
+						$type_name 
+				) );
+				$type_id = $type_id->fetchColumn ();
 				
-				echo "Id-to na razhoda e: ". $type_id;
-				
-			}elseif (($result = $check->fetchColumn()) == 0){
-				
+				echo "Id-to na razhoda e: " . $type_id;
+			} elseif (($result = $check->fetchColumn ()) == 0) {
 			}
-			
-			
-		}else {
+		} else {
 			
 			$result = false;
 			echo $result;
-			
-		};
-		
+		}
+		;
 	} catch ( PDOException $e ) {
-		$errorType = $e->errorInfo . "<br />";
-		$errorMessage = $e->getMessage ();
-		mail ( 'jasensolid@gmail.com', $errorType, $errorMessage );
-		return header ( 'Location: ./404.html' );
+		cach_handler ( $e );
 	}
 };
 
@@ -183,32 +167,27 @@ function db_expense_name_check($type_name) {
 // -=-==-=--=-=-=-=-=-=--=-==--==-= DB User Name function=-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
 
 function db_user_name($user_id) {
+	$type_name = htmlentities ( $user_id );
 	
-	$type_name = htmlentities($user_id);
-		
 	try {
-		$dbcon = new PDO ( "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS );
-		$dbcon->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+		$dbcon = db_connection ();
 		
-		$execute = $dbcon->prepare ( "SELECT user_name FROM users WHERE user_id = ? ");
+		$execute = $dbcon->prepare ( SELECT_USER_NAME_SQL );
 		
-		if ($execute->execute(array( $user_id ))) {
+		if ($execute->execute ( array (
+				$user_id 
+		) )) {
 			
-			$result = $execute->fetchColumn();
+			$result = $execute->fetchColumn ();
 			return $result;
-			
-		}else {
+		} else {
 			
 			$result = false;
 			return $result;
-			
-		};		
-		
+		}
+		;
 	} catch ( PDOException $e ) {
-		$errorType = $e->errorInfo . "<br />";
-		$errorMessage = $e->getMessage ();
-		mail ( 'jasensolid@gmail.com', $errorType, $errorMessage );
-		return header ( 'Location: ./404.html' );
+		cach_handler ( $e );
 	}
 };
 
