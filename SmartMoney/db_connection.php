@@ -10,10 +10,7 @@ define ( 'DB_NAME', 'smart_money' );
 // -=-==-=--=-=-=-=-=-=--=-==--==-= DB User info Request function=-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
 
 
-function db_request_info($user_id) {
-	
-	
-	
+function db_request_info($user_id) {	
 	try {
 		$dbcon = new PDO ( "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS );
 		$dbcon->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
@@ -60,8 +57,7 @@ function db_request_info($user_id) {
 		mail ( 'jasensolid@gmail.com', $errorType, $errorMessage );
 		return header ( 'Location: ./404.html' );
 	}
-}
-;
+};
 
 // -=-==-=--=-=-=-=-=-=--=-==--==-=END of DB User info Request function=-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
 
@@ -105,8 +101,7 @@ function db_insert_expense($user_id, $sum, $type_of_expense, $name_of_expense) {
 function db_insert_type_of_expense($type_name) {
 	
 	$type_name = htmlentities($type_name);
-	
-	
+		
 	try {
 		$dbcon = new PDO ( "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS );
 		$dbcon->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
@@ -124,9 +119,7 @@ function db_insert_type_of_expense($type_name) {
 			$result = false;
 			echo $result;
 			
-		};
-		
-		
+		};		
 		
 	} catch ( PDOException $e ) {
 		$errorType = $e->errorInfo . "<br />";
@@ -148,8 +141,7 @@ function db_insert_type_of_expense($type_name) {
 function db_expense_name_check($type_name) {
 	
 	$type_name = htmlentities($type_name);
-	
-	
+		
 	try {
 		$dbcon = new PDO ( "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS );
 		$dbcon->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
@@ -178,8 +170,6 @@ function db_expense_name_check($type_name) {
 			
 		};
 		
-		
-		
 	} catch ( PDOException $e ) {
 		$errorType = $e->errorInfo . "<br />";
 		$errorMessage = $e->getMessage ();
@@ -195,8 +185,7 @@ function db_expense_name_check($type_name) {
 function db_user_name($user_id) {
 	
 	$type_name = htmlentities($user_id);
-	
-	
+		
 	try {
 		$dbcon = new PDO ( "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS );
 		$dbcon->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
@@ -213,9 +202,7 @@ function db_user_name($user_id) {
 			$result = false;
 			return $result;
 			
-		};
-		
-		
+		};		
 		
 	} catch ( PDOException $e ) {
 		$errorType = $e->errorInfo . "<br />";
@@ -226,6 +213,8 @@ function db_user_name($user_id) {
 };
 
 // -=-==-=--=-=-=-=-=-=--=-==--==-=END of DB User Name function=-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
+
+
 
 
 

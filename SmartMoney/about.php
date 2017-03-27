@@ -197,7 +197,7 @@ if (!isset($_SESSION['user_id'])){
             <div class="row">
                <!-- countTo -->
                <div class="col-xs-6 col-sm-3 col-md-3">
-                  <div class="statistic-percent" data-perc="<?php echo $userIncome[1];?>">
+                  <div class="statistic-percent" data-perc="<?php echo $userIncome;?>">
                      <div class="facts-icons"> <span class="flaticon-pie-chart-1"></span> </div>
                      <div class="fact">
                         <span class="percentfactor">0</span>
@@ -210,7 +210,7 @@ if (!isset($_SESSION['user_id'])){
                <!-- end col-xs-6 col-sm-3 col-md-3 -->
                <!-- countTo -->
                <div class="col-xs-6 col-sm-3 col-md-3">
-                  <div class="statistic-percent" data-perc="<?php echo $userSavings[1];?>">
+                  <div class="statistic-percent" data-perc="<?php echo $userSavings;?>">
                      <div class="facts-icons"> <span class="flaticon-graph-3"></span> </div>
                      <div class="fact">
                         <span class="percentfactor">0</span>
@@ -223,7 +223,7 @@ if (!isset($_SESSION['user_id'])){
                <!-- end col-xs-6 col-sm-3 col-md-3 -->
                <!-- countTo -->
                <div class="col-xs-6 col-sm-3 col-md-3">
-                  <div class="statistic-percent" data-perc="<?php echo $userЕxpenses[1];?>">
+                  <div class="statistic-percent" data-perc="<?php echo $userЕxpenses;?>">
                      <div class="facts-icons"> <span class="flaticon-diagram"></span> </div>
                      <div class="fact">
                         <span class="percentfactor">0</span>
@@ -236,7 +236,7 @@ if (!isset($_SESSION['user_id'])){
                <!-- end col-xs-6 col-sm-3 col-md-3 -->
                <!-- countTo -->
                <div class="col-xs-6 col-sm-3 col-md-3">
-                  <div class="statistic-percent" data-perc="<?php echo $userIncome[1] - $userЕxpenses[1];?>">
+                  <div class="statistic-percent" data-perc="<?php echo $userЕxpenses;?>">
                      <div class="facts-icons"> <span class="flaticon-receipt"></span> </div>
                      <div class="fact">
                         <span class="percentfactor">0</span>
