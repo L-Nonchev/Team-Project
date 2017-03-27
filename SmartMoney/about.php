@@ -19,9 +19,22 @@ if (!isset($_SESSION['user_id'])){
 	
 	$info = db_request_info($user_id);	
 	
-	$userIncome =  $info['IN'];
-	$userЕxpenses = explode("-", $userData[2]);
-	$userSavings = explode("-", $userData[3]);
+	$allIncome =  $info['IN'];
+	$allExpenses =  $info['OUT'];
+	
+	$sumIN = 0;
+	for ($in = 0; $in < count($allIncome); $in++){
+		$sumIN += $allIncome[$in]['sum'];
+	};
+	
+	$sumOUT = 0;
+	for ($in = 0; $in < count($allExpenses); $in++){
+		$sumOUT += $allExpenses[$in]['sum'];
+	};
+		
+	$userIncome =  $sumIN;
+	$userЕxpenses = $sumOUT;
+	$userSavings = $userIncome - $userЕxpenses;
 	
 	$statisticalInformation = 21;	
 	
