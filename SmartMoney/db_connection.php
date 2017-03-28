@@ -214,8 +214,104 @@ function db_user_picture_address($user_id){
 	}
 };
 
+// -=-==-=--=-=-=-=-=-=--=-==--==-=END of DB User Picture address retrive function=-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
+
+// -=-==-=--=-=-=-=-=-=--=-==--==-= Creat acount for new users=-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
+
+function db_create_user ($firstName, $lastName, $email, $password ) {
+
+	//-=-=-=-=-=-=---==-=-=-= Check input =-=-=-==-=-==-=-==--\\
+	$firstName = htmlentities($firstName);
+	$lastName = htmlentities($lastName);
+	$email = htmlentities($email);
+	$password = htmlentities($password);
 
 
+	//-=-=-=-=-=-=---==-=-=-= Hash input=-=-=-==-=-==-=-==--\\
+	$mailSha1 = sha1($email);
+	$passMd5 = md5($password);
+	$passSha1 = sha1($passMd5);
+
+
+	try{
+	
+		$dbcon = db_connection();
+		//-=-=-=-=-=-=---==-=-=-= Insert data=-=-=-==-=-==-=-==--\\
+
+		// check for exist e-mail
+		$check = $dbcon->prepare(SELECT_USER_ID_SQL);
+		$check->execute(array($mailSha1, $passSha1));
+		if ($check->fetchColumn() > 0) {
+
+			$result = false;
+			return $result;
+
+		} else {
+			//insert new user
+			$stmt = $dbcon->prepare(INSERT_USER_DATA_SQL);
+			if ($stmt->execute(array($firstName, $lastName, $mailSha1, $passSha1))){
+
+				//-=-=-=-=-=-=---==-=-=-= CREATE  SESSION =-=-=-==-=-==-=-==--\\
+				session_start();
+				
+				$userID = $dbcon->lastInsertId();
+
+				$_SESSION['user_id'] = $userID;
+
+				$result = true;
+				return $result;
+			}
+		}
+	} catch ( PDOException $e ) {
+		cach_handler($e);
+	}
+
+}
+
+// -=-==-=--=-=-=-=-=-=--=-==--==-= END of DB Creat acount for new users=-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
+
+// -=-==-=--=-=-=-=-=-=--=-==--==-= Log In chek =-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
+
+function logInUser ($email, $password){
+
+	$email = htmlentities($email);
+	$password = htmlentities($password);
+
+
+	//-=-=-=-=-=-=---==-=-=-= Hash input=-=-=-==-=-==-=-==--\\
+	$mailSha1 = sha1($email);
+	$passMd5 = md5($password);
+	$passSha1 = sha1($passMd5);
+
+	try{
+	
+		$dbcon = db_connection();
+
+			
+		$check = $dbcon->prepare(SELECT_USER_ID_SQL);
+		$check->execute(array($mailSha1, $passSha1));;
+		$userId = $check->fetch(PDO::FETCH_COLUMN);
+			
+		if ($userId > 0 ){
+			//-=-=-=-=-=-=---==-=-=-= Create SESSION =-=-=-==-=-==-=-==--\\
+			session_start();
+
+			$_SESSION['user_id'] = $userId;
+
+			$result = true;
+			return $result;
+		}else {
+
+			$result = false;
+			return $result;
+		}
+			
+			
+	} catch ( PDOException $e ) {
+		cach_handler($e);
+	}
+}
+// -=-==-=--=-=-=-=-=-=--=-==--==-= END of Log In chek =-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
 
 
 

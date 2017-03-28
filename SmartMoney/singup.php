@@ -1,4 +1,7 @@
 <?php 
+
+require'db_connection.php';
+
 //<!-- =-=-=-=-=-=-=  NEWS =-=-=-=-=-=-= -->\\
 include 'php/lastNews.php';
 
@@ -13,89 +16,45 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 			$email = htmlentities($_POST['email']);
 			$password1 = htmlentities($_POST['pasword']);
 			$password2 = htmlentities($_POST['repeat-pasword']);
-			
-			// define data for login DB
-			define('DB_HOST', 'localhost');
-			define('DB_NAME', 'smartmoney');
-			define('DB_USER', 'root');
-			define('DB_PASS', '');
-			
-			if (strlen($firstName) > 0 && strlen($lastName) > 0 && strlen($email) > 0 && strlen($password1) > 7 && strlen($password2) > 7){
 					
-				//-=-=-=-=-=-=---==-=-=-= Hash data=-=-=-==-=-==-=-==--\\
-				//hash email 
-				$mailSha1 = sha1($email);
-				// hash passwords
-				$passMd5 = md5($password1);
-				$passSha1 = sha1($passMd5);
-				
+			if (strlen($firstName) > 0 && strlen($lastName) > 0 && strlen($email) > 0 && strlen($password1) > 7 && strlen($password2) > 7){
+			
 				//-=-=-=-=-=-=---==-=-=-= Check incomig data =-=-=-==-=-==-=-==--\\
-				try{
-					// Create connection
-					$db = new PDO("mysql:host=". DB_HOST . "; dbname=". DB_NAME, DB_USER, DB_PASS);
+				
+				// check for corec pass
+				if ($password1 !== $password2){
+					$password1 = '';
+					$password2 = '';
+					$error = "ERROR! <br /> The password you entered does NOT match! TRY AGAIN.";
+				} else {
+
+					
+					if (db_create_user($firstName, $lastName, $email, $password1)){
 						
-					// Set the PDO error mode to exception
-					$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+						//-=-=-=-=-=-=---==-=-=-= Creat folder for client =-=-=-==-=-==-=-==--\\
 						
-					//select data for exist e-mail
-					$selectEmail = "SELECT user_email 
-								  FROM users
-								  WHERE user_email = '$mailSha1'; ";
-					$result = $db->query($selectEmail);
-					if($result->rowCount() > 0){
+						/// PROBLEMMM !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+						/// PROBLEMMM !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+						/// PROBLEMMM !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+						/// PROBLEMMM !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+						/// PROBLEMMM !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+						/// PROBLEMMM !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+						/// PROBLEMMM !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+						mkdir('./users/'. $mailSha1 );
+						mkdir('./users/'.$mailSha1.'/assets');
+						mkdir('./users/'.$mailSha1.'/assets/profilPic');
+						
+						//-=-=-=-=-=-=---==-=-=-= Redirect =-=-=-==-=-==-=-==--\\
+						header('Location: index.php', true, 303);
+						die();
+						
+					}else {
+						
 						$email= "";
 						$error = "ERROR! <br /> Email alredy exist!";
-						
-					} else {
-						// check for corec pass
-						if ($password1 !== $password2){
-							$password1 = '';
-							$password2 = '';
-							$error = "ERROR! <br /> The password you entered does NOT match! TRY AGAIN.";
-						} else {
-							
-							//-=-=-=-=-=-=---==-=-=-= Creat folder for client =-=-=-==-=-==-=-==--\\
-							mkdir('./users/'. $mailSha1 );
-							mkdir('./users/'.$mailSha1.'/assets');
-							mkdir('./users/'.$mailSha1.'/assets/profilPic');
-	
-							//-=-=-=-=-=-=---==-=-=-= Creat acount =-=-=-==-=-==-=-==--\\
-	
-								//insert data
-								$inserUSER = "INSERT INTO users VALUES (
-												null, '$firstName' ' ' '$lastName', '$mailSha1' , '$passSha1');";
-		
-								$db->exec($inserUSER);
-	
-							//-=-=-=-=-=-=---==-=-=-=  SESSION =-=-=-==-=-==-=-==--\\
-							session_start();
-								
-							$selectUser_Id  = "SELECT user_id
-									  	   FROM users
-									 	   WHERE user_email = '$mailSha1';";
-							$userID = $db->query($selectUser_Id)->fetch(PDO::FETCH_COLUMN);
-							
-							$selectUserName=  "SELECT user_name 
-									   	  FROM users
-										  WHERE user_email = '$mailSha1';";
-							$userName = $db->query($selectUserName)->fetch(PDO::FETCH_COLUMN);
-							
-							$_SESSION['user_id'] = $userID;
-							$_SESSION['user_name'] = $userName;
-								
-								// Close connection
-								unset($db);
-							//-=-=-=-=-=-=---==-=-=-= Redirect =-=-=-==-=-==-=-==--\\
-							header('Location: index.php', true, 303);
-							die();
-						}	
 					}
-				} catch(PDOException $error){
-					die("ERROR: " . $error->getMessage());
-				}	
-				// Close connection
-				unset($db);
-			} 
+				}
+			}
 		}
 	}else {
 		$firstName = '';
@@ -429,7 +388,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
       </footer>
       
  	  <!-- =-=-=-=-=-=-= Sing UP validation =-=-=-=-=-=-= --> 
- 	  <script src="./js/singup-validation.js" type="text/javascript"></script>
+ 	  <script src="js/singup-validation.js" type="text/javascript"></script>
  	  
       <!-- =-=-=-=-=-=-= JQUERY =-=-=-=-=-=-= --> 
       <script src="js/jquery.min.js"></script> 

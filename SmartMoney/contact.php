@@ -8,9 +8,9 @@ if (!isset($_SESSION['user_id'])){
 
 }else {
 	// !-- =-=-=-=-=-=-=Login information retrive=-=-=-=-=-=-= --
-
-
-	$userName = $_SESSION['user_name'];
+	require'./db_connection.php';
+	$userName = db_user_name($_SESSION['user_id']);
+	
 
 	// !-- =-=-=-=-=-=-=Login information retrive  END=-=-=-=-=-=-= --
 	

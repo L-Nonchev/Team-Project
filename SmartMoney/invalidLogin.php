@@ -322,7 +322,7 @@ include 'php/lastNews.php';
                      <div class="desc-text">
                         <p>Enter yor E-mail and Password</p>
                      </div>
-                     <form action="./php/logIn.php" method="post" id="login-form">
+                     <form action="./logIn.php" method="post" id="login-form">
                         <div class="row clearfix">
                            
 	                           <!-- Email Address-->

@@ -58,6 +58,33 @@ define('FECH_PIC_ADDRESS_SQL', 'SELECT user_pic FROM users WHERE user_id = ?');
 
 //-=-=-=-=-=-=-=-=-=-=-=-=-=--= END of Define fech user picture address-=-=-=-=-==-==-==-=-===-==-=\\
 
+//-=-=-=-=-=-=-=-=-=-=-=-=-=--= Define fech user ID-=-=-=-=-==-==-==-=-===-==-=\\
+
+define('SELECT_USER_ID_SQL', 'SELECT user_id FROM users WHERE user_email = ? AND user_password = ?;');
+
+//-=-=-=-=-=-=-=-=-=-=-=-=-=--= END of Define fech user ID-=-=-=-=-==-==-==-=-===-==-=\\
+//-=-=-=-=-=-=-=-=-=-=-=-=-=--= Define Insert user data-=-=-=-=-==-==-==-=-===-==-=\\
+
+define('INSERT_USER_DATA_SQL', 'INSERT INTO users VALUES (null, ? \' \' ?, ?, ?);');
+
+//-=-=-=-=-=-=-=-=-=-=-=-=-=--= END of Define fech user ID-=-=-=-=-==-==-==-=-===-==-=\\
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

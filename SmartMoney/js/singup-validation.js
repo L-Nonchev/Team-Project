@@ -6,6 +6,7 @@ email.onblur = function() {
 	var currier = new XMLHttpRequest();
 	currier.onreadystatechange = function(){
 		if (this.readyState === 4 && this.status === 200) {
+			console.log(this.responseText);
 			var incomeData = JSON.parse(this.responseText);
 
 			if(incomeData['haveMail'] === true){
@@ -35,7 +36,7 @@ var paragrapfh = document.createElement('p');
 
 // chek for same passord 1 and 2 
 function check_password() {
-	if ((password1.value.length) > 0 && (password2.value.length) > 0){
+	if (((password1.value.length) > 0 ) || ((password2.value.length) > 0)){
 		// if password is not the same 
 		if(password1.value != password2.value){
 			// singUp button stop word
@@ -74,6 +75,6 @@ function check_password() {
 		singUpButton.onclick = function(){};
 	}
 }
-password1.onkeyup =  check_password;
+password1.onblur =  check_password;
 password2.onkeyup =  check_password;
 //-=-=-=-=-=-=--=---=-= password end =-=-=-=-=-=-=--=-=-==-=-=\\

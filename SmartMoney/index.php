@@ -9,15 +9,16 @@ if (!isset($_SESSION['user_id'])){
 }else {
 	$logged = true;
 	// !-- =-=-=-=-=-=-=Login information retrive=-=-=-=-=-=-= --
+	require './db_connection.php';
 	$user = $_SESSION['user_id'];
-	$userName = $_SESSION['user_name'];
-
+	$userName = db_user_name($_SESSION['user_id']);
 	// !-- =-=-=-=-=-=-=Login information retrive  END=-=-=-=-=-=-= --
 
 }
 //<!-- =-=-=-=-=-=-=  NEWS =-=-=-=-=-=-= -->
-include 'php/topNews.php';
 include 'php/lastNews.php';
+include 'php/topNews.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -794,7 +795,7 @@ include 'php/lastNews.php';
                      <div class="desc-text">
                         <p>Enter yor E-mail and Password</p>
                      </div>
-                     <form action="./php/logIn.php" method="post" id="login-form">
+                     <form action="./logIn.php" method="post" id="login-form">
                         <div class="row clearfix">
                            
 	                           <!-- Email Address-->
