@@ -12,10 +12,12 @@ if (!isset($_SESSION['user_id'])){
 	
 			// !-- =-=-=-=-=-=-=Login information retrive=-=-=-=-=-=-= --
 	include './db_connection.php';
-
-	$userName = db_user_name($_SESSION['user_id']);
 	
 	$user_id = $_SESSION['user_id'];
+
+	$profilePicture = db_user_picture_address($user_id);
+	
+	$userName = db_user_name($_SESSION['user_id']);
 	
 	$info = db_request_info($user_id);	
 	
@@ -106,10 +108,7 @@ if (!isset($_SESSION['user_id'])){
             </ul>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12">
-            <a href="./php/logOut.php" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Log Out</a>
-            <a href="#" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Recent Events</a>
-            <a href="#" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Latest News</a>
-            <a href="#" class="info-bar-meta-link hidden-sm"><i class="fa fa-caret-right fa-fw"></i>Blog</a>
+            <a href="./php/logOut.php" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Log Out</a> 
             </div>
          </div>
       </div>

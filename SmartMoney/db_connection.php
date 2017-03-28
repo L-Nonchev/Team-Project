@@ -167,8 +167,7 @@ function db_expense_name_check($type_name) {
 // -=-==-=--=-=-=-=-=-=--=-==--==-= DB User Name function=-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
 
 function db_user_name($user_id) {
-	$type_name = htmlentities ( $user_id );
-	
+		
 	try {
 		$dbcon = db_connection ();
 		
@@ -192,6 +191,29 @@ function db_user_name($user_id) {
 };
 
 // -=-==-=--=-=-=-=-=-=--=-==--==-=END of DB User Name function=-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
+
+// -=-==-=--=-=-=-=-=-=--=-==--==-= DB User Picture address retrive function=-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
+
+function db_user_picture_address($user_id){
+	try {
+		$dbcon = db_connection();
+		$execute = $dbcon->prepare ( FECH_PIC_ADDRESS_SQL );
+		if ($execute->execute ( array ($user_id) )) {
+			
+			$result = $execute->fetchColumn ();
+			return $result;
+	
+		} else {
+			
+			$result = false;
+			return $result;
+		};	
+		
+	} catch (PDOException $e) {
+		cach_handler($e);
+	}
+};
+
 
 
 
