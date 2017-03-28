@@ -27,6 +27,7 @@ CREATE TABLE `users` (
   `user_name` varchar(45) NOT NULL,
   `user_email` varchar(40) NOT NULL,
   `user_password` varchar(40) NOT NULL,
+  `user_pic` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_id_UNIQUE` (`user_id`),
   UNIQUE KEY `user_email_UNIQUE` (`user_email`)
@@ -39,7 +40,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Tim Burton','burton@abv.bg','juhasdjfkjkasdhukfh'),(4,'Amanda Burton','a.burton@abv.bg','juhasdjfkjkasdhukfh'),(5,'Ralph Burton','r.burton@abv.bg','juhasdjfkjkasdhukfh');
+INSERT INTO `users` VALUES (1,'Tim Burton','burton@abv.bg','juhasdjfkjkasdhukfh','./assets/users/pic/user_1.jpg'),(4,'Amanda Burton','a.burton@abv.bg','juhasdjfkjkasdhukfh',NULL),(5,'Ralph Burton','r.burton@abv.bg','juhasdjfkjkasdhukfh',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-24 21:54:29
+-- Dump completed on 2017-03-29  0:50:39
