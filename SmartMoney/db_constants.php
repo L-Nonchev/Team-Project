@@ -65,12 +65,24 @@ define('SELECT_USER_ID_SQL', 'SELECT user_id FROM users WHERE user_email = ? AND
 //-=-=-=-=-=-=-=-=-=-=-=-=-=--= END of Define fech user ID-=-=-=-=-==-==-==-=-===-==-=\\
 //-=-=-=-=-=-=-=-=-=-=-=-=-=--= Define Insert user data-=-=-=-=-==-==-==-=-===-==-=\\
 
-define('INSERT_USER_DATA_SQL', 'INSERT INTO users VALUES (null, ? \' \' ?, ?, ?);');
+define('INSERT_USER_DATA_SQL', 'INSERT INTO users VALUES (null, ? \' \' ?, ?, ?, ?);');
 
 //-=-=-=-=-=-=-=-=-=-=-=-=-=--= END of Define fech user ID-=-=-=-=-==-==-==-=-===-==-=\\
+//-=-=-=-=-=-=-=-=-=-=-=-=-=--= Define fetch user email -=-=-=-=-==-==-==-=-===-==-=\\
 
+define('FETCH_EMAIL_SQL', 'SELECT user_email FROM users WHERE user_id = 7;');
 
+//-=-=-=-=-=-=-=-=-=-=-=-=-=--= END of Define fetch user email-=-=-=-=-==-==-==-=-===-==-=\\
+//-=-=-=-=-=-=-=-=-=-=-=-=-=--= Define update user picture address-=-=-=-=-==-==-==-=-===-==-=\\
 
+define('UPDATE_PIC_ADDRESS_SQL', 'UPDATE users SET user_pic = ? WHERE user_id = ?;');
+
+//-=-=-=-=-=-=-=-=-=-=-=-=-=--= END of Define update user picture addressc-=-=-=-=-==-==-==-=-===-==-=\\
+//-=-=-=-=-=-=-=-=-=-=-=-=-=--= Define update user password -=-=-=-=-==-==-==-=-===-==-=\\
+
+define('UPDATE_USER_PASSWORD_SQL', 'UPDATE users SET user_password = ? WHERE user_id = ?;');
+
+//-=-=-=-=-=-=-=-=-=-=-=-=-=--= END of Define update user password -=-=-=-=-==-==-==-=-===-==-=\\
 
 
 
