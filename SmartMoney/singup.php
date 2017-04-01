@@ -28,21 +28,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 					$error = "ERROR! <br /> The password you entered does NOT match! TRY AGAIN.";
 				} else {
 
-					
-					if (db_create_user($firstName, $lastName, $email, $password1)){
-						
-						//-=-=-=-=-=-=---==-=-=-= Creat folder for client =-=-=-==-=-==-=-==--\\
-						
-						/// PROBLEMMM !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-						/// PROBLEMMM !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-						/// PROBLEMMM !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-						/// PROBLEMMM !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-						/// PROBLEMMM !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-						/// PROBLEMMM !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-						/// PROBLEMMM !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-						mkdir('./users/'. $mailSha1 );
-						mkdir('./users/'.$mailSha1.'/assets');
-						mkdir('./users/'.$mailSha1.'/assets/profilPic');
+					$pathImgDefault = "./assets/users/defautIMG/default.jpg";
+					if (db_create_user($firstName, $lastName, $email, $password1, $pathImgDefault)){
 						
 						//-=-=-=-=-=-=---==-=-=-= Redirect =-=-=-==-=-==-=-==--\\
 						header('Location: index.php', true, 303);

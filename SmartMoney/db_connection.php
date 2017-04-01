@@ -218,7 +218,7 @@ function db_user_picture_address($user_id){
 
 // -=-==-=--=-=-=-=-=-=--=-==--==-= Creat acount for new users=-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
 
-function db_create_user ($firstName, $lastName, $email, $password ) {
+function db_create_user ($firstName, $lastName, $email, $password, $pathImage ) {
 
 	//-=-=-=-=-=-=---==-=-=-= Check input =-=-=-==-=-==-=-==--\\
 	$firstName = htmlentities($firstName);
@@ -249,7 +249,12 @@ function db_create_user ($firstName, $lastName, $email, $password ) {
 		} else {
 			//insert new user
 			$stmt = $dbcon->prepare(INSERT_USER_DATA_SQL);
-			if ($stmt->execute(array($firstName, $lastName, $mailSha1, $passSha1))){
+			if ($stmt->execute(array($firstName, $lastName, $mailSha1, $passSha1, $pathImage))){
+				
+				//-=-=-=-=-=-=---==-=-=-= Creat folder for client =-=-=-==-=-==-=-==--\\
+				
+				mkdir('./assets/users/'. $mailSha1 );
+				mkdir('./assets/users/'.$mailSha1.'/image');
 
 				//-=-=-=-=-=-=---==-=-=-= CREATE  SESSION =-=-=-==-=-==-=-==--\\
 				session_start();
@@ -313,6 +318,68 @@ function logInUser ($email, $password){
 }
 // -=-==-=--=-=-=-=-=-=--=-==--==-= END of Log In chek =-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
 
+// -=-==-=--=-=-=-=-=-=--=-==--==-= Get email for user =-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
 
+function getEmail ($user_id) {
 
+	try{
+	
+		$dbcon = db_connection();
+		
+		$check = $dbcon->prepare(FETCH_EMAIL_SQL);
+		$check->execute(array($user_id));
+		$email = $check->fetch(PDO::FETCH_COLUMN);
+	
+		return $email;
+		
+		} catch ( PDOException $e ) {
+			cach_handler($e);
+		}
+}
+
+// -=-==-=--=-=-=-=-=-=--=-==--==-= END of Get email for user =-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
+
+// -=-==-=--=-=-=-=-=-=--=-==--==-= Get email for user =-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
+
+function updateImage ($user_id, $imgPath){
+	
+	try{
+	
+		$dbcon = db_connection();
+	
+		$check = $dbcon->prepare(UPDATE_PIC_ADDRESS_SQL);
+		if ($check->execute(array($imgPath, $user_id))){
+			return true;
+		}
+	
+	} catch ( PDOException $e ) {
+		cach_handler($e);
+	}
+	
+}
+
+// -=-==-=--=-=-=-=-=-=--=-==--==-= END of Get email for user =-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
+
+// -=-==-=--=-=-=-=-=-=--=-==--==-= Update user password =-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
+function updatePassword ($user_id, $password){
+	
+	$password = htmlentities($password);
+	$passMd5 = md5($password);
+	$passSha1 = sha1($passMd5);
+
+	try{
+
+		$dbcon = db_connection();
+		
+		$check = $dbcon->prepare(UPDATE_USER_PASSWORD_SQL);
+		if ($check->execute(array($passSha1, $user_id))){
+			return "Òhe password is changed successfully";
+		}
+
+	} catch ( PDOException $e ) {
+		cach_handler($e);
+	}
+}
+
+// -=-==-=--=-=-=-=-=-=--=-==--==-= END of Update user password =-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
 ?>

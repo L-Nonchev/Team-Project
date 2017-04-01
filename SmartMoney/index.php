@@ -10,8 +10,11 @@ if (!isset($_SESSION['user_id'])){
 	$logged = true;
 	// !-- =-=-=-=-=-=-=Login information retrive=-=-=-=-=-=-= --
 	require './db_connection.php';
-	$user = $_SESSION['user_id'];
-	$userName = db_user_name($_SESSION['user_id']);
+	$user_id = $_SESSION['user_id'];
+	
+	$userName = db_user_name($user_id);
+	
+	$profilePicture = db_user_picture_address($user_id);
 	// !-- =-=-=-=-=-=-=Login information retrive  END=-=-=-=-=-=-= --
 
 }
@@ -95,7 +98,7 @@ include 'php/topNews.php';
             <?php if ($logged){?>
               <div class="col-md-6 col-sm-6 col-xs-12">
              <a href="./php/logOut.php" class="info-bar-meta-link">Log Out</a>
-             <a href="#" class="info-bar-meta-link">Setings</a>
+             <a href="./settings.php" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Settings</a>
             </div>
             <?php }?>
          </div>

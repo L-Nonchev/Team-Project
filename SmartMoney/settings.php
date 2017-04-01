@@ -9,12 +9,55 @@ if (!isset($_SESSION['user_id'])){
 }else {
 	// !-- =-=-=-=-=-=-=Login information retrive=-=-=-=-=-=-= --
 	require './db_connection.php';
+	require_once './php/updateuserimage.php';
 	$user_id = $_SESSION['user_id'];
 	
 	$userName = db_user_name($user_id);
 	
-	$profilePicture = db_user_picture_address($user_id);
+
 	// !-- =-=-=-=-=-=-=Login information retrive  END=-=-=-=-=-=-= --
+	
+	// !-- =-=-=-=-=-=-= Change user =-=-=-=-=-=-= --
+		// image
+	$error= "";
+	$passwordMesage = "";
+
+	if (isset($_POST['submit'])){
+		if (isset($_FILES['picture'])){
+		
+			// user pic
+			$fileOnServer = $_FILES['picture']['tmp_name'];
+			$fileRealName = $_FILES['picture']['name'];
+			
+			if (!empty($fileOnServer)){
+				$error = updateProfilImage($user_id, $fileOnServer, $fileRealName);		
+			}
+		}
+		
+		if (isset($_POST['password']) && isset($_POST['re-password'])){
+			if (strlen($_POST['password']) > 7 && strlen($_POST['re-password']) > 7){
+			
+				$password1 = htmlentities($_POST['password']);
+				$password2 = htmlentities($_POST['re-password']);
+				
+				if ($password1 === $password2){
+					
+					$passwordMesage = updatePassword ($user_id, $password1);
+					
+				}else{
+					$passwordMesage = "Passwords are not the same.";
+				}
+			}else{
+				$passwordMesage = "The password must be more than 7 characters.";
+			}
+		}
+	}
+
+	$profilePicture = db_user_picture_address($user_id);
+	
+	
+	
+	
 	
 	//<!-- =-=-=-=-=-=-=  NEWS =-=-=-=-=-=-= -->\\
 	include 'php/lastNews.php';
@@ -158,8 +201,7 @@ if (!isset($_SESSION['user_id'])){
             <div class="row">
                <div class="page-title">
                   <div class="col-sm-12 col-md-6 page-heading text-left">
-                     <h3>any question</h3>
-                     <h2>Contact  Us</h2>
+                     <h2>Settings</h2>
                   </div>
                </div>
             </div>
@@ -173,90 +215,49 @@ if (!isset($_SESSION['user_id'])){
             <!-- Row -->
             <div class="row">
                <div class="col-md-8 col-xs-12 col-sm-12  ">
-                  <div class="notice success" id="success">
-                     <p>Thanks so much for your message. We check e-mail frequently and will try our best to respond to your inquiry.</p>
-                  </div>
-                  <form id="contactForm"  method="post"  action="#">
+                  <form enctype='multipart/form-data' id="setings"  method="post"  action="./settings.php">
                   <div class="row">
+                  <p>Change your password:<span class="required"></span></p>
                      <div class="col-sm-6">
-                        <!-- Name -->
+                        <!-- passwprd -->
                         <div class="form-group">
-                           <label>Name<span class="required">*</span></label>
-                           <input type="text" placeholder="Name" id="name" name="name" class="form-control" required>
+                           <label>Password</label>
+                           <input type="password" placeholder="Name" id="name" name="password" class="form-control" >
                         </div>
                      </div>
                      <!-- End col-sm-6 -->
                      <div class="col-sm-6">
-                        <!-- Email -->
+                        <!-- re-passwprd -->
                         <div class="form-group">
-                           <label for="email">Email<span class="required">*</span></label>
-                           <input type="email" placeholder="Email" id="email" name="email" class="form-control" required>
+                           <label>Re-Password</label>
+                           <input type="password" placeholder="Name" id="name" name="re-password" class="form-control" >
                         </div>
                      </div>
+                     <label for=""><?= $passwordMesage ?></label>
                    </div>
                      <!-- End col-sm-6 -->
                       <div class="row">
+                      <p>Change your profil picture: <span class="required"></span></p>
                      <div class="col-sm-12">
-                        <!-- Email -->
+                        <!-- IMAGE -->
                         <div class="form-group">
-                           <label>Subject<span class="required">*</span></label>
-                           <input type="text" placeholder="Subject" id="subject" name="subject" class="form-control" required>
+                           <input type="hidden" name="MAX_FILE_SIZE" value="8000000" />
+							<label>File</label>
+							<input type="file" name="picture" accept="image/*" class="loader"/>
+							<label for=""><?= $error ?></label>
                         </div>
                      </div>
                      </div>
                      <!-- End col-sm-12 -->
-           
-                       <!-- End col-sm-6 -->
-                        <div class="row">
-                     <div class="col-sm-12">
-                        <!-- Email -->
-                        <div class="form-group">
-                           <label>Topic To Discuss <span class="required">*</span></label>
-                            <select class="form-control required">
-                                 <option>Share Market Trading</option>
-                                 <option>Market Hosting</option>
-                                 <option>Presidency Share</option>
-                                 <option>Other Topic</option>
-                              </select>
-                        </div>
-                     </div>
-                     </div>
-                     <!-- End col-sm-12 -->
+
                       <div class="row">
-                     <div class="col-sm-12">
-                        <!-- Comment -->
-                        <div class="form-group">
-                           <label>Message<span class="required">*</span></label>
-                           <textarea placeholder="Message..." id="message" name="message"  class="form-control" rows="3" required></textarea>
-                        </div>
-                     </div>
-                     </div>
-                     <!-- End col-sm-12 -->
-                      <div class="row">
-                     <div class="col-sm-12">
-                        <button type="submit" id="yes" class="btn btn-primary">Send Message</button>
-                        <img id="loader" alt="" src="images/loader.gif" class="loader">
-                     </div>
+                    	 <div class="col-sm-12">
+                       		 <button name="submit" type="submit" id="yes" class="btn btn-primary">Save</button>
+                    	 </div>
                      </div>
                      <!-- End col-sm-6 -->
                   </form>
                </div>
-               <div class="col-md-4 col-xs-12 col-sm-12 margin-top-30">
-
-                <div class="location-box"> <a class="media-left pull-left" > <i class=" icon-envelope"></i></a>
-                  <div class="media-body"> <strong>OUR CONTACT E-MAIL</strong>
-                    <p>smart.money.managment@gmail.com</p>
-                  </div>
-                </div>
-                <div class="location-box"> <a class="media-left pull-left" > <i class="icon-phone"></i></a>
-                  <div class="media-body"> <strong>Call us 24/7</strong>
-                    <p> +359 - 888-333-124 | +359 - 888-333-125  </p>
-                  </div>
-                </div>
-
-               </div>
-        
-               <div class="clearfix"></div>
             </div>
             <!-- Row End -->
          </div>
