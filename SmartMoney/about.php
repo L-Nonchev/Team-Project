@@ -38,7 +38,23 @@ if (!isset($_SESSION['user_id'])){
 	$userЕxpenses = $sumOUT;
 	$userSavings = $userIncome - $userЕxpenses;
 	
-	$statisticalInformation = 21;	
+	//=-=-=-=-=--=-==-=-==--=Function for fetching spendings data=-=-=-=-=-=-=-=--=-=-=-=-==--\\
+	
+	function export_spendig_data($allIncome, $allExpenses){
+		if (count($allIncome)){
+		
+			for($in = 0; $in < count ( $allIncome ); $in ++) {
+				
+				echo '<div class="progress-bar-linear">';
+				echo '<p class="progress-bar-text">Financial Service';
+				echo "<span>" . $allIncome [$in] ['sum'] . "$</span> </p>";			
+				echo '<div class="progress-bar">';
+				echo "<span data-percent=" . $allIncome [$in] ['sum'] . "></span></div></div>";
+			};
+		}
+	};
+	
+	//=-=-=-=-=--=-==-=-==--=END of Function for fetching spendings data=-=-=-=-=-=-=-=--=-=-=-=-==--\\
 	
 		// !-- =-=-=-=-=-=-=Login information retrive  END=-=-=-=-=-=-= --
 }
@@ -335,40 +351,9 @@ if (!isset($_SESSION['user_id'])){
                   </div>
                </div>
                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                  <h2>Skills that I have</h2>
+                  <h2>My budget details</h2>
                   <div class="our-skill">
-                     <div class="progress-bar-linear">
-                        <p class="progress-bar-text">Financial Service
-                           <span><?php echo $statisticalInformation . "%";?></span>
-                        </p>
-                        <div class="progress-bar">
-                           <span data-percent="<?php echo $statisticalInformation;?>"></span>
-                        </div>
-                     </div>
-                     <div class="progress-bar-linear">
-                        <p class="progress-bar-text">Best Consultancy
-                           <span><?php echo $statisticalInformation . "%"?></span>
-                        </p>
-                        <div class="progress-bar">
-                           <span data-percent="<?php echo $statisticalInformation;?>"></span>
-                        </div>
-                     </div>
-                     <div class="progress-bar-linear">
-                        <p class="progress-bar-text">Business Analysis
-                           <span><?php echo $statisticalInformation . "%"?></span>
-                        </p>
-                        <div class="progress-bar">
-                           <span data-percent="<?php echo $statisticalInformation;?>"></span>
-                        </div>
-                     </div>
-                     <div class="progress-bar-linear">
-                        <p class="progress-bar-text">Market Analysis
-                           <span><?php echo $statisticalInformation. "%"?></span>
-                        </p>
-                        <div class="progress-bar">
-                           <span data-percent="<?php echo $statisticalInformation;?>"></span>
-                        </div>
-                     </div>
+                     <?php export_spendig_data($allIncome, $allExpenses);?>                     
                   </div>
                </div>
             </div>
