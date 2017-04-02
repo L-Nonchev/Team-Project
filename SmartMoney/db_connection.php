@@ -31,8 +31,10 @@ function db_request_info($user_id) {
 		if ($carryer->execute ( array ($user_id) )) {
 			$sums_in = array ();
 			$sums_out = array();
+			$sums_save = array();
 			$in = 0;
 			$out = 0;
+			$save = 0;
 			while ( $row = $carryer->fetch ( PDO::FETCH_ASSOC ) ) {				
 				
 				if ($row['trans_type'] == 'IN') {					
@@ -48,11 +50,18 @@ function db_request_info($user_id) {
 					$sums_out[$out]['name_id'] = $row['name_id'];
 					$sums_out[$out]['date'] = $row['transaction_date'];
 					$out++;
+				}else{
+					$sums_save[$save]['sum'] = $row['transaction_sum'];
+					$sums_save[$save]['name'] = $row['trans_name'];
+					$sums_save[$save]['name_id'] = $row['name_id'];
+					$sums_save[$save]['date'] = $row['transaction_date'];
+					$save++;
 				}
 			};		
 			$user_info = array(
 					'IN' => $sums_in,
-					'OUT' => $sums_out
+					'OUT' => $sums_out,
+					'SAVE' => $sums_save
 			);
 			
 			return $user_info;

@@ -29,6 +29,10 @@ if (!isset($_SESSION['user_id'])){
 	
 	$allIncome =  $info['IN'];
 	$allExpenses =  $info['OUT'];
+	$savings = 0;
+	if (count($info['SAVE'] ) > 0) {
+		$savings = $info['SAVE'];
+	};
 	
 	$sumIN = 0;
 	for ($in = 0; $in < count($allIncome); $in++){
@@ -42,7 +46,7 @@ if (!isset($_SESSION['user_id'])){
 		
 	$userIncome =  $sumIN;
 	$userЕxpenses = $sumOUT;
-	$userSavings = $userIncome - $userЕxpenses;
+	$balance = $userIncome - $userЕxpenses;
 	
 	
 	
@@ -208,7 +212,7 @@ if (!isset($_SESSION['user_id'])){
                <!-- end col-xs-6 col-sm-3 col-md-3 -->
                <!-- countTo -->
                <div class="col-xs-6 col-sm-3 col-md-3">
-                  <div class="statistic-percent" data-perc="<?php echo $userЕxpenses;?>">
+                  <div class="statistic-percent" data-perc="<?php echo "$savings";?>">
                      <div class="facts-icons"> <span class="flaticon-piggy-bank-1"></span> </div>
                      <div class="fact">
                         <span class="percentfactor">0</span>
@@ -221,7 +225,7 @@ if (!isset($_SESSION['user_id'])){
                <!-- end col-xs-6 col-sm-3 col-md-3 -->
                <!-- countTo -->
                <div class="col-xs-6 col-sm-3 col-md-3">
-                  <div class="statistic-percent" data-perc="<?php echo $userЕxpenses;?>">
+                  <div class="statistic-percent" data-perc="<?php echo $balance;?>">
                      <div class="facts-icons"> <span class="flaticon-wallet-1"></span> </div>
                      <div class="fact">
                         <span class="percentfactor">0</span>
@@ -512,7 +516,7 @@ if (!isset($_SESSION['user_id'])){
                               <br />
                            </div>                         
                            <!--Form Group-->
-                           <div><input type="submit" name="sub"/></div>
+                           <div><input type="submit" name="sub-inc"/></div>
                         </div>
                      </form>
                   </div>
@@ -542,6 +546,45 @@ if (!isset($_SESSION['user_id'])){
                               <select class="form-control" name="expense-type" id="select_sum_type" onchange="check_for_new()">
                                 <?php 
 	                                popup_menu_expenses($expenseNames, $customEntry);
+                                 ?>                            
+                              </select>
+                              
+                           </div>  
+                            <div class="form-group col-md-12 col-sm-12 col-xs-12" id="Sum_type_new" style="visibility:hidden" >
+                              <input  class="form-control" type="text" placeholder="Enter the name of the expense"  name="Sum_type_new">
+                              <br />
+                           </div>                         
+                           <!--Form Group-->
+                           <div><input type="submit" name="sub-expense"/></div>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+            <!-- /.modal-content -->
+         </div>
+         <!-- /.modal-dialog -->
+      </div>
+      
+      <div class="modal fade" id="request-quote-3" role="dialog"  aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-body">
+                  <div class="quotation-box-2">
+                     <h2>Add money to your budget</h2>
+                     <br />                    
+                     <form action="porch.php" method="post">
+                        <div class="row clearfix">
+                           <!--Form Group-->                          
+                           <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                              <input class="form-control" type="number" placeholder="Sum amount"  name="Sum-to-buget">
+                              <br />
+                           </div>
+                           <!--Form Group-->
+                           <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                              <select class="form-control" name="expense-type" id="select_sum_type" onchange="check_for_new()">
+                                <?php 
+	                                popup_menu_savings($expenseNames, $customEntry);
                                  ?>                            
                               </select>
                               

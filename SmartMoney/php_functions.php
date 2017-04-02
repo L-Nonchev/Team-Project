@@ -59,6 +59,36 @@ function popup_menu_expenses($expenseNames, $customEntry) {
 
 //-=-=-=-=-=-=--=-=-=-=-=-=-=-=-= END of Create options for EXPENSE select menu-=-=-=-=-=--=-==-=-=-=-=-=-=-=-=-=\\
 
+//-=-=-=-=-=-=--=-=-=-=-=-=-=-=-= Create options for SAVINGS select menu-=-=-=-=-=--=-==-=-=-=-=-=-=-=-=-=\\
+
+function popup_menu_savings($savings) {
+	
+	for ($in = 0; $in < count($expenseNames); $in++){
+		
+		$name = $expenseNames[$in]['trans_name'];
+		$value = $expenseNames[$in]['name_id'];
+		
+		echo "<option value='$value'>".$name."</option>";
+		
+		
+	};
+	echo "<option value='new'>Other...</option>";
+	
+	if(count($customEntry['OUT']) > 0 && $customEntry['OUT']['name_id'] > 10){
+		echo ' <option value="" disabled selected>User custom entryes...</option>';
+		for ($in = 0; $in < count($customEntry['OUT']); $in++){
+			$name = $customEntry[$in]['trans_name'];
+			$value = $customEntry[$in]['name_id'];
+			
+			echo "<option value='$value'>".$name."</option>";
+			
+		}
+	}
+	
+};
+
+//-=-=-=-=-=-=--=-=-=-=-=-=-=-=-= END of Create options for SAVINGS select menu-=-=-=-=-=--=-==-=-=-=-=-=-=-=-=-=\\
+
 //=-=-=-=-=--=-==-=-==--=Function for fetching income data=-=-=-=-=-=-=-=--=-=-=-=-==--\\
 
 function export_income_data($allIncome){	
