@@ -21,6 +21,8 @@ if (!isset($_SESSION['user_id'])){
 	
 	$info = db_request_info($user_id);	
 	
+	$expenseNames = get_defalt_epense_names();
+	
 	$allIncome =  $info['IN'];
 	$allExpenses =  $info['OUT'];
 	
@@ -169,29 +171,8 @@ if (!isset($_SESSION['user_id'])){
                            <a  href="index.php" >Home </a>
                         </li>
                         <li class="dropdown">
-                        	<a href="about.php">About </a> 
-                        </li>
-                        <li class="dropdown ">
-                           <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-animations="fadeInUp">Our Service <span class="fa fa-angle-down"></span></a>
-                           <ul class="dropdown-menu">
-                              <li><a href="services.html">Services</a> </li>
-                              <li><a href="services-2.html">Services 2</a> </li>
-                              <li><a href="services-3.html">Services 3</a> </li>
-                              <li><a href="services-4.html">Services 4 (Sticky Bar)</a> </li>
-                              <li><a href="services-details.html">Services Detail</a> </li>
-                           </ul>
-                        </li>
-                        
-                        <li class="dropdown">
-                           <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-animations="fadeInUp">Pages <span class="fa fa-angle-down"></span></a>
-                           <ul class="dropdown-menu">
-                              <li><a href="404.html">Error Page</a> </li>
-                              <li><a href="team.html">Our Team </a> </li>
-                              <li><a href="icons.html">Icons</a> </li>
-                              <li><a href="flat-icons.html">Flat Icons</a> </li>
-                              <li><a href="gallery.html ">Gallery</a></li>
-                           </ul>
-                        </li>
+                        	<a href="blog.php">Blog </a> 
+                        </li>       
                         <li><a href="contact.php">Contact Us</a></li>
                      </ul>
                      <a  href="online-booking.html"  class="btn btn-primary pull-right"><span class="hidden-sm">Get An </span>Appointment</a> 
@@ -213,7 +194,7 @@ if (!isset($_SESSION['user_id'])){
                <!-- countTo -->
                <div class="col-xs-6 col-sm-3 col-md-3">
                   <div class="statistic-percent" data-perc="<?php echo $userIncome;?>">
-                     <div class="facts-icons"> <span class="flaticon-pie-chart-1"></span> </div>
+                     <div class="facts-icons"> <span class="flaticon-notes-1"></span> </div>
                      <div class="fact">
                         <span class="percentfactor">0</span>
                         <p>Montly Income</p>
@@ -225,8 +206,21 @@ if (!isset($_SESSION['user_id'])){
                <!-- end col-xs-6 col-sm-3 col-md-3 -->
                <!-- countTo -->
                <div class="col-xs-6 col-sm-3 col-md-3">
-                  <div class="statistic-percent" data-perc="<?php echo $userSavings;?>">
-                     <div class="facts-icons"> <span class="flaticon-graph-3"></span> </div>
+                  <div class="statistic-percent" data-perc="<?php echo $userЕxpenses;?>">
+                     <div class="facts-icons"> <span class="flaticon-receipt"></span> </div>
+                     <div class="fact">
+                        <span class="percentfactor">0</span>
+                        <p>Montly Spandings</p>
+                     </div>
+                     <!-- end fact -->
+                  </div>
+                  <!-- end statistic-percent -->
+               </div>
+               <!-- end col-xs-6 col-sm-3 col-md-3 -->
+               <!-- countTo -->
+               <div class="col-xs-6 col-sm-3 col-md-3">
+                  <div class="statistic-percent" data-perc="<?php echo $userЕxpenses;?>">
+                     <div class="facts-icons"> <span class="flaticon-piggy-bank-1"></span> </div>
                      <div class="fact">
                         <span class="percentfactor">0</span>
                         <p>Montly Savings</p>
@@ -239,20 +233,7 @@ if (!isset($_SESSION['user_id'])){
                <!-- countTo -->
                <div class="col-xs-6 col-sm-3 col-md-3">
                   <div class="statistic-percent" data-perc="<?php echo $userЕxpenses;?>">
-                     <div class="facts-icons"> <span class="flaticon-diagram"></span> </div>
-                     <div class="fact">
-                        <span class="percentfactor">0</span>
-                        <p>Montly Spendings</p>
-                     </div>
-                     <!-- end fact -->
-                  </div>
-                  <!-- end statistic-percent -->
-               </div>
-               <!-- end col-xs-6 col-sm-3 col-md-3 -->
-               <!-- countTo -->
-               <div class="col-xs-6 col-sm-3 col-md-3">
-                  <div class="statistic-percent" data-perc="<?php echo $userЕxpenses;?>">
-                     <div class="facts-icons"> <span class="flaticon-receipt"></span> </div>
+                     <div class="facts-icons"> <span class="flaticon-wallet-1"></span> </div>
                      <div class="fact">
                         <span class="percentfactor">0</span>
                         <p>Balance</p>
@@ -285,52 +266,28 @@ if (!isset($_SESSION['user_id'])){
                   <div class="item">
                      <!-- services grid -->
                      <div class="services-grid" data-target="#request-quote-2" data-toggle="modal">
-                        <div class="icons" > <i class="flaticon-graph-2"></i></div>
-                        <h4>Add revolving income</h4>
+                        <div class="icons" > <i class="flaticon-money"></i></div>
+                        <h4>Add income</h4>
                         <p></p>
                      </div>
                   </div>                   
                   <!-- services grid -->
                   <div class="item">
                      <div class="services-grid">
-                        <div class="icons"> <i class="flaticon-insert-coin"></i></div>
-                        <h4>Saving Solutions</h4>
-                        <p>We have the right caring, experience and dedicated professional for you.</p>
+                        <div class="icons"> <i class="flaticon-point-of-service"></i></div>
+                        <h4>Add expense</h4>
+                        <p></p>
                      </div>
                   </div>
                   <!-- services grid -->
                   <div class="item">
                      <div class="services-grid">
                         <div class="icons"> <i class="flaticon-safebox-3"></i></div>
-                        <h4>Private Banking </h4>
-                        <p>We have the right caring, experience and dedicated professional for you.</p>
+                        <h4>Add savings</h4>
+                        <p></p>
                      </div>
                   </div>
-                  <!-- Service Item List -->
-                  <div class="item">
-                     <!-- services grid -->
-                     <div class="services-grid">
-                        <div class="icons"> <i class="flaticon-pie-chart-5"></i></div>
-                        <h4>Wealth Management</h4>
-                        <p>We have the right caring, experience and dedicated professional for you.</p>
-                     </div>
-                  </div>
-                  <!-- services grid -->
-                  <div class="item">
-                     <div class="services-grid">
-                        <div class="icons"> <i class="flaticon-change"></i></div>
-                        <h4>Mutual Funds</h4>
-                        <p>We have the right caring, experience and dedicated professional for you.</p>
-                     </div>
-                  </div>
-                  <!-- services grid -->
-                  <div class="item">
-                     <div class="services-grid">
-                        <div class="icons"> <i class="flaticon-time-passing"></i></div>
-                        <h4>Saving &and; Investments</h4>
-                        <p>We have the right caring, experience and dedicated professional for you.</p>
-                     </div>
-                  </div>
+                 
                   <!-- Service Item List End -->
                </div>
             </div>
@@ -493,7 +450,7 @@ if (!isset($_SESSION['user_id'])){
       <div class="modal fade " id="request-quote" role="dialog"  aria-hidden="true">
          <div class="modal-dialog">
             <div class="modal-content">
-               <div class="modal-body">
+               <div class="">
                   <div class="quotation-box-1">
                      <h2>Request a Call Back</h2>
                      <div class="desc-text">
@@ -539,28 +496,35 @@ if (!isset($_SESSION['user_id'])){
       </div>
       <!-- =-=-=-=-=-=-= Quote Modal End =-=-=-=-=-=-= -->
        <!-- =-=-=-=-=-=-= Budget Query =-=-=-=-=-=-= --> 
-      <div class="modal fade " id="request-quote-2" role="dialog"  aria-hidden="true">
+      <div class="modal fade" id="request-quote-2" role="dialog"  aria-hidden="true">
          <div class="modal-dialog">
             <div class="modal-content">
                <div class="modal-body">
                   <div class="quotation-box-2">
-                     <h2>Enter a revolving amount to your budget</h2>
-                     <div class="desc-text">
-                        <p>Изберете сума и период, в който да бъде добавена</p>
-                     </div>
+                     <h2>Add money to your budget</h2>
+                     <br />                    
                      <form action="precentage.php" method="post">
                         <div class="row clearfix">
-                           <!--Form Group-->
-                          
+                           <!--Form Group-->                          
                            <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                              <input class="form-control" type="number" placeholder="Размер на сумата"  name="Sum-to-buget">
+                              <input class="form-control" type="number" placeholder="Sum amount"  name="Sum-to-buget">
+                              <br />
                            </div>
                            <!--Form Group-->
                            <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                              <select class="form-control" name="income-type">
-                                 <option>Dayly</option>
-                                 <option>Montly</option>
-                                 <option>Yearly</option>                                 
+                              <select class="form-control" name="income-type" id="select_sum_type">
+                                <?php 
+                                for ($in = 0; $in < count($expenseNames); $in++){
+                                	
+                                	$name = $expenseNames[$in]['trans_name'];
+                                	$value = $expenseNames[$in]['name_id'];
+                                	
+			                        echo "<option value='$value'</option>";
+			                        echo $name;
+			                                      
+                                };
+                                echo "<option value='NULL'>Other...</option>";
+                                 ?>                            
                               </select>
                            </div>                           
                            <!--Form Group-->
@@ -575,7 +539,11 @@ if (!isset($_SESSION['user_id'])){
          <!-- /.modal-dialog -->
       </div>
       <!-- =-=-=-=-=-=-= Quote Modal End =-=-=-=-=-=-= -->
-      
+      <script type="text/javascript" src="/js/select_sum.js">
+<!--
+
+//-->
+</script>
    </body>
 </html>
 

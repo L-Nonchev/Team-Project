@@ -3789,6 +3789,12 @@ ul.header-social > li > a.social-tumblr:hover::after {
     
 }
 
+
+
+
+
+
+
 /* =-=-=-=-=-=-= Responsive Quries =-=-=-=-=-=-= */
 
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -4042,6 +4048,9 @@ ul.header-list li {
     padding-bottom: 20px;
 }
 }
+
+
+
 
 @media (min-width: 320px) and (max-width: 767px) {
 .top-bar .left-text {
@@ -4307,3 +4316,5 @@ ul.header-social {
 	margin-top:30px;
 }
 }
+
+

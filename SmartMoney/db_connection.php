@@ -379,7 +379,46 @@ function updatePassword ($user_id, $password){
 	} catch ( PDOException $e ) {
 		cach_handler($e);
 	}
-}
+};
 
 // -=-==-=--=-=-=-=-=-=--=-==--==-= END of Update user password =-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
+
+// -=-==-=--=-=-=-=-=-=--=-==--==-= Get defalt expense names =-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
+
+function get_defalt_epense_names (){
+	
+
+	try{
+		
+		$dbcon = db_connection();
+		$names = array();
+		$in = 0;
+		foreach ($dbcon->query(ALL_EXPANSE_NAMES_SQL, PDO::FETCH_ASSOC) as $row){
+			
+			$names[$in] = $row;
+			$in++;
+		}
+		return $names;
+		
+		
+	} catch ( PDOException $e ) {
+		cach_handler($e);
+	}
+}
+
+$names = get_defalt_epense_names();
+
+echo "<select>";
+
+for ($in = 0; $in < count($names); $in++){
+	
+	$name = $names[$in]['trans_name'];
+	$value = $names[$in]['name_id'];
+	echo "<option value='$value'</option>";
+	echo $name;
+	
+};
+echo "<option value='NULL'>Other...</option>";
+echo                          "</select>";
+
 ?>

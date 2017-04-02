@@ -85,11 +85,11 @@ define('UPDATE_USER_PASSWORD_SQL', 'UPDATE users SET user_password = ? WHERE use
 //-=-=-=-=-=-=-=-=-=-=-=-=-=--= END of Define update user password -=-=-=-=-==-==-==-=-===-==-=\\
 
 
+//-=-=-=-=-=-=-=-=-=-=-=-=-=--= Define defalt expanse types -=-=-=-=-==-==-==-=-===-==-=\\
 
+define('ALL_EXPANSE_NAMES_SQL', 'SELECT * FROM transaction_name ORDER BY name_id LIMIT 5');
 
-
-
-
+//-=-=-=-=-=-=-=-=-=-=-=-=-=--= END of Define defalt expanse types -=-=-=-=-==-==-==-=-===-==-=\\
 
 
 
