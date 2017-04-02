@@ -11,7 +11,7 @@ define ( 'DB_NAME', 'smart_money' );
 
 //-=-=-=-=-=-=-=-=-=-=-=-=-=--= Define user info request  -=-=-=-=-==-==-==-=-===-==-=\\
 
-define('REQUEST_USER_INFO_SQL', 'SELECT ua.transaction_sum, tn.trans_name, tt.trans_type, ua.transaction_date 
+define('REQUEST_USER_INFO_SQL', 'SELECT ua.transaction_sum, ua.name_id,  tn.trans_name, tt.trans_type, ua.transaction_date 
 FROM users u INNER JOIN user_account ua ON( u.user_id = ua.user_id)
 INNER JOIN transaction_name tn ON( ua.name_id = tn.name_id)
 INNER JOIN transaction_type tt ON( ua.type_id = tt.type_id)
@@ -51,13 +51,11 @@ define('SELECT_TRANSACTION_NAME_ID_SQL', 'SELECT name_id FROM transaction_name W
 define('SELECT_USER_NAME_SQL', 'SELECT user_name FROM users WHERE user_id = ?');
 
 //-=-=-=-=-=-=-=-=-=-=-=-=-=--= END of Define fech user name-=-=-=-=-==-==-==-=-===-==-=\\
-
 //-=-=-=-=-=-=-=-=-=-=-=-=-=--= Define fech user picture address-=-=-=-=-==-==-==-=-===-==-=\\
 
 define('FECH_PIC_ADDRESS_SQL', 'SELECT user_pic FROM users WHERE user_id = ?');
 
 //-=-=-=-=-=-=-=-=-=-=-=-=-=--= END of Define fech user picture address-=-=-=-=-==-==-==-=-===-==-=\\
-
 //-=-=-=-=-=-=-=-=-=-=-=-=-=--= Define fech user ID-=-=-=-=-==-==-==-=-===-==-=\\
 
 define('SELECT_USER_ID_SQL', 'SELECT user_id FROM users WHERE user_email = ? AND user_password = ?;');
@@ -83,17 +81,16 @@ define('UPDATE_PIC_ADDRESS_SQL', 'UPDATE users SET user_pic = ? WHERE user_id = 
 define('UPDATE_USER_PASSWORD_SQL', 'UPDATE users SET user_password = ? WHERE user_id = ?;');
 
 //-=-=-=-=-=-=-=-=-=-=-=-=-=--= END of Define update user password -=-=-=-=-==-==-==-=-===-==-=\\
-
-
-//-=-=-=-=-=-=-=-=-=-=-=-=-=--= Define defalt expanse types -=-=-=-=-==-==-==-=-===-==-=\\
+//-=-=-=-=-=-=-=-=-=-=-=-=-=--= Define defalt expanse names -=-=-=-=-==-==-==-=-===-==-=\\
 
 define('ALL_EXPANSE_NAMES_SQL', 'SELECT * FROM transaction_name ORDER BY name_id LIMIT 5');
 
-//-=-=-=-=-=-=-=-=-=-=-=-=-=--= END of Define defalt expanse types -=-=-=-=-==-==-==-=-===-==-=\\
+//-=-=-=-=-=-=-=-=-=-=-=-=-=--= END of Define defalt expanse names -=-=-=-=-==-==-==-=-===-==-=\\
+//-=-=-=-=-=-=-=-=-=-=-=-=-=--= Define defalt income names -=-=-=-=-==-==-==-=-===-==-=\\
 
+define('ALL_INCOME_NAMES_SQL', 'SELECT * FROM transaction_name WHERE name_id BETWEEN 6 AND 9 ORDER BY name_id');
 
-
-
+//-=-=-=-=-=-=-=-=-=-=-=-=-=--= END of Define defalt income names -=-=-=-=-==-==-==-=-===-==-=\\
 
 
 

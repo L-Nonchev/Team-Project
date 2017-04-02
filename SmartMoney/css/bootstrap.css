@@ -2248,6 +2248,16 @@ pre code {
     margin-left: 0;
   }
 }
+.expenses{
+	float: right;
+	clear: none;
+	width: 49%;
+}
+.incomes{
+	float: left;
+	clear: none;
+	width: 49%;
+}
 table {
   background-color: transparent;
 }

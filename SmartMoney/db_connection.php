@@ -38,12 +38,14 @@ function db_request_info($user_id) {
 				if ($row['trans_type'] == 'IN') {					
 					$sums_in[$in]['sum'] = $row['transaction_sum'];
 					$sums_in[$in]['name'] = $row['trans_name'];
+					$sums_in[$in]['name_id'] = $row['name_id'];
 					$sums_in[$in]['date'] = $row['transaction_date'];		
 					$in++;
 					
 				}elseif($row['trans_type'] == 'OUT') {					
 					$sums_out[$out]['sum'] = $row['transaction_sum'];
 					$sums_out[$out]['name'] = $row['trans_name'];
+					$sums_out[$out]['name_id'] = $row['name_id'];
 					$sums_out[$out]['date'] = $row['transaction_date'];
 					$out++;
 				}
@@ -404,21 +406,31 @@ function get_defalt_epense_names (){
 	} catch ( PDOException $e ) {
 		cach_handler($e);
 	}
-}
-
-$names = get_defalt_epense_names();
-
-echo "<select>";
-
-for ($in = 0; $in < count($names); $in++){
-	
-	$name = $names[$in]['trans_name'];
-	$value = $names[$in]['name_id'];
-	echo "<option value='$value'</option>";
-	echo $name;
-	
 };
-echo "<option value='NULL'>Other...</option>";
-echo                          "</select>";
+
+// -=-==-=--=-=-=-=-=-=--=-==--==-= END of Get defalt expense names =-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
+
+// -=-==-=--=-=-=-=-=-=--=-==--==-= Get defalt income names =-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
+
+function  get_defalt_income_names(){
+	try{		
+		$dbcon = db_connection();
+		$names = array();
+		$in = 0;
+		foreach ($dbcon->query(ALL_INCOME_NAMES_SQL, PDO::FETCH_ASSOC) as $row){
+			
+			$names[$in] = $row;
+			$in++;
+		}
+		return $names;
+		
+		
+	} catch ( PDOException $e ) {
+		cach_handler($e);
+	}
+};
+
+// -=-==-=--=-=-=-=-=-=--=-==--==-= END of Get defalt income names =-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
+
 
 ?>
