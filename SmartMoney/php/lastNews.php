@@ -1,7 +1,13 @@
 <?php
 //<!-- =-=-=-=-=-=-= LAST NEWS =-=-=-=-=-=-= -->
 //<!-- =-=-= Business Insider =-=-= -->
-$news = file_get_contents('https://newsapi.org/v1/articles?source=business-insider&sortBy=latest&apiKey=f72df7cb5fb0489a8c9ab9553f922927');
+
+// set_time_limit(5);
+
+$context = stream_context_create(array('https' => array('header'=>'Connection: close\r\n')));
+
+$news = file_get_contents('https://newsapi.org/v1/articles?source=business-insider&sortBy=latest&apiKey=f72df7cb5fb0489a8c9ab9553f922927',
+		false, $context);
 $data2 = json_decode($news, true);
 
 $titleLN  = array();

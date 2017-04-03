@@ -10,8 +10,13 @@ $img = array();
 $url = array();
 $date = array();
 
+// set_time_limit(5);
+
 //<!-- =-=-= Business Insider =-=-= -->
-$news = file_get_contents('https://newsapi.org/v1/articles?source=business-insider&sortBy=top&apiKey=f72df7cb5fb0489a8c9ab9553f922927');
+$context = stream_context_create(array('https' => array('header'=>'Connection: close\r\n')));
+
+$news = file_get_contents('https://newsapi.org/v1/articles?source=business-insider&sortBy=top&apiKey=f72df7cb5fb0489a8c9ab9553f922927', 
+		false, $context);
 $data = json_decode($news, true);
 
 for ($index= 0; $index < 3; $index++){
@@ -25,7 +30,8 @@ for ($index= 0; $index < 3; $index++){
 }
 
 //<!-- =-=-= Bloomberg  =-=-= -->
-$news = file_get_contents('https://newsapi.org/v1/articles?source=bloomberg&sortBy=top&apiKey=f72df7cb5fb0489a8c9ab9553f922927');
+$news = file_get_contents('https://newsapi.org/v1/articles?source=bloomberg&sortBy=top&apiKey=f72df7cb5fb0489a8c9ab9553f922927', 
+		false, $context);
 $data = json_decode($news, true);
 
 for ($index= 3; $index < 6; $index++){

@@ -20,7 +20,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 			//-=-=-=-=-=-=---==-=-=-= Redirect =-=-=-==-=-==-=-==--\\
 			if (logInUser($email, $password)){
 				
-				header('Location: ./index.php', true, 303);
+				header('Location: ./about.php', true, 303);
 				die();
 			
 			}else{

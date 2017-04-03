@@ -8,8 +8,8 @@ include 'php/lastNews.php';
 //<!-- =-=-=-=-=-=-=  Sing Up =-=-=-=-=-=-= -->\\
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
 	if (isset($_POST['sing-up-button'])){
-		if (isset($_POST['first-name']) && isset($_POST['last-name']) && isset($_POST['email']) 
-				&& isset($_POST['pasword']) && isset($_POST['repeat-pasword'])  ){
+		if (!empty($_POST['first-name']) && !empty($_POST['last-name']) && !empty($_POST['email']) 
+				&& !empty($_POST['pasword']) && !empty($_POST['repeat-pasword'])  ){
 			// user data
 			$firstName = htmlentities($_POST['first-name']);
 			$lastName = htmlentities($_POST['last-name']);
@@ -32,7 +32,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 					if (db_create_user($firstName, $lastName, $email, $password1, $pathImgDefault)){
 						
 						//-=-=-=-=-=-=---==-=-=-= Redirect =-=-=-==-=-==-=-==--\\
-						header('Location: index.php', true, 303);
+						header('Location: ./about.php', true, 303);
 						die();
 						
 					}else {

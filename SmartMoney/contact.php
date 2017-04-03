@@ -176,7 +176,7 @@ if (!isset($_SESSION['user_id'])){
                   <div class="notice success" id="success">
                      <p>Thanks so much for your message. We check e-mail frequently and will try our best to respond to your inquiry.</p>
                   </div>
-                  <form id="contactForm"  method="post"  action="#">
+                  <form id="contactForm"  method="post"  action="./php/contact.php">
                   <div class="row">
                      <div class="col-sm-6">
                         <!-- Name -->
@@ -201,23 +201,6 @@ if (!isset($_SESSION['user_id'])){
                         <div class="form-group">
                            <label>Subject<span class="required">*</span></label>
                            <input type="text" placeholder="Subject" id="subject" name="subject" class="form-control" required>
-                        </div>
-                     </div>
-                     </div>
-                     <!-- End col-sm-12 -->
-           
-                       <!-- End col-sm-6 -->
-                        <div class="row">
-                     <div class="col-sm-12">
-                        <!-- Email -->
-                        <div class="form-group">
-                           <label>Topic To Discuss <span class="required">*</span></label>
-                            <select class="form-control required">
-                                 <option>Share Market Trading</option>
-                                 <option>Market Hosting</option>
-                                 <option>Presidency Share</option>
-                                 <option>Other Topic</option>
-                              </select>
                         </div>
                      </div>
                      </div>

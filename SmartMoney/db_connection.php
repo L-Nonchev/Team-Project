@@ -373,7 +373,7 @@ function updatePassword ($user_id, $password){
 		
 		$check = $dbcon->prepare(UPDATE_USER_PASSWORD_SQL);
 		if ($check->execute(array($passSha1, $user_id))){
-			return "Òhe password is changed successfully";
+			return " Òhe password is changed successfully";
 		}
 
 	} catch ( PDOException $e ) {

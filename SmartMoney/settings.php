@@ -34,7 +34,7 @@ if (!isset($_SESSION['user_id'])){
 			}
 		}
 		
-		if (isset($_POST['password']) && isset($_POST['re-password'])){
+		if (!empty($_POST['password']) && !empty($_POST['re-password'])){
 			if (strlen($_POST['password']) > 7 && strlen($_POST['re-password']) > 7){
 			
 				$password1 = htmlentities($_POST['password']);

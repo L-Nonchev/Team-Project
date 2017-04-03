@@ -36,14 +36,14 @@ function updateProfilImage ($user_id, $fileOnServer, $fileRealName){
 					return "File has been changed successfully ";
 				}
 			}else {
-				return "File ne e kachen uspeshno! Opitaj pak !";
+				return "The file is not successfully uploaded, please try again.";
 
 			}
 		}else {
-			return "File ne e kachen uspeshno! Opitaj pak !";
+			return "The file is not successfully uploaded, please try again.";
 		}
 	}else {
-		return  "Molq prikachete image/jpeg format !";
+		return  "Please upload  image/jpeg format !";
 	}
 }
 

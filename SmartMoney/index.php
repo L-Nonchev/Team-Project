@@ -170,6 +170,7 @@ include 'php/topNews.php';
                               <a href="blog.php">Blog</a>
                         </li>
                         <li><a href="contact.php">Contact Us</a></li>
+                        
                      </ul>
                   </div>
                   <!-- /.navbar-collapse -->
@@ -206,27 +207,7 @@ include 'php/topNews.php';
 				        data-transform_in="o:0" 
 				        data-transform_out="o:0" 
 				        data-start="1000">
-						<span class="bold">creating the env for your business</span>
-				    </div>
-					<div class="tp-caption sfb tp-resizeme main-caption-p" 
-				        data-x="left" data-hoffset="0" 
-				        data-y="top" data-voffset="340" 
-				        data-whitespace="nowrap"
-				        data-transform_idle="o:1;" 
-				        data-transform_in="o:0" 
-				        data-transform_out="o:0" 
-				        data-start="1500">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Suspendisse<br>  Ted orci at ex consectetur pharetra eget non turpis. <br> Vivamus finibus ex vitae diam dapibus rutrum.
-				    </div>
-					<div class="tp-caption sfb tp-resizeme" 
-				        data-x="left" data-hoffset="0" 
-				        data-y="top" data-voffset="455" 
-				        data-whitespace="nowrap"
-				        data-transform_idle="o:1;" 
-				        data-transform_in="o:0" 
-				        data-transform_out="o:0" 
-				        data-start="2000">
-						<a href="#" class="slider-main-button">learn more <i class="fa fa-arrow-circle-right"></i></a>
+						<span class="bold">create your own budget manager</span>
 				    </div>
 				</li>
 				<li data-transition="parallaxvertical">
@@ -239,7 +220,7 @@ include 'php/topNews.php';
 				        data-transform_in="o:0" 
 				        data-transform_out="o:0" 
 				        data-start="500">
-						Helping you improve 
+						Are you tired of wasting? 
 				    </div>
 					<div class="tp-caption sfr tp-resizeme main-caption bg-white font-light" 
 				        data-x="left" data-hoffset="0" 
@@ -249,7 +230,7 @@ include 'php/topNews.php';
 				        data-transform_in="o:0" 
 				        data-transform_out="o:0" 
 				        data-start="1000">
-						<span class="bold">Building a Better Business</span>
+						<span class="bold">Start saving now!</span>
 				    </div>
 					<div class="tp-caption sfb tp-resizeme main-caption-p" 
 				        data-x="left" data-hoffset="0" 
@@ -259,17 +240,12 @@ include 'php/topNews.php';
 				        data-transform_in="o:0" 
 				        data-transform_out="o:0" 
 				        data-start="1500">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Suspendisse<br>  Ted orci at ex consectetur pharetra eget non turpis. <br> Vivamus finibus ex vitae diam dapibus rutrum.
-				    </div>
-					<div class="tp-caption sfb tp-resizeme" 
-				        data-x="left" data-hoffset="0" 
-				        data-y="top" data-voffset="455" 
-				        data-whitespace="nowrap"
-				        data-transform_idle="o:1;" 
-				        data-transform_in="o:0" 
-				        data-transform_out="o:0" 
-				        data-start="2000">
-						<a href="#" class="slider-main-button">learn more <i class="fa fa-arrow-circle-right"></i></a>
+						Do you keep wondering where your money has gone?
+						<br />
+						 Or, maybe, your salary is often spent long before the end of the month? 
+						<br />	
+						Perhaps it is time to start keeping track of your financial health and optimize your budget!
+
 				    </div>
 				</li>
 				<li data-transition="parallaxvertical">
@@ -282,7 +258,7 @@ include 'php/topNews.php';
 				        data-transform_in="o:0" 
 				        data-transform_out="o:0" 
 				        data-start="500">
-						Great Experience
+						Keep track of your finance.
 				    </div>
 					<div class="tp-caption sft tp-resizeme main-caption bg-white font-light" 
 				        data-x="left" data-hoffset="0" 
@@ -292,27 +268,7 @@ include 'php/topNews.php';
 				        data-transform_in="o:0" 
 				        data-transform_out="o:0" 
 				        data-start="1000">
-						<span class="bold">Meet our expert adviser </span>
-				    </div>
-					<div class="tp-caption sfb tp-resizeme main-caption-p" 
-				        data-x="left" data-hoffset="0" 
-				        data-y="top" data-voffset="340" 
-				        data-whitespace="nowrap"
-				        data-transform_idle="o:1;" 
-				        data-transform_in="o:0" 
-				        data-transform_out="o:0" 
-				        data-start="1500">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Suspendisse<br>  Ted orci at ex consectetur pharetra eget non turpis. <br> Vivamus finibus ex vitae diam dapibus rutrum.
-				    </div>
-					<div class="tp-caption sfb tp-resizeme" 
-				        data-x="left" data-hoffset="0" 
-				        data-y="top" data-voffset="455" 
-				        data-whitespace="nowrap"
-				        data-transform_idle="o:1;" 
-				        data-transform_in="o:0" 
-				        data-transform_out="o:0" 
-				        data-start="2000">
-						<a href="#" class="slider-main-button">learn more <i class="fa fa-arrow-circle-right"></i></a>
+						<span class="bold">Be the master of your life! </span>
 				    </div>
 				</li>
 				
@@ -328,16 +284,15 @@ include 'php/topNews.php';
                <!--Column-->
                <div class="col-md-8 col-sm-12 col-xs-12 ">
                   <div class="about-title">
-                     <h3>who we are</h3>
-                     <h2>About Our Company</h2>
-                     <p>Uniquely disseminate economically sound bandwidth and frictionless methodologies. Quickly reinvent cross functional infrastructures without high standards in niche markets. Distinctively visualize open-source functionalities rather than interdependent e-business. Interactively simplify client-based collaboration and idea-sharing and goal-oriented intellectual capital. Phosfluorescently foster e-business sources whereas sustainable internal or "organic" sources.</p>
-                     <p>Uniquely disseminate economically sound bandwidth and frictionless methodologies. Quickly reinvent cross functional infrastructures without high standards in niche markets. Distinctively visualize open-source functionalities rather than interdependent e-business. I</p>
-                     <div class="more-about"> <a class="btn btn-primary btn-lg" href="#">Read More <i class="fa fa-chevron-circle-right"></i></a> </div>
+                     <h3>What is Smart Money</h3>
+                     <h2>How to use the platform to save money?</h2>
+                     <p>The platform lets you see all of your money, where it's moving, and what your account balances were at any time,  also lets you draw up a household budget and check at all times if you're not sticking to it, see how much you're spending on what types of purchases or utilities, set up savings goals, and actually stick to them. You may be surprised to find out how the frequent small amounts you spend actually add up to big money.</p>
+                     <p>By tracking your spenditure you can easily notice any unnecessary spending you have done and try to master your funds better so that you actually end up saving instead of wasting.</p>
                   </div>
                </div>
                <!-- Quote Form -->
                <div class="col-md-4 col-sm-12 col-xs-12 our-gallery">
-                  <img class="img-responsive " alt="Image" src="images/about-us.png">
+                  <img class="img-responsive " alt="Image" src="images/happyLife.jpg">
                </div>
             </div>
          </div>
@@ -348,7 +303,6 @@ include 'php/topNews.php';
             <!-- title-section -->
             <div class="main-heading text-center">
                <h2>service we offer</h2>
-               <p>Cras varius purus in tempus porttitor ut dapibus efficitur sagittis cras vitae lacus metus nunc vulputate facilisis nisi <br> eu lobortis erat consequat ut. Aliquam et justo ante. Nam a cursus velit</p>
             </div>
             <!-- End title-section -->
             <!-- Row -->
@@ -359,7 +313,9 @@ include 'php/topNews.php';
                      <div class="services-box-2 text-center">
                         <i class="flaticon-graph-2"></i>
                         <h4>Financial Planning</h4>
-                        <p>Mauris eros tortor, tristique cursus porttitor et, luctus sed urna. Quisque id libero risus. Aliquam accumsan erat id sem placerat tempus.</p>
+                         <div class="text-justify">
+	                        <p>All individual financial activities fall under the purview of personal finance; personal financial planning involves analyzing your current financial position, predicting short-term and long-term needs and executing a plan to fulfill those needs. </p>
+                 	    </div>
                      </div>
                   </div>
                   <!-- end services-box-2 -->
@@ -367,17 +323,17 @@ include 'php/topNews.php';
                   <div class="col-sm-6 col-md-4 col-xs-12">
                      <div class="services-box-2 text-center">
                         <i class="flaticon-insert-coin"></i>
-                        <h4>Saving Solutions</h4>
-                        <p>Mauris eros tortor, tristique cursus porttitor et, luctus sed urna. Quisque id libero risus. Aliquam accumsan erat id sem placerat tempus.</p>
-                     </div>
-                  </div>
-                  <!-- end services-box-2 -->
-                  <!-- services box grid -->
-                  <div class="col-sm-6 col-md-4 col-xs-12">
-                     <div class="services-box-2 text-center">
-                        <i class="flaticon-safebox-3"></i>
-                        <h4>Private Banking </h4>
-                        <p>Mauris eros tortor, tristique cursus porttitor et, luctus sed urna. Quisque id libero risus. Aliquam accumsan erat id sem placerat tempus.</p>
+                      	 <h4>Saving Solutions</h4>
+                        <div class="text-justify">
+	                        <p>Set goals for saving. 
+								Track and master your budget.  
+								Slash excess spending regularly.  
+								Cut monthly bills significantly.   
+								Switch up your grocery routine.   
+								Transfer debt to a lower interest credit card.
+								Be picky about your savings account.
+	                        </p>
+                        </div>
                      </div>
                   </div>
                   <!-- end services-box-2 -->
@@ -386,25 +342,9 @@ include 'php/topNews.php';
                      <div class="services-box-2 text-center">
                         <i class="flaticon-pie-chart-5"></i>
                         <h4>Wealth Management</h4>
-                        <p>Mauris eros tortor, tristique cursus porttitor et, luctus sed urna. Quisque id libero risus. Aliquam accumsan erat id sem placerat tempus.</p>
-                     </div>
-                  </div>
-                  <!-- end services-box-2 -->
-                  <!-- services box grid -->
-                  <div class="col-sm-6 col-md-4 col-xs-12">
-                     <div class="services-box-2 text-center">
-                        <i class="flaticon-change"></i>
-                        <h4>Mutual Funds</h4>
-                        <p>Mauris eros tortor, tristique cursus porttitor et, luctus sed urna. Quisque id libero risus. Aliquam accumsan erat id sem placerat tempus.</p>
-                     </div>
-                  </div>
-                  <!-- end services-box-2 -->
-                  <!-- services box grid -->
-                  <div class="col-sm-6 col-md-4 col-xs-12">
-                     <div class="services-box-2 text-center">
-                        <i class="flaticon-time-passing"></i>
-                        <h4>Saving &and; Investments</h4>
-                        <p>Mauris eros tortor, tristique cursus porttitor et, luctus sed urna. Quisque id libero risus. Aliquam accumsan erat id sem placerat tempus.</p>
+                         <div class="text-justify">
+	                        <p>Private wealth management is an investment advisory practice that incorporates financial planning, portfolio management and other aggregated financial services for private individuals, not for corporations, trusts or other types of clients. </p>
+	                    </div>
                      </div>
                   </div>
                   <!-- end services-box-2 -->
@@ -435,7 +375,7 @@ include 'php/topNews.php';
                         <div class="news-thumb">
                            <a target="blank" href="<?= $url[0] ?>"><img alt="" class="img-responsive" src="<?= $img[0] ?>"></a>
                            <div class="date"> <strong><?= $date[0] ?></strong>
-                              <span>Mar</span> 
+                              <span>Apr</span> 
                            </div>
                         </div>
                         <div class="news-detail">
@@ -457,7 +397,7 @@ include 'php/topNews.php';
                         <div class="news-thumb">
                            <a target="blank" href="<?= $url[1] ?>"><img alt="" class="img-responsive" src="<?= $img[1] ?>"></a>
                            <div class="date"> <strong><?= $date[1] ?></strong>
-                              <span>Mar</span> 
+                              <span>Apr</span> 
                            </div>
                         </div>
                         <div class="news-detail">
@@ -478,7 +418,7 @@ include 'php/topNews.php';
                         <div class="news-thumb">
                            <a target="blank" href="<?= $url[2] ?>"><img class="img-responsive" alt="" src="<?= $img[2] ?>"></a>
                            <div class="date"> <strong><?= $date[2] ?></strong>
-                              <span>Mar</span> 
+                              <span>Apr</span> 
                            </div>
                         </div>
                         <div class="news-detail">
@@ -510,7 +450,7 @@ include 'php/topNews.php';
                         <div class="news-thumb">
                            <a target="blank" href="<?= $url[3] ?>"><img alt="" class="img-responsive" src="<?= $img[3] ?>"></a>
                            <div class="date"> <strong><?= $date[3] ?></strong>
-                              <span>Mar</span> 
+                              <span>Apr</span> 
                            </div>
                         </div>
                         <div class="news-detail">
@@ -532,7 +472,7 @@ include 'php/topNews.php';
                         <div class="news-thumb">
                            <a target="blank" href="<?= $url[4] ?>"><img alt="" class="img-responsive" src="<?= $img[4] ?>"></a>
                            <div class="date"> <strong><?= $date[4] ?></strong>
-                              <span>Mar</span> 
+                              <span>Apr</span> 
                            </div>
                         </div>
                         <div class="news-detail">
@@ -553,7 +493,7 @@ include 'php/topNews.php';
                         <div class="news-thumb">
                            <a target="blank" href="<?= $url[5] ?>"><img class="img-responsive" alt="" src="<?= $img[5] ?>"></a>
                            <div class="date"> <strong><?= $date[5] ?></strong>
-                              <span>Mar</span> 
+                              <span>Apr</span> 
                            </div>
                         </div>
                         <div class="news-detail">
@@ -582,7 +522,6 @@ include 'php/topNews.php';
             <!-- title-section -->
             <div class="main-heading text-center">
                <h2>our partners</h2>
-               <p>Cras varius purus in tempus porttitor ut dapibus efficitur sagittis cras vitae lacus metus nunc vulputate facilisis nisi eu lobortis erat consequat ut. Aliquam et justo ante. Nam a cursus velit</p>
             </div>
             <!-- End title-section -->
             <!-- Row -->
