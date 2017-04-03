@@ -30,9 +30,6 @@ if (!isset($_SESSION['user_id'])){
 	$allIncome =  $info['IN'];
 	$allExpenses =  $info['OUT'];
 	$savings = 0;
-	if (count($info['SAVE'] ) > 0) {
-		$savings = $info['SAVE'];
-	};
 	
 	$sumIN = 0;
 	for ($in = 0; $in < count($allIncome); $in++){
@@ -182,7 +179,7 @@ if (!isset($_SESSION['user_id'])){
       
       <!-- =-=-=-=-=-=-= SEPARATOR Montly stats =-=-=-=-=-=-= -->
       <div class="parallex section-padding fun-facts-bg text-center" >
-         <div class="container">
+         <div class="stats" >
             <div class="row">
                <!-- countTo -->
                <div class="col-xs-6 col-sm-3 col-md-3">
@@ -210,19 +207,7 @@ if (!isset($_SESSION['user_id'])){
                   <!-- end statistic-percent -->
                </div>
                <!-- end col-xs-6 col-sm-3 col-md-3 -->
-               <!-- countTo -->
-               <div class="col-xs-6 col-sm-3 col-md-3">
-                  <div class="statistic-percent" data-perc="<?php echo "$savings";?>">
-                     <div class="facts-icons"> <span class="flaticon-piggy-bank-1"></span> </div>
-                     <div class="fact">
-                        <span class="percentfactor">0</span>
-                        <p>Montly Savings</p>
-                     </div>
-                     <!-- end fact -->
-                  </div>
-                  <!-- end statistic-percent -->
-               </div>
-               <!-- end col-xs-6 col-sm-3 col-md-3 -->
+             
                <!-- countTo -->
                <div class="col-xs-6 col-sm-3 col-md-3">
                   <div class="statistic-percent" data-perc="<?php echo $balance;?>">
@@ -272,15 +257,7 @@ if (!isset($_SESSION['user_id'])){
                         <p></p>
                      </div>
                   </div>
-                  <!-- services grid -->
-                  <div class="item">
-                     <div class="services-grid" data-target="#request-quote-3" data-toggle="modal">
-                        <div class="icons"> <i class="flaticon-safebox-3"></i></div>
-                        <h4>Add savings</h4>
-                        <p></p>
-                     </div>
-                  </div>
-                 
+           
                   <!-- Service Item List End -->
                </div>
             </div>
