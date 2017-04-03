@@ -14,12 +14,12 @@ if (!isset($_SESSION['user_id'])){
 	include './db_connection.php';
 	include './php_functions.php';
 	$user_id = $_SESSION['user_id'];
-
+	
 	$profilePicture = db_user_picture_address($user_id);
 	
 	$userName = db_user_name($_SESSION['user_id']);
 	
-	$info = db_request_info($user_id);	
+	$info = db_request_info($user_id);
 	
 	$expenseNames = get_defalt_epense_names();
 	
@@ -40,13 +40,10 @@ if (!isset($_SESSION['user_id'])){
 	for ($in = 0; $in < count($allExpenses); $in++){
 		$sumOUT += $allExpenses[$in]['sum'];
 	};
-		
+	
 	$userIncome =  $sumIN;
 	$userЕxpenses = $sumOUT;
 	$balance = $userIncome - $userЕxpenses;
-	
-	
-	
 	
 		// !-- =-=-=-=-=-=-=Login information retrive  END=-=-=-=-=-=-= --
 }
@@ -509,7 +506,7 @@ if (!isset($_SESSION['user_id'])){
             <div class="modal-content">
                <div class="modal-body">
                   <div class="quotation-box-2">
-                     <h2>Add money to your budget</h2>
+                     <h2>Add income</h2>
                      <br />                    
                      <form action="porch.php" method="post">
                         <div class="row clearfix">
@@ -532,7 +529,7 @@ if (!isset($_SESSION['user_id'])){
                               <br />
                            </div>                         
                            <!--Form Group-->
-                           <div><input type="submit" name="sub-expense"/></div>
+                           <div><input id="sub-button"  type="submit" name="sub-expense"/></div>
                         </div>
                      </form>
                   </div>
@@ -548,7 +545,7 @@ if (!isset($_SESSION['user_id'])){
             <div class="modal-content">
                <div class="modal-body">
                   <div class="quotation-box-2">
-                     <h2>Add money to your budget</h2>
+                     <h2>Add expense</h2>
                      <br />                    
                      <form action="porch.php" method="post">
                         <div class="row clearfix">
@@ -571,7 +568,7 @@ if (!isset($_SESSION['user_id'])){
                               <br />
                            </div>                         
                            <!--Form Group-->
-                           <div><input type="submit" name="sub-expense"/></div>
+                           <div><input id="sub-button" type="submit" name="sub-expense"/></div>
                         </div>
                      </form>
                   </div>
