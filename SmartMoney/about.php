@@ -12,7 +12,7 @@ if (!isset($_SESSION['user_id'])){
 	
 			// !-- =-=-=-=-=-=-=Login information retrive=-=-=-=-=-=-= --
 	include './db_connection.php';
-	
+	include './php_functions.php';
 	$user_id = $_SESSION['user_id'];
 
 	$profilePicture = db_user_picture_address($user_id);
@@ -21,8 +21,18 @@ if (!isset($_SESSION['user_id'])){
 	
 	$info = db_request_info($user_id);	
 	
+	$expenseNames = get_defalt_epense_names();
+	
+	$incomNames = get_defalt_income_names();
+	
+	$customEntry = $info;
+	
 	$allIncome =  $info['IN'];
 	$allExpenses =  $info['OUT'];
+	$savings = 0;
+	if (count($info['SAVE'] ) > 0) {
+		$savings = $info['SAVE'];
+	};
 	
 	$sumIN = 0;
 	for ($in = 0; $in < count($allIncome); $in++){
@@ -36,9 +46,10 @@ if (!isset($_SESSION['user_id'])){
 		
 	$userIncome =  $sumIN;
 	$userЕxpenses = $sumOUT;
-	$userSavings = $userIncome - $userЕxpenses;
+	$balance = $userIncome - $userЕxpenses;
 	
-	$statisticalInformation = 21;	
+	
+	
 	
 		// !-- =-=-=-=-=-=-=Login information retrive  END=-=-=-=-=-=-= --
 }
@@ -153,29 +164,8 @@ if (!isset($_SESSION['user_id'])){
                            <a  href="index.php" >Home </a>
                         </li>
                         <li class="dropdown">
-                        	<a href="about.php">About </a> 
-                        </li>
-                        <li class="dropdown ">
-                           <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-animations="fadeInUp">Our Service <span class="fa fa-angle-down"></span></a>
-                           <ul class="dropdown-menu">
-                              <li><a href="services.html">Services</a> </li>
-                              <li><a href="services-2.html">Services 2</a> </li>
-                              <li><a href="services-3.html">Services 3</a> </li>
-                              <li><a href="services-4.html">Services 4 (Sticky Bar)</a> </li>
-                              <li><a href="services-details.html">Services Detail</a> </li>
-                           </ul>
-                        </li>
-                        
-                        <li class="dropdown">
-                           <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-animations="fadeInUp">Pages <span class="fa fa-angle-down"></span></a>
-                           <ul class="dropdown-menu">
-                              <li><a href="404.html">Error Page</a> </li>
-                              <li><a href="team.html">Our Team </a> </li>
-                              <li><a href="icons.html">Icons</a> </li>
-                              <li><a href="flat-icons.html">Flat Icons</a> </li>
-                              <li><a href="gallery.html ">Gallery</a></li>
-                           </ul>
-                        </li>
+                        	<a href="blog.php">Blog </a> 
+                        </li>       
                         <li><a href="contact.php">Contact Us</a></li>
                      </ul>
                      <a  href="online-booking.html"  class="btn btn-primary pull-right"><span class="hidden-sm">Get An </span>Appointment</a> 
@@ -197,7 +187,7 @@ if (!isset($_SESSION['user_id'])){
                <!-- countTo -->
                <div class="col-xs-6 col-sm-3 col-md-3">
                   <div class="statistic-percent" data-perc="<?php echo $userIncome;?>">
-                     <div class="facts-icons"> <span class="flaticon-pie-chart-1"></span> </div>
+                     <div class="facts-icons"> <span class="flaticon-notes-1"></span> </div>
                      <div class="fact">
                         <span class="percentfactor">0</span>
                         <p>Montly Income</p>
@@ -209,8 +199,21 @@ if (!isset($_SESSION['user_id'])){
                <!-- end col-xs-6 col-sm-3 col-md-3 -->
                <!-- countTo -->
                <div class="col-xs-6 col-sm-3 col-md-3">
-                  <div class="statistic-percent" data-perc="<?php echo $userSavings;?>">
-                     <div class="facts-icons"> <span class="flaticon-graph-3"></span> </div>
+                  <div class="statistic-percent" data-perc="<?php echo $userЕxpenses;?>">
+                     <div class="facts-icons"> <span class="flaticon-receipt"></span> </div>
+                     <div class="fact">
+                        <span class="percentfactor">0</span>
+                        <p>Montly Spandings</p>
+                     </div>
+                     <!-- end fact -->
+                  </div>
+                  <!-- end statistic-percent -->
+               </div>
+               <!-- end col-xs-6 col-sm-3 col-md-3 -->
+               <!-- countTo -->
+               <div class="col-xs-6 col-sm-3 col-md-3">
+                  <div class="statistic-percent" data-perc="<?php echo "$savings";?>">
+                     <div class="facts-icons"> <span class="flaticon-piggy-bank-1"></span> </div>
                      <div class="fact">
                         <span class="percentfactor">0</span>
                         <p>Montly Savings</p>
@@ -222,21 +225,8 @@ if (!isset($_SESSION['user_id'])){
                <!-- end col-xs-6 col-sm-3 col-md-3 -->
                <!-- countTo -->
                <div class="col-xs-6 col-sm-3 col-md-3">
-                  <div class="statistic-percent" data-perc="<?php echo $userЕxpenses;?>">
-                     <div class="facts-icons"> <span class="flaticon-diagram"></span> </div>
-                     <div class="fact">
-                        <span class="percentfactor">0</span>
-                        <p>Montly Spendings</p>
-                     </div>
-                     <!-- end fact -->
-                  </div>
-                  <!-- end statistic-percent -->
-               </div>
-               <!-- end col-xs-6 col-sm-3 col-md-3 -->
-               <!-- countTo -->
-               <div class="col-xs-6 col-sm-3 col-md-3">
-                  <div class="statistic-percent" data-perc="<?php echo $userЕxpenses;?>">
-                     <div class="facts-icons"> <span class="flaticon-receipt"></span> </div>
+                  <div class="statistic-percent" data-perc="<?php echo $balance;?>">
+                     <div class="facts-icons"> <span class="flaticon-wallet-1"></span> </div>
                      <div class="fact">
                         <span class="percentfactor">0</span>
                         <p>Balance</p>
@@ -268,53 +258,29 @@ if (!isset($_SESSION['user_id'])){
                   <!-- Service Item List -->
                   <div class="item">
                      <!-- services grid -->
-                     <div class="services-grid" data-target="#request-quote-2" data-toggle="modal">
-                        <div class="icons" > <i class="flaticon-graph-2"></i></div>
-                        <h4>Add revolving income</h4>
+                     <div class="services-grid" data-target="#request-quote-1" data-toggle="modal">
+                        <div class="icons" > <i class="flaticon-money"></i></div>
+                        <h4>Add income</h4>
                         <p></p>
                      </div>
                   </div>                   
                   <!-- services grid -->
                   <div class="item">
-                     <div class="services-grid">
-                        <div class="icons"> <i class="flaticon-insert-coin"></i></div>
-                        <h4>Saving Solutions</h4>
-                        <p>We have the right caring, experience and dedicated professional for you.</p>
+                     <div class="services-grid" data-target="#request-quote-2" data-toggle="modal">
+                        <div class="icons"> <i class="flaticon-point-of-service"></i></div>
+                        <h4>Add expense</h4>
+                        <p></p>
                      </div>
                   </div>
                   <!-- services grid -->
                   <div class="item">
-                     <div class="services-grid">
+                     <div class="services-grid" data-target="#request-quote-3" data-toggle="modal">
                         <div class="icons"> <i class="flaticon-safebox-3"></i></div>
-                        <h4>Private Banking </h4>
-                        <p>We have the right caring, experience and dedicated professional for you.</p>
+                        <h4>Add savings</h4>
+                        <p></p>
                      </div>
                   </div>
-                  <!-- Service Item List -->
-                  <div class="item">
-                     <!-- services grid -->
-                     <div class="services-grid">
-                        <div class="icons"> <i class="flaticon-pie-chart-5"></i></div>
-                        <h4>Wealth Management</h4>
-                        <p>We have the right caring, experience and dedicated professional for you.</p>
-                     </div>
-                  </div>
-                  <!-- services grid -->
-                  <div class="item">
-                     <div class="services-grid">
-                        <div class="icons"> <i class="flaticon-change"></i></div>
-                        <h4>Mutual Funds</h4>
-                        <p>We have the right caring, experience and dedicated professional for you.</p>
-                     </div>
-                  </div>
-                  <!-- services grid -->
-                  <div class="item">
-                     <div class="services-grid">
-                        <div class="icons"> <i class="flaticon-time-passing"></i></div>
-                        <h4>Saving &and; Investments</h4>
-                        <p>We have the right caring, experience and dedicated professional for you.</p>
-                     </div>
-                  </div>
+                 
                   <!-- Service Item List End -->
                </div>
             </div>
@@ -328,47 +294,15 @@ if (!isset($_SESSION['user_id'])){
       <section class="section-padding-70" id="about">
          <div class="container">            
             <div class="row margin-top-30">
-               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                  <div class="our-experince">
-                     <h2>Budget insights</h2>
-                     <p>Monitor keyword rankings daily to strategise and forecast your digital marketing effortsk tens of thousands of keywords and manage valuable keyterms with easy-to-edit labels. intalyse Rankings also allows you to keep an eye on the with for comparison with your own keyword performance. manage valuable keyterms with easy-to-edit labels. intalyse Rankings also allows you to keep an eye . Monitor keyword rankings daily to strategise and forecast your digital marketing effortsk tens of thousands of keywords and manage valuable keyterms with easy-to-edit labels.</p>
+               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                  <div class="our-experince income">
+                     <h2>My incomes</h2>
+                      <?php export_income_data($allIncome);?>
                   </div>
-               </div>
-               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                  <h2>Skills that I have</h2>
-                  <div class="our-skill">
-                     <div class="progress-bar-linear">
-                        <p class="progress-bar-text">Financial Service
-                           <span><?php echo $statisticalInformation . "%";?></span>
-                        </p>
-                        <div class="progress-bar">
-                           <span data-percent="<?php echo $statisticalInformation;?>"></span>
-                        </div>
-                     </div>
-                     <div class="progress-bar-linear">
-                        <p class="progress-bar-text">Best Consultancy
-                           <span><?php echo $statisticalInformation . "%"?></span>
-                        </p>
-                        <div class="progress-bar">
-                           <span data-percent="<?php echo $statisticalInformation;?>"></span>
-                        </div>
-                     </div>
-                     <div class="progress-bar-linear">
-                        <p class="progress-bar-text">Business Analysis
-                           <span><?php echo $statisticalInformation . "%"?></span>
-                        </p>
-                        <div class="progress-bar">
-                           <span data-percent="<?php echo $statisticalInformation;?>"></span>
-                        </div>
-                     </div>
-                     <div class="progress-bar-linear">
-                        <p class="progress-bar-text">Market Analysis
-                           <span><?php echo $statisticalInformation. "%"?></span>
-                        </p>
-                        <div class="progress-bar">
-                           <span data-percent="<?php echo $statisticalInformation;?>"></span>
-                        </div>
-                     </div>
+               
+                  <h2>My expenses</h2>
+                  <div class="our-skill expenses">
+                     <?php export_expense_data($allExpenses);?>                     
                   </div>
                </div>
             </div>
@@ -508,7 +442,7 @@ if (!isset($_SESSION['user_id'])){
       <div class="modal fade " id="request-quote" role="dialog"  aria-hidden="true">
          <div class="modal-dialog">
             <div class="modal-content">
-               <div class="modal-body">
+               <div class="">
                   <div class="quotation-box-1">
                      <h2>Request a Call Back</h2>
                      <div class="desc-text">
@@ -554,32 +488,113 @@ if (!isset($_SESSION['user_id'])){
       </div>
       <!-- =-=-=-=-=-=-= Quote Modal End =-=-=-=-=-=-= -->
        <!-- =-=-=-=-=-=-= Budget Query =-=-=-=-=-=-= --> 
-      <div class="modal fade " id="request-quote-2" role="dialog"  aria-hidden="true">
+      <div class="modal fade" id="request-quote-1" role="dialog"  aria-hidden="true">
          <div class="modal-dialog">
             <div class="modal-content">
                <div class="modal-body">
                   <div class="quotation-box-2">
-                     <h2>Enter a revolving amount to your budget</h2>
-                     <div class="desc-text">
-                        <p>Изберете сума и период, в който да бъде добавена</p>
-                     </div>
-                     <form action="precentage.php" method="post">
+                     <h2>Add money to your budget</h2>
+                     <br />                    
+                     <form action="porch.php" method="post">
                         <div class="row clearfix">
-                           <!--Form Group-->
-                          
+                           <!--Form Group-->                          
                            <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                              <input class="form-control" type="number" placeholder="Размер на сумата"  name="Sum-to-buget">
+                              <input class="form-control" type="number" placeholder="Sum amount"  name="Sum-to-buget">
+                              <br />
                            </div>
                            <!--Form Group-->
                            <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                              <select class="form-control" name="income-type">
-                                 <option>Dayly</option>
-                                 <option>Montly</option>
-                                 <option>Yearly</option>                                 
+                              <select class="form-control" name="income-type" id="select_sum_type" onchange="check_for_new()">
+                                <?php 
+                               		 popup_menu_income($incomNames, $customEntry);
+                                 ?>                            
                               </select>
-                           </div>                           
+                              
+                           </div>  
+                            <div class="form-group col-md-12 col-sm-12 col-xs-12" id="Sum_type_new" style="visibility:hidden" >
+                              <input  class="form-control" type="text" placeholder="Enter the name of the expense"  name="Sum_type_new">
+                              <br />
+                           </div>                         
                            <!--Form Group-->
-                           <div><input type="submit" name="sub"/></div>
+                           <div><input type="submit" name="sub-inc"/></div>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+            <!-- /.modal-content -->
+         </div>
+         <!-- /.modal-dialog -->
+      </div>
+      
+      <div class="modal fade" id="request-quote-2" role="dialog"  aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-body">
+                  <div class="quotation-box-2">
+                     <h2>Add money to your budget</h2>
+                     <br />                    
+                     <form action="porch.php" method="post">
+                        <div class="row clearfix">
+                           <!--Form Group-->                          
+                           <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                              <input class="form-control" type="number" placeholder="Sum amount"  name="Sum-to-buget">
+                              <br />
+                           </div>
+                           <!--Form Group-->
+                           <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                              <select class="form-control" name="expense-type" id="select_sum_type" onchange="check_for_new()">
+                                <?php 
+	                                popup_menu_expenses($expenseNames, $customEntry);
+                                 ?>                            
+                              </select>
+                              
+                           </div>  
+                            <div class="form-group col-md-12 col-sm-12 col-xs-12" id="Sum_type_new" style="visibility:hidden" >
+                              <input  class="form-control" type="text" placeholder="Enter the name of the expense"  name="Sum_type_new">
+                              <br />
+                           </div>                         
+                           <!--Form Group-->
+                           <div><input type="submit" name="sub-expense"/></div>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+            <!-- /.modal-content -->
+         </div>
+         <!-- /.modal-dialog -->
+      </div>
+      
+      <div class="modal fade" id="request-quote-3" role="dialog"  aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-body">
+                  <div class="quotation-box-2">
+                     <h2>Add money to your budget</h2>
+                     <br />                    
+                     <form action="porch.php" method="post">
+                        <div class="row clearfix">
+                           <!--Form Group-->                          
+                           <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                              <input class="form-control" type="number" placeholder="Sum amount"  name="Sum-to-buget">
+                              <br />
+                           </div>
+                           <!--Form Group-->
+                           <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                              <select class="form-control" name="expense-type" id="select_sum_type" onchange="check_for_new()">
+                                <?php 
+	                                popup_menu_savings($expenseNames, $customEntry);
+                                 ?>                            
+                              </select>
+                              
+                           </div>  
+                            <div class="form-group col-md-12 col-sm-12 col-xs-12" id="Sum_type_new" style="visibility:hidden" >
+                              <input  class="form-control" type="text" placeholder="Enter the name of the expense"  name="Sum_type_new">
+                              <br />
+                           </div>                         
+                           <!--Form Group-->
+                           <div><input type="submit" name="sub-expense"/></div>
                         </div>
                      </form>
                   </div>
@@ -590,7 +605,7 @@ if (!isset($_SESSION['user_id'])){
          <!-- /.modal-dialog -->
       </div>
       <!-- =-=-=-=-=-=-= Quote Modal End =-=-=-=-=-=-= -->
-      
+      <script type="text/javascript" src="./js/select_sum.js"></script>
    </body>
 </html>
 

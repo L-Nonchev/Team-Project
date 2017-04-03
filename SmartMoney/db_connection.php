@@ -31,26 +31,37 @@ function db_request_info($user_id) {
 		if ($carryer->execute ( array ($user_id) )) {
 			$sums_in = array ();
 			$sums_out = array();
+			$sums_save = array();
 			$in = 0;
 			$out = 0;
+			$save = 0;
 			while ( $row = $carryer->fetch ( PDO::FETCH_ASSOC ) ) {				
 				
 				if ($row['trans_type'] == 'IN') {					
 					$sums_in[$in]['sum'] = $row['transaction_sum'];
 					$sums_in[$in]['name'] = $row['trans_name'];
+					$sums_in[$in]['name_id'] = $row['name_id'];
 					$sums_in[$in]['date'] = $row['transaction_date'];		
 					$in++;
 					
 				}elseif($row['trans_type'] == 'OUT') {					
 					$sums_out[$out]['sum'] = $row['transaction_sum'];
 					$sums_out[$out]['name'] = $row['trans_name'];
+					$sums_out[$out]['name_id'] = $row['name_id'];
 					$sums_out[$out]['date'] = $row['transaction_date'];
 					$out++;
+				}else{
+					$sums_save[$save]['sum'] = $row['transaction_sum'];
+					$sums_save[$save]['name'] = $row['trans_name'];
+					$sums_save[$save]['name_id'] = $row['name_id'];
+					$sums_save[$save]['date'] = $row['transaction_date'];
+					$save++;
 				}
 			};		
 			$user_info = array(
 					'IN' => $sums_in,
-					'OUT' => $sums_out
+					'OUT' => $sums_out,
+					'SAVE' => $sums_save
 			);
 			
 			return $user_info;
@@ -379,7 +390,56 @@ function updatePassword ($user_id, $password){
 	} catch ( PDOException $e ) {
 		cach_handler($e);
 	}
-}
+};
 
 // -=-==-=--=-=-=-=-=-=--=-==--==-= END of Update user password =-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
+
+// -=-==-=--=-=-=-=-=-=--=-==--==-= Get defalt expense names =-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
+
+function get_defalt_epense_names (){
+	
+
+	try{
+		
+		$dbcon = db_connection();
+		$names = array();
+		$in = 0;
+		foreach ($dbcon->query(ALL_EXPANSE_NAMES_SQL, PDO::FETCH_ASSOC) as $row){
+			
+			$names[$in] = $row;
+			$in++;
+		}
+		return $names;
+		
+		
+	} catch ( PDOException $e ) {
+		cach_handler($e);
+	}
+};
+
+// -=-==-=--=-=-=-=-=-=--=-==--==-= END of Get defalt expense names =-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
+
+// -=-==-=--=-=-=-=-=-=--=-==--==-= Get defalt income names =-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
+
+function  get_defalt_income_names(){
+	try{		
+		$dbcon = db_connection();
+		$names = array();
+		$in = 0;
+		foreach ($dbcon->query(ALL_INCOME_NAMES_SQL, PDO::FETCH_ASSOC) as $row){
+			
+			$names[$in] = $row;
+			$in++;
+		}
+		return $names;
+		
+		
+	} catch ( PDOException $e ) {
+		cach_handler($e);
+	}
+};
+
+// -=-==-=--=-=-=-=-=-=--=-==--==-= END of Get defalt income names =-=--=-=-=-=-=-=-=-=-=-=-=-=-\\
+
+
 ?>
