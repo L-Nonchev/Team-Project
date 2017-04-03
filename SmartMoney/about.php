@@ -14,12 +14,12 @@ if (!isset($_SESSION['user_id'])){
 	include './db_connection.php';
 	include './php_functions.php';
 	$user_id = $_SESSION['user_id'];
-
+	
 	$profilePicture = db_user_picture_address($user_id);
 	
 	$userName = db_user_name($_SESSION['user_id']);
 	
-	$info = db_request_info($user_id);	
+	$info = db_request_info($user_id);
 	
 	$expenseNames = get_defalt_epense_names();
 	
@@ -30,9 +30,6 @@ if (!isset($_SESSION['user_id'])){
 	$allIncome =  $info['IN'];
 	$allExpenses =  $info['OUT'];
 	$savings = 0;
-	if (count($info['SAVE'] ) > 0) {
-		$savings = $info['SAVE'];
-	};
 	
 	$sumIN = 0;
 	for ($in = 0; $in < count($allIncome); $in++){
@@ -43,13 +40,10 @@ if (!isset($_SESSION['user_id'])){
 	for ($in = 0; $in < count($allExpenses); $in++){
 		$sumOUT += $allExpenses[$in]['sum'];
 	};
-		
+	
 	$userIncome =  $sumIN;
 	$userЕxpenses = $sumOUT;
 	$balance = $userIncome - $userЕxpenses;
-	
-	
-	
 	
 		// !-- =-=-=-=-=-=-=Login information retrive  END=-=-=-=-=-=-= --
 }
@@ -182,7 +176,7 @@ if (!isset($_SESSION['user_id'])){
       
       <!-- =-=-=-=-=-=-= SEPARATOR Montly stats =-=-=-=-=-=-= -->
       <div class="parallex section-padding fun-facts-bg text-center" >
-         <div class="container">
+         <div class="stats" >
             <div class="row">
                <!-- countTo -->
                <div class="col-xs-6 col-sm-3 col-md-3">
@@ -210,19 +204,7 @@ if (!isset($_SESSION['user_id'])){
                   <!-- end statistic-percent -->
                </div>
                <!-- end col-xs-6 col-sm-3 col-md-3 -->
-               <!-- countTo -->
-               <div class="col-xs-6 col-sm-3 col-md-3">
-                  <div class="statistic-percent" data-perc="<?php echo "$savings";?>">
-                     <div class="facts-icons"> <span class="flaticon-piggy-bank-1"></span> </div>
-                     <div class="fact">
-                        <span class="percentfactor">0</span>
-                        <p>Montly Savings</p>
-                     </div>
-                     <!-- end fact -->
-                  </div>
-                  <!-- end statistic-percent -->
-               </div>
-               <!-- end col-xs-6 col-sm-3 col-md-3 -->
+             
                <!-- countTo -->
                <div class="col-xs-6 col-sm-3 col-md-3">
                   <div class="statistic-percent" data-perc="<?php echo $balance;?>">
@@ -272,15 +254,7 @@ if (!isset($_SESSION['user_id'])){
                         <p></p>
                      </div>
                   </div>
-                  <!-- services grid -->
-                  <div class="item">
-                     <div class="services-grid" data-target="#request-quote-3" data-toggle="modal">
-                        <div class="icons"> <i class="flaticon-safebox-3"></i></div>
-                        <h4>Add savings</h4>
-                        <p></p>
-                     </div>
-                  </div>
-                 
+           
                   <!-- Service Item List End -->
                </div>
             </div>
@@ -532,7 +506,7 @@ if (!isset($_SESSION['user_id'])){
             <div class="modal-content">
                <div class="modal-body">
                   <div class="quotation-box-2">
-                     <h2>Add money to your budget</h2>
+                     <h2>Add income</h2>
                      <br />                    
                      <form action="porch.php" method="post">
                         <div class="row clearfix">
@@ -555,7 +529,7 @@ if (!isset($_SESSION['user_id'])){
                               <br />
                            </div>                         
                            <!--Form Group-->
-                           <div><input type="submit" name="sub-expense"/></div>
+                           <div><input id="sub-button"  type="submit" name="sub-expense"/></div>
                         </div>
                      </form>
                   </div>
@@ -571,7 +545,7 @@ if (!isset($_SESSION['user_id'])){
             <div class="modal-content">
                <div class="modal-body">
                   <div class="quotation-box-2">
-                     <h2>Add money to your budget</h2>
+                     <h2>Add expense</h2>
                      <br />                    
                      <form action="porch.php" method="post">
                         <div class="row clearfix">
@@ -594,7 +568,7 @@ if (!isset($_SESSION['user_id'])){
                               <br />
                            </div>                         
                            <!--Form Group-->
-                           <div><input type="submit" name="sub-expense"/></div>
+                           <div><input id="sub-button" type="submit" name="sub-expense"/></div>
                         </div>
                      </form>
                   </div>
