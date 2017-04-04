@@ -70,9 +70,6 @@ if (!isset($_SESSION['user_id'])){
       <![endif]-->
    </head>
    <body>
-    <!-- =-=-=-=-=-=-= PRELOADER =-=-=-=-=-=-= -->
-       <!-- <div class="preloader"><span class="preloader-gif"></span></div> -->
-
       <!-- =-=-=-=-=-=-= HEADER =-=-=-=-=-=-= -->
       <div id="header-info-bar">
          <div class="container">

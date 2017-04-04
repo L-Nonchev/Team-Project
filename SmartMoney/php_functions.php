@@ -15,7 +15,7 @@ function popup_menu_income($incomNames, $customEntry){
 	};
 	echo "<option value='new'>Other...</option>";
 	
-	if(count($customEntry['IN']) > 0 && $customEntry['IN']['name_id'] > 10){
+	if(count($customEntry['IN']) > 0 && $customEntry['IN']['name_id'] > 9){
 		echo ' <option value="" disabled selected>User custom entryes...</option>';
 		for ($in = 0; $in < count($customEntry['IN']); $in++){
 			$name = $customEntry[$in]['trans_name'];
@@ -100,7 +100,7 @@ function export_income_data($allIncome){
 			echo '<div class="progress-bar-linear">';
 			echo '<p class="progress-bar-text">'. $allIncome[$in]['name'];
 			echo "<span>" . $allIncome [$in] ['sum'] . "$</span> </p>";
-			echo "<hr class='progress-bar' /></div></div>";
+			echo "<hr class='progress-bar' /></div>";
 		};
 	}
 };
@@ -116,10 +116,9 @@ function export_expense_data($allExpenses){
 		for($in = 0; $in < count ( $allExpenses); $in ++) {
 			
 			echo '<div class="progress-bar-linear">';
-			echo "<div class='bar-text-content'>";
 			echo '<p class="progress-bar-text">'. $allExpenses[$in]['name'];
-			echo "<span>" . $allExpenses[$in] ['sum'] . "$</span> </p></div>";
-			echo "<hr class='progress-bar' /></div></div>";
+			echo "<span>" . $allExpenses[$in] ['sum'] . "$</span> </p>";
+			echo "<hr class='progress-bar' /></div>";
 		};
 	}
 };

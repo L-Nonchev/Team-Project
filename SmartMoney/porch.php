@@ -25,11 +25,11 @@ if (isset($_POST['sub-inc']) && isset($_POST['Sum-to-buget'])) {
 		db_insert_expense($userId, $sum, $typeOfExp, $nameOfExpanse);
 		header('location:about.php');
 	}else {
-		echo "ne minava pri flaga";
+		echo "<allert></allert>";
 	}
 	
 }else {
-	echo "ne minava nachaloto";
+	echo "<allert></allert>";
 };
 
 //=-=-=-=-=-=-=--=-=-=--=-=-==-=-==-=--=END of Validating income input=-=-=-=-=-=-=-=-=-=--=-=-=--=-=--=\\
@@ -58,11 +58,11 @@ if (isset($_POST['sub-expense']) && isset($_POST['Sum-to-buget'])) {
 		db_insert_expense($userId, $sum, $typeOfExp, $nameOfExpanse);
 		header('location:about.php');
 	}else {
-		echo "ne minava pri flaga";
+		echo "<allert></allert>";
 	}
 	
 }else {
-	echo "ne minava nachaloto";
+	echo "<allert></allert>";
 };
 
 //=-=-=-=-=-=-=--=-=-=--=-=-==-=-==-=--=END of Validating expense input=-=-=-=-=-=-=-=-=-=--=-=-=--=-=--=\\

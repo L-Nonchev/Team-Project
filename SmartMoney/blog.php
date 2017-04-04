@@ -130,7 +130,7 @@ if (!isset($_SESSION['user_id'])){
                            <a  href="index.php" >Home </a>
                         </li>
                         <li class="dropdown">
-                        	<a href="about.php">About </a> 
+                        	<a href="about.php">User Account </a> 
                         </li>
                         <li class="dropdown ">
                               <a href="blog.php">Blog</a>
@@ -305,8 +305,6 @@ if (!isset($_SESSION['user_id'])){
 											class="img-responsive" alt=""></a>
 									</div>
 									<ul class="contact-info">
-										<li><span class="icon fa fa-map-marker"></span> 60 Link
-											Road Lhr. Pakistan 54770</li>
 										<li><span class="icon fa fa-phone"></span> (042)
 											1234567890</li>
 										<li><span class="icon fa fa-envelope-o"></span>
@@ -380,7 +378,7 @@ if (!isset($_SESSION['user_id'])){
                               <h2>Site Links</h2>
                               <ul>
                                  <li><a href="index.php">Home</a></li>
-                                 <li><a href="about.php">About Us</a></li>
+                                 <li><a href="about.php">User Account</a></li>
                                  <li><a href="blog.php">blog</a></li>
                                  <li><a href="contact.php">Contact Us</a></li>
                               </ul>

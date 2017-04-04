@@ -3808,6 +3808,7 @@ ul.header-social > li > a.social-tumblr:hover::after {
 	padding-left: 100px;
 }
 
+
 /* =-=-=--=-==--=-=-=--= Buttons =-=-=---=--=-=--=--=-= */
 #sub-button {
   background: #c7c7c7;
@@ -3824,6 +3825,7 @@ ul.header-social > li > a.social-tumblr:hover::after {
   font-size: 20px;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
+  border-style: none;
 }
 
 #sub-button:hover {

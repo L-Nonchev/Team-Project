@@ -28,9 +28,15 @@ if (!isset($_SESSION['user_id'])){
 			// user pic
 			$fileOnServer = $_FILES['picture']['tmp_name'];
 			$fileRealName = $_FILES['picture']['name'];
+			$fileSize = filesize($fileOnServer);
+			$size  = $_POST['MAX_FILE_SIZE'];
 			
-			if (!empty($fileOnServer)){
-				$error = updateProfilImage($user_id, $fileOnServer, $fileRealName);		
+			if ($fileSize < $size){
+				if (!empty($fileOnServer)){
+					$error = updateProfilImage($user_id, $fileOnServer, $fileRealName);		
+				}
+			}else{
+				$error = "Please upload the image to 1MB!";
 			}
 		}
 		
@@ -113,9 +119,6 @@ if (!isset($_SESSION['user_id'])){
       <![endif]-->
    </head>
    <body>
-    <!-- =-=-=-=-=-=-= PRELOADER =-=-=-=-=-=-= -->
-       <!-- <div class="preloader"><span class="preloader-gif"></span></div> -->
-
       <!-- =-=-=-=-=-=-= HEADER =-=-=-=-=-=-= -->
       <div id="header-info-bar">
          <div class="container">
@@ -177,7 +180,7 @@ if (!isset($_SESSION['user_id'])){
                         </li>
                         
                         <li class="dropdown">
-                        	<a href="about.php">About </a>
+                        	<a href="about.php">User Account </a>
                         </li>
             
                         <li class="dropdown ">
@@ -351,7 +354,7 @@ if (!isset($_SESSION['user_id'])){
                               <h2>Site Links</h2>
                               <ul>
                                  <li><a href="index.php">Home</a></li>
-                                 <li><a href="about.php">About Us</a></li>
+                                 <li><a href="about.php">User Account</a></li>
                                  <li><a href="blog.php">blog</a></li>
                                  <li><a href="contact.php">Contact Us</a></li>
                               </ul>

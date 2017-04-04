@@ -108,7 +108,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
       <![endif]-->
    </head>
    <body>
-   
+
       <!-- =-=-=-=-=-=-= HEADER =-=-=-=-=-=-= -->
       <div id="header-info-bar">
          <div class="container">

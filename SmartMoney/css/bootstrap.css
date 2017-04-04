@@ -2250,11 +2250,10 @@ pre code {
 }
 .expenses{
 	
-	float: right;
 	width: 49%;
 }
 .incomes{
-	float: left;
+	
 	width: 49%;
 }
 table {

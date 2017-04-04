@@ -68,7 +68,7 @@ define('INSERT_USER_DATA_SQL', 'INSERT INTO users VALUES (null, ? \' \' ?, ?, ?,
 //-=-=-=-=-=-=-=-=-=-=-=-=-=--= END of Define fech user ID-=-=-=-=-==-==-==-=-===-==-=\\
 //-=-=-=-=-=-=-=-=-=-=-=-=-=--= Define fetch user email -=-=-=-=-==-==-==-=-===-==-=\\
 
-define('FETCH_EMAIL_SQL', 'SELECT user_email FROM users WHERE user_id = 7;');
+define('FETCH_EMAIL_SQL', 'SELECT user_email FROM users WHERE user_id = ?;');
 
 //-=-=-=-=-=-=-=-=-=-=-=-=-=--= END of Define fetch user email-=-=-=-=-==-==-==-=-===-==-=\\
 //-=-=-=-=-=-=-=-=-=-=-=-=-=--= Define update user picture address-=-=-=-=-==-==-==-=-===-==-=\\

@@ -78,9 +78,7 @@ include 'php/topNews.php';
       <![endif]-->
    </head>
    <body>
-    <!-- =-=-=-=-=-=-= PRELOADER =-=-=-=-=-=-= -->
-    
-  <!--     <div class="preloader"><span class="preloader-gif"></span></div>     --> 
+
       <!-- =-=-=-=-=-=-= HEADER =-=-=-=-=-=-= -->
       <div id="header-info-bar">
          <div class="container">
@@ -97,7 +95,7 @@ include 'php/topNews.php';
 		    </div>
             <?php if ($logged){?>
               <div class="col-md-6 col-sm-6 col-xs-12">
-             <a href="./php/logOut.php" class="info-bar-meta-link">Log Out</a>
+             <a href="./php/logOut.php" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Log Out</a>
              <a href="./settings.php" class="info-bar-meta-link"><i class="fa fa-caret-right fa-fw"></i>Settings</a>
             </div>
             <?php }?>
@@ -164,7 +162,7 @@ include 'php/topNews.php';
                            <a  href="index.php" >Home </a>
                         </li>
                         <li class="dropdown">
-                        	<a href="about.php">About </a> 
+                        	<a href="about.php">User Account </a> 
                         </li>
                         <li class="dropdown ">
                               <a href="blog.php">Blog</a>
@@ -564,8 +562,6 @@ include 'php/topNews.php';
 											class="img-responsive" alt=""></a>
 									</div>
 									<ul class="contact-info">
-										<li><span class="icon fa fa-map-marker"></span> 60 Link
-											Road Lhr. Pakistan 54770</li>
 										<li><span class="icon fa fa-phone"></span> (042)
 											1234567890</li>
 										<li><span class="icon fa fa-envelope-o"></span>
@@ -639,7 +635,7 @@ include 'php/topNews.php';
                               <h2>Site Links</h2>
                               <ul>
                                  <li><a href="index.php">Home</a></li>
-                                 <li><a href="about.php">About Us</a></li>
+                                 <li><a href="about.php">User Account</a></li>
                                  <li><a href="blog.php">blog</a></li>
                                  <li><a href="contact.php">Contact Us</a></li>
                               </ul>

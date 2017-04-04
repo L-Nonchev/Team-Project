@@ -5,12 +5,12 @@
 	var value = document.getElementsByTagName("option")[opt].value;
 	var ne = document.getElementById('Sum_type_new');
 	
+	console.log(value);
+	console.log("haha");
 	if (value == "new") {		
 		ne.style.visibility = "visible";
 	}else {
 		ne.style.visibility = "hidden";
 	}
-		
-		
-	
 }
+ 
